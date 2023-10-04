@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:49:36 by afatir            #+#    #+#             */
-/*   Updated: 2023/10/04 09:55:59 by afatir           ###   ########.fr       */
+/*   Updated: 2023/10/04 11:26:39 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,7 @@ void	chack_first(t_map *map, char *f, char *s)
 	}
 	
 }
-// void	ft_checkc_midl(t_map *map, char *f, char *m, char *l)
-// {
-	
-// }
+
 void	check_map(t_map *map)
 {
 	t_map	*prev;
@@ -85,7 +82,6 @@ void	check_map(t_map *map)
 	while (cur)
 	{
 		cur = cur->next;
-		// ft_checkc_midl(map, prev->line, cur->line);
 	}
 	
 	
@@ -100,6 +96,5 @@ t_map	*parsing(t_map *map, int ac, char **av)
     }
 	fill_map(av[1], &map);
 	print_nodes(map);
-	// check_map(map);
 	return (map);
 }
