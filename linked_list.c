@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 12:44:49 by afatir            #+#    #+#             */
-/*   Updated: 2023/10/04 08:02:37 by afatir           ###   ########.fr       */
+/*   Updated: 2023/10/21 14:26:28 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ void	free_list(t_map *list)
 	}
 }
 
-t_map	*ft_cr_list(char *cmd)
+t_map	*cr_list(char *cmd)
 {
-	t_map	*s;
-	static	int	i;
+	t_map		*s;
+	static int	i;
 
 	s = (t_map *)malloc(sizeof(t_map));
 	if (!s)
@@ -45,7 +45,7 @@ t_map	*ft_cr_list(char *cmd)
 	return (s);
 }
 
-void	ft_add_end(t_map **a, t_map *n)
+void	add_end(t_map **a, t_map *n)
 {
 	t_map	*tmp;
 
@@ -60,7 +60,7 @@ void	ft_add_end(t_map **a, t_map *n)
 	tmp->next = n;
 }
 
-int	ft_strlen_list(t_map **a)
+int	strlen_list(t_map **a)
 {
 	t_map	*tmp;
 	int		ln;
@@ -73,4 +73,15 @@ int	ft_strlen_list(t_map **a)
 		tmp = tmp->next;
 	}
 	return (ln);
+}
+
+char	*get_index_list(t_map *map, int index)
+{
+	while (map)
+	{
+		if (map->index == index)
+			return (ft_strdup(map->line));
+		map = map->next;
+	}
+	return (NULL);
 }

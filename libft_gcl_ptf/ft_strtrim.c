@@ -6,13 +6,13 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 11:11:16 by afatir            #+#    #+#             */
-/*   Updated: 2022/10/29 06:17:17 by afatir           ###   ########.fr       */
+/*   Updated: 2023/05/28 10:05:27 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char *s1, char *set)
 {
 	int		end;
 

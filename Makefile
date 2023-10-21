@@ -6,7 +6,7 @@
 #    By: afatir <afatir@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/01 07:32:35 by afatir            #+#    #+#              #
-#    Updated: 2023/10/04 09:06:41 by afatir           ###   ########.fr        #
+#    Updated: 2023/10/21 16:55:51 by afatir           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,11 +15,11 @@ LIB_FT	= libft_gcl_ptf/
 LIB_FT_A= libft_gcl_ptf/libft_gcl_ptf.a
 
 CC		= cc
-CFLAGS	= -Wall -Werror -Wextra -fsanitize=address
+CFLAGS	= -Wall -Werror -Wextra -fsanitize=address -g
 MLX		= -lmlx -framework OpenGL -framework AppKit
 
 MOBJS	= ${SRCS:%.c=objectF/%.o}
-SRCS	= main_cub.c parsing.c linked_list.c
+SRCS	= main.c linked_list.c fill_list.c parsing1_head.c parsing2_map.c parsing3_utils.c
 
 
 mkdir := mkdir -p

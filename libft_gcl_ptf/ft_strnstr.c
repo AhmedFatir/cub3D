@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 06:14:34 by afatir            #+#    #+#             */
-/*   Updated: 2022/11/01 05:26:36 by afatir           ###   ########.fr       */
+/*   Updated: 2023/08/09 09:32:59 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 			else
 				j++;
 		}
-	i++;
-	}		
+		i++;
+	}
 	return (0);
 }

@@ -6,11 +6,11 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 00:14:45 by afatir            #+#    #+#             */
-/*   Updated: 2022/10/25 07:22:25 by afatir           ###   ########.fr       */
+/*   Updated: 2023/08/09 09:32:27 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "libft.h"
 
 size_t	ft_strlen(const char *s)
 {

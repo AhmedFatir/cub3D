@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 22:14:02 by afatir            #+#    #+#             */
-/*   Updated: 2023/02/13 12:51:12 by afatir           ###   ########.fr       */
+/*   Updated: 2023/10/19 11:03:09 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		ft_atoi(const char *str);
 char	*ft_strdup(const char *s1);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	*ft_strtrim(char const *s1, char const *set);
+char	*ft_strtrim(char *s1, char *set);
 char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
@@ -56,10 +56,12 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
+int		ft_strcmp(const char *s1, const char *s2);
 // gnl
 char	**ft_free_all(char **p);
 size_t	ft_checkc(char *s, int c);
 char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strjoin_p(char *s1, char s2);
 char	*get_next_line(int fd);
 char	*ft_read(int fd, char *str);
 char	*ft_save(char *str);

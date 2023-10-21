@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 11:43:43 by afatir            #+#    #+#             */
-/*   Updated: 2022/10/29 06:07:17 by afatir           ###   ########.fr       */
+/*   Updated: 2023/08/09 09:33:06 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strrchr(const char *s, int c)
 	{
 		if (s[i] == (char)c)
 			return ((char *) &s[i]);
-	i--;
+		i--;
 	}
 	return (0);
 }

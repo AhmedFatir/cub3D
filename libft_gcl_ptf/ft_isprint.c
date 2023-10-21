@@ -6,11 +6,11 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 23:55:23 by afatir            #+#    #+#             */
-/*   Updated: 2022/10/31 02:56:26 by afatir           ###   ########.fr       */
+/*   Updated: 2023/08/09 09:31:27 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
+#include "libft.h"
 
 int	ft_isprint(int c)
 {
