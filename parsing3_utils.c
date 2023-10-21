@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 16:51:44 by afatir            #+#    #+#             */
-/*   Updated: 2023/10/21 17:02:30 by afatir           ###   ########.fr       */
+/*   Updated: 2023/10/21 20:40:25 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,31 +50,33 @@ int	check_if_full(char *map)
 	return (0);
 }
 
-char	**load_map(t_map *map)
+char	**load_map(t_map *map, int *i)
 {
 	char	**mp;
 	t_map	*tmp;
-	int		i;
+	int		j;
 
 	tmp = map;
-	i = 0;
+	j = 0;
 	while (tmp)
 	{
 		if (!ft_strncmp(tmp->line, "111", 3))
 			break ;
-		i++;
+		j++;
 		tmp = tmp->next;
 	}
-	mp = ft_calloc(((strlen_list(&map) - i) + 1), sizeof(char *));
-	i = 0;
+	mp = ft_calloc(((strlen_list(&map) - j) + 1), sizeof(char *));
+	j = 0;
 	if (tmp)
 	{
 		while (tmp)
 		{
-			mp[i] = ft_strdup(tmp->line);
+			mp[j] = ft_strdup(tmp->line);
 			tmp = tmp->next;
-			i++;
+			j++;
 		}
 	}
+	else
+		*i = 1;
 	return (mp);
 }

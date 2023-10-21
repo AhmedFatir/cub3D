@@ -6,13 +6,13 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 10:10:04 by afatir            #+#    #+#             */
-/*   Updated: 2023/10/21 16:55:01 by afatir           ###   ########.fr       */
+/*   Updated: 2023/10/21 20:25:12 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	check_line(char *line, t_info *n, int j)
+void	check_line(char *line, t_info *n, int j, int *i)
 {
 	while (line[j])
 	{
@@ -33,7 +33,7 @@ void	check_line(char *line, t_info *n, int j)
 			else if (line[j] == 'C' && (line[j + 1] == 32 || line[j + 1] == 9))
 				n->c++;
 			else
-				n->no = 20;
+				*i = 1;
 			return ;
 		}
 		j++;
@@ -63,7 +63,7 @@ void	check_info(t_map *map, int *i)
 	{
 		if (!ft_strncmp(mp->line, "111", 3))
 			break ;
-		check_line(mp->line, &n, 0);
+		check_line(mp->line, &n, 0, i);
 		mp = mp->next;
 	}
 	if (n.no > 1 || n.so > 1 || n.we > 1 || n.ea > 1 || n.c > 1 || n.f > 1)
@@ -80,7 +80,6 @@ char	*get_info(t_map *map, int *i, char *s)
 
 	j = 0;
 	mp = map;
-	(void)s;
 	while (mp && ft_strncmp(mp->line, "111", 3))
 	{
 		j = 0;
@@ -105,6 +104,8 @@ void	parsing(t_map *map, t_data *dt)
 
 	i = 0;
 	check_info(map, &i);
+	if (i == 1)
+		print_error("Error\nwrong file format\n");
 	dt->no = get_info(map, &i, "NO");
 	dt->so = get_info(map, &i, "SO");
 	dt->we = get_info(map, &i, "WE");

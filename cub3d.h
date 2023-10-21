@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:32:06 by afatir            #+#    #+#             */
-/*   Updated: 2023/10/21 17:01:41 by afatir           ###   ########.fr       */
+/*   Updated: 2023/10/21 20:36:58 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,16 @@ void	add_end(t_map **a, t_map *n);
 int		strlen_list(t_map **a);
 char	*get_index_list(t_map *map, int index);
 //parsing1_head.c
-void	check_line(char *line, t_info *n, int j);
+void	check_line(char *line, t_info *n, int j, int *i);
 void	init_n(t_info *n);
 void	check_info(t_map *map, int *i);
 char	*get_info(t_map *map, int *i, char *s);
 void	parsing(t_map *map, t_data *dt);
 // parsing2_map.c
-void	check_left(char **map, int h, int *i);
-void	check_right(char **map, int h, int *i);
+void	check_sides(char **map, int h, int *i);
 char	**get_map(t_map *map, int *i);
 //parsing3_utils.c
 int		getmap_hi(char **map);
 int		check_if_full(char *map);
-char	**load_map(t_map *map);
+char	**load_map(t_map *map, int *i);
 #endif
