@@ -6,11 +6,23 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 16:51:44 by afatir            #+#    #+#             */
-/*   Updated: 2023/10/21 20:40:25 by afatir           ###   ########.fr       */
+/*   Updated: 2023/10/22 15:20:50 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	check_if_map(char *line)
+{
+	int		i;
+
+	i = 0;
+	while (line[i] == 32 || line[i] == 9)
+		i++;
+	if (line[i] && !ft_strncmp(&line[i], "1", 1))
+		return (0);
+	return (1);
+}
 
 int	getmap_hi(char **map)
 {
@@ -50,33 +62,22 @@ int	check_if_full(char *map)
 	return (0);
 }
 
-char	**load_map(t_map *map, int *i)
+int	valide_symbols(char c)
 {
-	char	**mp;
-	t_map	*tmp;
-	int		j;
+	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
+		return (2);
+	if (c == '1' || c == '0' || c == 32 || c == '\n' || c == 9)
+		return (1);
+	return (0);
+}
 
-	tmp = map;
-	j = 0;
-	while (tmp)
-	{
-		if (!ft_strncmp(tmp->line, "111", 3))
-			break ;
-		j++;
-		tmp = tmp->next;
-	}
-	mp = ft_calloc(((strlen_list(&map) - j) + 1), sizeof(char *));
-	j = 0;
-	if (tmp)
-	{
-		while (tmp)
-		{
-			mp[j] = ft_strdup(tmp->line);
-			tmp = tmp->next;
-			j++;
-		}
-	}
-	else
+void	check_midle_to(char *line, int k, int *i)
+{
+	int		len;
+
+	len = (int)ft_strlen(line) - 1;
+	if (k > len)
 		*i = 1;
-	return (mp);
+	else if (line[k] == '\n' || line[k] == 32 || line[k] == 9)
+		*i = 1;
 }

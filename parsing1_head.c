@@ -6,11 +6,40 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 10:10:04 by afatir            #+#    #+#             */
-/*   Updated: 2023/10/21 20:25:12 by afatir           ###   ########.fr       */
+/*   Updated: 2023/10/22 16:28:18 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+char	**load_map(t_map *map, int *i, int j)
+{
+	char	**mp;
+	t_map	*tmp;
+
+	tmp = map;
+	while (tmp)
+	{
+		if (!check_if_map(tmp->line))
+			break ;
+		j++;
+		tmp = tmp->next;
+	}
+	mp = ft_calloc(((strlen_list(&map) - j) + 1), sizeof(char *));
+	j = 0;
+	if (tmp)
+	{
+		while (tmp)
+		{
+			mp[j] = ft_strdup(tmp->line);
+			tmp = tmp->next;
+			j++;
+		}
+	}
+	else
+		*i = 1;
+	return (mp);
+}
 
 void	check_line(char *line, t_info *n, int j, int *i)
 {
@@ -40,16 +69,6 @@ void	check_line(char *line, t_info *n, int j, int *i)
 	}
 }
 
-void	init_n(t_info *n)
-{
-	n->no = 0;
-	n->we = 0;
-	n->so = 0;
-	n->ea = 0;
-	n->f = 0;
-	n->c = 0;
-}
-
 void	check_info(t_map *map, int *i)
 {
 	t_map	*mp;
@@ -61,7 +80,7 @@ void	check_info(t_map *map, int *i)
 	mp = map;
 	while (mp)
 	{
-		if (!ft_strncmp(mp->line, "111", 3))
+		if (!check_if_map(mp->line))
 			break ;
 		check_line(mp->line, &n, 0, i);
 		mp = mp->next;
@@ -80,7 +99,7 @@ char	*get_info(t_map *map, int *i, char *s)
 
 	j = 0;
 	mp = map;
-	while (mp && ft_strncmp(mp->line, "111", 3))
+	while (mp && ft_strncmp(mp->line, "1", 1))
 	{
 		j = 0;
 		while (mp->line[j])
@@ -98,22 +117,38 @@ char	*get_info(t_map *map, int *i, char *s)
 	return (NULL);
 }
 
+void	check_colors(char *c, int *i)
+{
+	int		j;
+	
+	j = 0;
+	(void)i;
+	while (c[j] && (c[j] == 32 || c[j] == 9))
+		j++;
+	
+}
+
 void	parsing(t_map *map, t_data *dt)
 {
 	int		i;
 
 	i = 0;
+	dt->map = NULL;
 	check_info(map, &i);
-	if (i == 1)
-		print_error("Error\nwrong file format\n");
+	print_error("Error\nwrong file format\n", &i);
 	dt->no = get_info(map, &i, "NO");
 	dt->so = get_info(map, &i, "SO");
 	dt->we = get_info(map, &i, "WE");
 	dt->ea = get_info(map, &i, "EA");
 	dt->f = get_info(map, &i, "F ");
 	dt->c = get_info(map, &i, "C ");
-	dt->map = get_map(map, &i);
-	if (i == 1)
-		ft_free_data(dt);
+	ft_free_data(dt, map, &i);
+	// check_colors(dt->f, &i);
+	// check_colors(dt->c, &i);
+	// ft_free_data(dt, map, &i);
+	dt->map = get_map(map, dt, &i);
 	free_list(map);
+	i = 0;
+	while (dt->map[i])
+		ft_printf("%s", dt->map[i++]);
 }
