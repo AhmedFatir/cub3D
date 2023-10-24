@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 16:51:44 by afatir            #+#    #+#             */
-/*   Updated: 2023/10/22 15:20:50 by afatir           ###   ########.fr       */
+/*   Updated: 2023/10/23 20:57:21 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	check_if_map(char *line)
 	int		i;
 
 	i = 0;
-	while (line[i] == 32 || line[i] == 9)
+	while (is_sep(line[i]))
 		i++;
 	if (line[i] && !ft_strncmp(&line[i], "1", 1))
 		return (0);

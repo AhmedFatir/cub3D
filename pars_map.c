@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 14:09:51 by afatir            #+#    #+#             */
-/*   Updated: 2023/10/22 15:26:36 by afatir           ###   ########.fr       */
+/*   Updated: 2023/10/23 21:52:58 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ char	**get_map(t_map *map, t_data *dt, int *i)
 	char	**mp;
 	int		h;
 
+	ft_free_data(dt, map, i);
 	mp = load_map(map, i, 0);
 	print_error("Error\nerror loading the map\n", i);
 	ft_free_data(dt, map, i);

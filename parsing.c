@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing1_head.c                                    :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 10:10:04 by afatir            #+#    #+#             */
-/*   Updated: 2023/10/22 16:28:18 by afatir           ###   ########.fr       */
+/*   Updated: 2023/10/24 20:51:10 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,22 +47,9 @@ void	check_line(char *line, t_info *n, int j, int *i)
 	{
 		while (line[j] && (line[j] == 32 || line[j] == 9))
 			j++;
-		if (line[j] && line[j + 1])
+		if (line[j] && line[j + 1] && line[j + 2])
 		{
-			if (line[j] == 'N' && line[j + 1] == 'O')
-				n->no++;
-			else if (line[j] == 'S' && line[j + 1] == 'O')
-				n->so++;
-			else if (line[j] == 'W' && line[j + 1] == 'E')
-				n->we++;
-			else if (line[j] == 'E' && line[j + 1] == 'A')
-				n->ea++;
-			else if (line[j] == 'F' && (line[j + 1] == 32 || line[j + 1] == 9))
-				n->f++;
-			else if (line[j] == 'C' && (line[j + 1] == 32 || line[j + 1] == 9))
-				n->c++;
-			else
-				*i = 1;
+			check_directions(line, &j, i, n);
 			return ;
 		}
 		j++;
@@ -117,23 +104,14 @@ char	*get_info(t_map *map, int *i, char *s)
 	return (NULL);
 }
 
-void	check_colors(char *c, int *i)
-{
-	int		j;
-	
-	j = 0;
-	(void)i;
-	while (c[j] && (c[j] == 32 || c[j] == 9))
-		j++;
-	
-}
-
-void	parsing(t_map *map, t_data *dt)
+t_data	*parsing(t_data *dt, int ac, char **av, t_map *map)
 {
 	int		i;
 
 	i = 0;
-	dt->map = NULL;
+	fill_list(ac, av, &map);
+	dt = (t_data *)ft_calloc(sizeof(t_data), 1);
+	dt->col = (t_col *)ft_calloc(sizeof(t_col), 1);
 	check_info(map, &i);
 	print_error("Error\nwrong file format\n", &i);
 	dt->no = get_info(map, &i, "NO");
@@ -143,12 +121,10 @@ void	parsing(t_map *map, t_data *dt)
 	dt->f = get_info(map, &i, "F ");
 	dt->c = get_info(map, &i, "C ");
 	ft_free_data(dt, map, &i);
-	// check_colors(dt->f, &i);
-	// check_colors(dt->c, &i);
-	// ft_free_data(dt, map, &i);
+	check_colors(dt, &i, 'c', 0);
+	check_colors(dt, &i, 'f', 0);
+	triming(dt, &i, -1, NULL);
 	dt->map = get_map(map, dt, &i);
 	free_list(map);
-	i = 0;
-	while (dt->map[i])
-		ft_printf("%s", dt->map[i++]);
+	return (dt);
 }

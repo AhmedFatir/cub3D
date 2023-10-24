@@ -2,7 +2,8 @@ NO ./the_north_texture
 SO ./the_south_texture
 WE ./the_west_texture
 EA ./the_east_texture
-F 220,100,0
+
+F 220,100,0 
 C 225,30,0
 
 1111111111111111111111111

@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:49:36 by afatir            #+#    #+#             */
-/*   Updated: 2023/10/22 15:19:38 by afatir           ###   ########.fr       */
+/*   Updated: 2023/10/24 20:34:18 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,16 @@ void	ft_free_data(t_data *dt, t_map *map, int *i)
 {
 	if (!*i)
 		return ;
-	if (dt->no)
-		free(dt->no);
-	if (dt->so)
-		free(dt->so);
-	if (dt->we)
-		free(dt->we);
-	if (dt->ea)
-		free(dt->ea);
-	if (dt->f)
-		free(dt->f);
-	if (dt->c)
-		free(dt->c);
-	if (dt->map)
-		ft_free_all(dt->map);
+	free(dt->no);
+	free(dt->so);
+	free(dt->we);
+	free(dt->ea);
+	free(dt->f);
+	free(dt->c);
+	ft_free_all(dt->map);
+	ft_free_all(dt->col->c);
+	ft_free_all(dt->col->f);
+	free(dt->col);
 	free(dt);
 	free_list(map);
 	exit(1);
