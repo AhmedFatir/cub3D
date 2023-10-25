@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:49:36 by afatir            #+#    #+#             */
-/*   Updated: 2023/10/24 20:34:18 by afatir           ###   ########.fr       */
+/*   Updated: 2023/10/25 09:08:05 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	init_n(t_info *n)
 	n->c = 0;
 }
 
-void	ft_free_data(t_data *dt, t_map *map, int *i)
+void	ft_free_data(t_data *dt, t_map *map, int *i, int j)
 {
 	if (!*i)
 		return ;
@@ -49,7 +49,8 @@ void	ft_free_data(t_data *dt, t_map *map, int *i)
 	free(dt->col);
 	free(dt);
 	free_list(map);
-	exit(1);
+	if (j)
+		exit(1);
 }
 
 void	check_extention(int ac, char **av)

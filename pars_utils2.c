@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 12:23:36 by afatir            #+#    #+#             */
-/*   Updated: 2023/10/24 20:39:49 by afatir           ###   ########.fr       */
+/*   Updated: 2023/10/25 14:15:50 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,16 @@ void	check_directions(char *line, int *j, int *i, t_info *n)
 		n->c++;
 	else
 		*i = 1;
+}
+
+char	*ft_strtrim_back(char *s1, char *set)
+{
+	int		end;
+
+	if (!s1 || !set)
+		return (0);
+	end = ft_strlen(s1) - 1;
+	while (end > 0 && *s1 && ft_strchr(set, s1[end]))
+		end--;
+	return (ft_substr(s1, 0, end + 1));
 }

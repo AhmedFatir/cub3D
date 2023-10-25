@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing4_colors.c                                  :+:      :+:    :+:   */
+/*   pars_colors.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 20:04:07 by afatir            #+#    #+#             */
-/*   Updated: 2023/10/24 20:08:38 by afatir           ###   ########.fr       */
+/*   Updated: 2023/10/25 10:55:38 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	triming(t_data *dt, int *i, int j, char	*p)
 {
 	while (dt->col->c[++j])
 	{
-		p = ft_strtrim(dt->col->c[j], " ");
+		p = ft_strtrim(dt->col->c[j], " \t");
 		free(dt->col->c[j]);
 		dt->col->c[j] = ft_strdup(p);
 		free(p);
@@ -90,7 +90,7 @@ void	triming(t_data *dt, int *i, int j, char	*p)
 	j = -1;
 	while (dt->col->f[++j])
 	{
-		p = ft_strtrim(dt->col->f[j], " ");
+		p = ft_strtrim(dt->col->f[j], " \t");
 		free(dt->col->f[j]);
 		dt->col->f[j] = ft_strdup(p);
 		free(p);

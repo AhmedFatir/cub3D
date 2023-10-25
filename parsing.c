@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 10:10:04 by afatir            #+#    #+#             */
-/*   Updated: 2023/10/24 20:51:10 by afatir           ###   ########.fr       */
+/*   Updated: 2023/10/25 14:15:43 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	**load_map(t_map *map, int *i, int j)
 	{
 		while (tmp)
 		{
-			mp[j] = ft_strdup(tmp->line);
+			mp[j] = ft_strtrim_back(tmp->line, "\n \t");
 			tmp = tmp->next;
 			j++;
 		}
@@ -120,7 +120,7 @@ t_data	*parsing(t_data *dt, int ac, char **av, t_map *map)
 	dt->ea = get_info(map, &i, "EA");
 	dt->f = get_info(map, &i, "F ");
 	dt->c = get_info(map, &i, "C ");
-	ft_free_data(dt, map, &i);
+	ft_free_data(dt, map, &i, 1);
 	check_colors(dt, &i, 'c', 0);
 	check_colors(dt, &i, 'f', 0);
 	triming(dt, &i, -1, NULL);

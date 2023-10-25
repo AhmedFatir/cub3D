@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:32:06 by afatir            #+#    #+#             */
-/*   Updated: 2023/10/24 20:51:02 by afatir           ###   ########.fr       */
+/*   Updated: 2023/10/25 14:15:59 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <mlx.h>
-# define SIZE 33
+
+# define SIZE_H 33
+# define SIZE_W 33
 
 typedef struct s_map
 {
@@ -42,11 +44,23 @@ typedef struct s_data
 	char	*so;
 	char	*ea;
 	char	*f;
-	char	*c;
 	int		p_x;
 	int		p_y;
+	char	*c;
 	t_col	*col;
 }t_data;
+
+typedef struct s_game
+{
+	char	*win;
+	char	*mlx_p;
+	char	*img;
+	int		img_x;
+	int		img_y;
+	int		map_h;
+	int		map_w;
+	t_data	*dt;
+}t_game;
 
 typedef struct s_info
 {
@@ -61,7 +75,7 @@ typedef struct s_info
 // fill_list.c
 void	print_error(char *s, int *i);
 void	init_n(t_info *n);
-void	ft_free_data(t_data *dt, t_map *map, int *i);
+void	ft_free_data(t_data *dt, t_map *map, int *i, int j);
 void	check_extention(int ac, char **av);
 void	fill_list(int ac, char **av, t_map **map);
 //linked_list.c
@@ -97,4 +111,7 @@ void	check_midle_to(char *line, int k, int *i);
 //pars_utils2.c
 int		is_sep(char c);
 void	check_directions(char *line, int *j, int *i, t_info *n);
+char	*ft_strtrim_back(char *s1, char *set);
+//execution.c
+void	execution(t_data *dt, t_game *mlx);
 #endif

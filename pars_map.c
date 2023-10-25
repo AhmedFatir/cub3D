@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing2_map.c                                     :+:      :+:    :+:   */
+/*   pars_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 14:09:51 by afatir            #+#    #+#             */
-/*   Updated: 2023/10/23 21:52:58 by afatir           ###   ########.fr       */
+/*   Updated: 2023/10/25 14:07:37 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ void	check_sides(char **map, int h, int *i)
 	while (j < h)
 	{
 		k = 0;
-		while (map[j][k] && (map[j][k] == 32 || map[j][k] == 9))
+		while (map[j][k] && is_sep(map[j][k]))
 			k++;
 		if (map[j][k] && map[j][k] != '1')
 			*i = 1;
-		if (ft_strlen(map[j]) > 2 && map[j][ft_strlen(map[j]) - 2] != '1')
+		if (((int)ft_strlen(map[j]) - 1) < 0)
 			*i = 1;
 		j++;
 	}
@@ -113,19 +113,19 @@ char	**get_map(t_map *map, t_data *dt, int *i)
 	char	**mp;
 	int		h;
 
-	ft_free_data(dt, map, i);
+	ft_free_data(dt, map, i, 1);
 	mp = load_map(map, i, 0);
 	print_error("Error\nerror loading the map\n", i);
-	ft_free_data(dt, map, i);
+	ft_free_data(dt, map, i, 1);
 	h = getmap_hi(mp);
 	check_sides(mp, h, i);
 	print_error("Error\nerror in the map sides\n", i);
-	ft_free_data(dt, map, i);
+	ft_free_data(dt, map, i, 1);
 	check_midle(mp, h, i, 0);
 	print_error("Error\nerror inside the map\n", i);
-	ft_free_data(dt, map, i);
+	ft_free_data(dt, map, i, 1);
 	check_player(mp, dt, h, i);
 	print_error("Error\ncaracter error\n", i);
-	ft_free_data(dt, map, i);
+	ft_free_data(dt, map, i, 1);
 	return (mp);
 }
