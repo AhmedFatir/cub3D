@@ -25,107 +25,86 @@ typedef struct	s_mlx {
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
-
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }
 
-void	put_pixel(t_data *img, void *mlx, void *mlx_win, int x, int y)
+void devide_win(t_mlx *mlx)
 {
-	if (x < 0 || x > WITH || y < 0 || y > HIGT)
+	int i;
+	if ((mlx->x-10) < 0 || (mlx->x+10) > WITH || (mlx->y-10) < 0 || (mlx->y+10) > HIGT)
 	{
 		printf("NTCHAWFO\n");
 		exit(0);
 	}
-	my_mlx_pixel_put(img, x, y, 0x00FF0000);
-	mlx_put_image_to_window(mlx, mlx_win, img->img, 0, 0);
+	i = 0;
+	while (i < mlx->x)
+		my_mlx_pixel_put(mlx->dt, i++, mlx->y, 0xff0000);
+	i = WITH;
+	while (i > mlx->x)
+		my_mlx_pixel_put(mlx->dt, i--, mlx->y, 0xff0000);
+	i = 0;
+	while (i < mlx->y)
+		my_mlx_pixel_put(mlx->dt, mlx->x, i++, 0xff9300);
+	i = HIGT;
+	while (i > mlx->y)
+		my_mlx_pixel_put(mlx->dt, mlx->x, i--, 0xff9300);
 }
 
-void devide_win(t_data *img,void *mlx, void *mlx_win)
+void draw_win(t_mlx *mlx)
 {
-	int x = WITH;
-	int y = HIGT / 2;
-	int i = 0;
-	while (i < x)
-		put_pixel(img, mlx, mlx_win, x - i++, y);
-	i = (HIGT / 2) * -1;
-	while (i < y)
-		put_pixel(img, mlx, mlx_win, x/2 , y - i++);
-}
-
-void draw_pos_right(t_data *img,void *mlx, void *mlx_win, int x, int y)
-{
-	int	x_p, x_m;
-	int	y_p = y;
-	while (y_p < (y+10))
+	devide_win(mlx);
+	int	x_m, x_p;
+	int	y_p = mlx->y;
+	int	y_m = mlx->y;
+	while (y_m > (mlx->y-10) && y_p < (mlx->y+10))
 	{
-		x_p = x;
-		while (x_p < (x+10))
-			put_pixel(img, mlx, mlx_win, x_p++, y_p);
+		x_m = mlx->x;
+		x_p = mlx->x;
+		while (x_m > (mlx->x-10) && x_p < (mlx->x+10))
+		{
+			my_mlx_pixel_put(mlx->dt, x_m--, y_m, 0x009300);
+			my_mlx_pixel_put(mlx->dt, x_p++, y_p, 0x009300);
+		}
+		y_m--;
 		y_p++;
 	}
-	y_p = y;
-	while (y_p > (y-10))
+	y_m = mlx->y;
+	y_p = mlx->y;
+	while (y_m < (mlx->y+10) && y_p > (mlx->y-10))
 	{
-		x_p = x;
-		while (x_p < (x+10))
-			put_pixel(img, mlx, mlx_win, x_p++, y_p);
+		x_m = mlx->x;
+		x_p = mlx->x;
+		while (x_m > (mlx->x-10) && x_p < (mlx->x+10))
+		{
+			my_mlx_pixel_put(mlx->dt, x_m--, y_m, 0x009300);
+			my_mlx_pixel_put(mlx->dt, x_p++, y_p, 0x009300);
+		}
+		y_m++;
 		y_p--;
 	}
-	// mlx_clear_window(mlx, mlx_win);
+
 }
-void draw_pos_left(t_data *img,void *mlx, void *mlx_win, int x, int y)
-{
-	int	x_m;
-	int	y_m = y;
-	while (y_m > (y-10))
-	{
-		x_m = x;
-		while (x_m > (x-10))
-			put_pixel(img, mlx, mlx_win, x_m--, y_m);
-		y_m--;
-	}
-	y_m = y;
-	while (y_m < (y+10))
-	{
-		x_m = x;
-		while (x_m > (x-10))
-			put_pixel(img, mlx, mlx_win, x_m--, y_m);
-		y_m++;
-	}
-	// mlx_clear_window(mlx, mlx_win);
-}
+
 int	ft_exit(int key, t_mlx *mlx)
 {
 	if (key == 53)
 		exit(0);
-	if (key == 123)
-	{
-		mlx_clear_window(mlx->mlxp, mlx->win);
-		mlx->x = mlx->x - 10;
-		draw_pos_left(mlx->dt, mlx->mlxp, mlx->win, mlx->x, mlx->y);
-	}
-	if (key == 124)
-	{
-		mlx_clear_window(mlx->mlxp, mlx->win);
-		mlx->x = mlx->x + 10;
-		draw_pos_right(mlx->dt, mlx->mlxp, mlx->win, mlx->x, mlx->y);
-	}
-	if (key == 125)
-	{
-		mlx_clear_window(mlx->mlxp, mlx->win);
+	else if (key == 123)
+		mlx->x -= 10;
+	else if (key == 124)
+		mlx->x += 10;
+	else if (key == 125)
 		mlx->y += 10;
-		draw_pos_right(mlx->dt, mlx->mlxp, mlx->win, mlx->x, mlx->y);
-		draw_pos_left(mlx->dt, mlx->mlxp, mlx->win, mlx->x, mlx->y);
-	}
-	if (key == 126)
-	{
-		mlx_clear_window(mlx->mlxp, mlx->win);
+	else if (key == 126)
 		mlx->y -= 10;
-		draw_pos_right(mlx->dt, mlx->mlxp, mlx->win, mlx->x, mlx->y);
-		draw_pos_left(mlx->dt, mlx->mlxp, mlx->win, mlx->x, mlx->y);
-	}
-	// devide_win(mlx->dt, mlx->mlxp, mlx->win);
+	else 
+		return (0);
+	mlx_destroy_image(mlx->mlxp, mlx->dt->img);
+	mlx->dt->img = NULL;
+	mlx->dt->img = mlx_new_image(mlx->mlxp, WITH, HIGT);
+	draw_win(mlx);
+	mlx_put_image_to_window(mlx->mlxp, mlx->win, mlx->dt->img, 0, 0);
 	return (0);
 }
 int	main(void)
@@ -137,15 +116,13 @@ int	main(void)
 	mlx.mlxp = mlx_init();
 	mlx.win = mlx_new_window(mlx.mlxp, WITH, HIGT, "Hello world!");
 	img.img = mlx_new_image(mlx.mlxp, WITH, HIGT);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-								&img.endian);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
 	mlx.dt = &img;
 	/////////////////////////////////////////////
 	mlx.x = WITH / 2;
 	mlx.y = HIGT / 2;
-	// devide_win(mlx.dt, mlx.mlxp, mlx.win);
-	draw_pos_right(mlx.dt, mlx.mlxp, mlx.win, mlx.x, mlx.y);
-	draw_pos_left(mlx.dt, mlx.mlxp, mlx.win, mlx.x, mlx.y);
+	draw_win(&mlx);
+	mlx_put_image_to_window(mlx.mlxp, mlx.win, img.img, 0, 0);
 	
 		
 
