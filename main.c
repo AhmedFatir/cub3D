@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:40:50 by afatir            #+#    #+#             */
-/*   Updated: 2023/10/25 14:13:52 by afatir           ###   ########.fr       */
+/*   Updated: 2023/10/28 11:22:58 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ int	main(int ac, char **av)
 {
 	t_data	*dt;
 
-	atexit(v);
+	// atexit(v);
 	dt = parsing(NULL, ac, av, NULL);
-	execution(dt, NULL);
+	execution(dt);
 	print_data(dt);
 	return (0);
 }

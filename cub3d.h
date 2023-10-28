@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:32:06 by afatir            #+#    #+#             */
-/*   Updated: 2023/10/25 14:15:59 by afatir           ###   ########.fr       */
+/*   Updated: 2023/10/28 12:06:15 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@
 
 # define SIZE_H 33
 # define SIZE_W 33
+
+# define LEFT_K 123
+# define RIGHT_K 124
+# define DOWN_K 125
+# define UP_K 126
 
 typedef struct s_map
 {
@@ -52,15 +57,24 @@ typedef struct s_data
 
 typedef struct s_game
 {
-	char	*win;
-	char	*mlx_p;
-	char	*img;
-	int		img_x;
-	int		img_y;
 	int		map_h;
 	int		map_w;
+	void	*img;
+	int		img_x;
+	int		img_y;
 	t_data	*dt;
 }t_game;
+
+typedef struct s_mlx
+{
+	void	*win;
+	void	*mlx_p;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	t_game	*gm;
+}t_mlx;
 
 typedef struct s_info
 {
@@ -113,5 +127,6 @@ int		is_sep(char c);
 void	check_directions(char *line, int *j, int *i, t_info *n);
 char	*ft_strtrim_back(char *s1, char *set);
 //execution.c
-void	execution(t_data *dt, t_game *mlx);
+void	drow_map(t_mlx *mlx, int key);
+void	execution(t_data *dt);
 #endif
