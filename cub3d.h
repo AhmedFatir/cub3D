@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:32:06 by afatir            #+#    #+#             */
-/*   Updated: 2023/10/30 11:13:11 by afatir           ###   ########.fr       */
+/*   Updated: 2023/10/30 13:21:08 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@
 # include <fcntl.h>
 # include <mlx.h>
 
-# define SIZE_H 50
-# define SIZE_W 50
+# define SIZE_H 48
+# define SIZE_W 48
 
 # define WHI 0xf9fcfc
+# define BLK 0x000000
 # define GREY 0x808080
 # define GREN 0x009300
 # define ORNG 0xff9300
@@ -68,6 +69,8 @@ typedef struct s_game
 	void	*img;
 	int		img_x;
 	int		img_y;
+	int		plyr_x;
+	int		plyr_y;
 	t_data	*dt;
 }t_game;
 
