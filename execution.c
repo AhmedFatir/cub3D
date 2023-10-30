@@ -6,26 +6,11 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:23:08 by afatir            #+#    #+#             */
-/*   Updated: 2023/10/28 12:05:09 by afatir           ###   ########.fr       */
+/*   Updated: 2023/10/30 11:12:19 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	get_h_w(t_game *mlx)
-{
-	int		i;
-
-	i = 0; 
-	mlx->map_h = getmap_hi(mlx->dt->map);
-	mlx->map_w = 0;
-	while (i < mlx->map_h)
-	{
-		if ((int)ft_strlen(mlx->dt->map[i]) > mlx->map_w)
-			mlx->map_w = (int)ft_strlen(mlx->dt->map[i]);
-		i++;
-	}
-}
 
 void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
 {
@@ -47,12 +32,130 @@ int	ft_exit(t_mlx *mlx)
 	return (0);
 }
 
+
+void draw_win(t_mlx *mlx, int x, int y, int color)
+{
+	int	x_m;
+	int	y_m = y+1;
+	while (y_m < (y+SIZE_H))
+	{
+		x_m = x+1;
+		while (x_m < (x+SIZE_W))
+			my_mlx_pixel_put(mlx, x_m++, y_m, color);
+		y_m++;
+	}
+}
+
+void drow_player(t_mlx *mlx, int x_p, int y_p, char c, int color)
+{
+	int		x;
+	int		y;
+
+	y = SIZE_H/4;
+	while (y < (SIZE_H - SIZE_H/4))
+	{
+		x = SIZE_W/4;
+		while (x < (SIZE_W - SIZE_W/4))
+			my_mlx_pixel_put(mlx, x_p + x++, y_p + y, color);
+		y++;
+	}
+	y = SIZE_H/2;
+	x = SIZE_W/2;
+	if (c == 'N')
+	{
+		while (y > (SIZE_W/2 * -1))
+			my_mlx_pixel_put(mlx, x_p + x, y_p + y--, RED);
+	}
+}
+
+void	drow_map_pixel(t_mlx *mlx)
+{
+	int		y;
+	int		x;
+	int		x_p;
+	int		y_p;
+
+	y = 0;
+	y_p = 0;
+	while (y < mlx->gm->map_h)
+	{
+		x = 0;
+		x_p = 0;
+		while (mlx->gm->dt->map[y][x])
+		{
+			char c = mlx->gm->dt->map[y][x];
+			if (c == '1')
+				draw_win(mlx, x_p, y_p, GREY);
+			else if (c == '0' || is_sep(c))
+				draw_win(mlx, x_p, y_p, WHI);
+			else if (valide_symbols(c) == 2)
+			{
+				draw_win(mlx, x_p, y_p, WHI);
+				drow_player(mlx, x_p, y_p, c, ORNG);
+			}
+			x++;
+			x_p += SIZE_W;
+		}
+		y++;
+		y_p += SIZE_H;
+	}
+	mlx_put_image_to_window(mlx->mlx_p, mlx->win, mlx->gm->img, 0, 0);
+}
+int	mv_left_and_rightp(t_data *dt, int i, char c)
+{
+	if (i == 1)
+	{
+		dt->map[dt->p_x][dt->p_y] = '0';
+		dt->p_y -= 1;
+		dt->map[dt->p_x][dt->p_y] = c;
+	}
+	else if (i == 2)
+	{
+		dt->map[dt->p_x][dt->p_y] = '0';
+		dt->p_y += 1;
+		dt->map[dt->p_x][dt->p_y] = c;
+	}
+	return (0);
+}
+
+int	mv_down_and_upp(t_data *dt, int i, char c)
+{
+	if (i == 1)
+	{
+		dt->map[dt->p_x][dt->p_y] = '0';
+		dt->p_x += 1;
+		dt->map[dt->p_x][dt->p_y] = c;
+	}
+	else if (i == 2)
+	{
+		dt->map[dt->p_x][dt->p_y] = '0';
+		dt->p_x -= 1;
+		dt->map[dt->p_x][dt->p_y] = c;
+	}
+	return (0);
+}
+int	cub_hook(t_mlx *mlx, t_data *dt, int key)
+{
+	if (key == -1)
+		return (0);
+	if ((key == LEFT_K) && (dt->map[dt->p_x][dt->p_y - 1] == '0'))
+		mv_left_and_rightp(dt, 1, dt->map[dt->p_x][dt->p_y]);
+	else if ((key == RIGHT_K) && (dt->map[dt->p_x][dt->p_y + 1] == '0'))
+		mv_left_and_rightp(dt, 2, dt->map[dt->p_x][dt->p_y]);
+	else if ((key == DOWN_K) && (dt->map[dt->p_x + 1][dt->p_y] == '0'))
+		mv_down_and_upp(dt, 1, dt->map[dt->p_x][dt->p_y]);
+	else if ((key == UP_K) && (dt->map[dt->p_x - 1][dt->p_y] == '0'))
+		mv_down_and_upp(dt, 2, dt->map[dt->p_x][dt->p_y]);
+	drow_map_pixel(mlx);
+	return (0);
+}
+
 int	ft_hook(int key,t_mlx *mlx)
 {
 	if (key == 53)
 		ft_exit(mlx);
 	else
-		drow_map(mlx, key);
+		cub_hook(mlx, mlx->gm->dt, key);
 	return (0);
 }
 
@@ -67,7 +170,7 @@ void	execution(t_data *dt)
 	mlx.win = mlx_new_window(mlx.mlx_p, (mlx.gm->map_w * SIZE_H), (mlx.gm->map_h * SIZE_W), "cub3D");
 	mlx.gm->img = mlx_new_image(mlx.mlx_p, (mlx.gm->map_w * SIZE_H), (mlx.gm->map_h * SIZE_W));
 	mlx.addr = mlx_get_data_addr(mlx.gm->img, &mlx.bits_per_pixel, &mlx.line_length, &mlx.endian);
-	drow_map(&mlx, -1);
+	drow_map_pixel(&mlx);
 	mlx_hook(mlx.win, 17, 0, ft_exit, &mlx);
 	mlx_hook(mlx.win, 2, 0, ft_hook, &mlx);
 	mlx_loop(mlx.mlx_p);

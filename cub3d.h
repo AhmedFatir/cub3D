@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:32:06 by afatir            #+#    #+#             */
-/*   Updated: 2023/10/28 12:06:15 by afatir           ###   ########.fr       */
+/*   Updated: 2023/10/30 11:13:11 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,14 @@
 # include <fcntl.h>
 # include <mlx.h>
 
-# define SIZE_H 33
-# define SIZE_W 33
+# define SIZE_H 50
+# define SIZE_W 50
+
+# define WHI 0xf9fcfc
+# define GREY 0x808080
+# define GREN 0x009300
+# define ORNG 0xff9300
+# define RED 0xff0000
 
 # define LEFT_K 123
 # define RIGHT_K 124
@@ -126,7 +132,7 @@ void	check_midle_to(char *line, int k, int *i);
 int		is_sep(char c);
 void	check_directions(char *line, int *j, int *i, t_info *n);
 char	*ft_strtrim_back(char *s1, char *set);
+void	get_h_w(t_game *mlx);
 //execution.c
-void	drow_map(t_mlx *mlx, int key);
 void	execution(t_data *dt);
 #endif
