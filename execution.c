@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:23:08 by afatir            #+#    #+#             */
-/*   Updated: 2023/10/30 13:22:23 by afatir           ###   ########.fr       */
+/*   Updated: 2023/10/30 21:09:38 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
 {
-	if (y > (SIZE_H * mlx->gm->map_h) || x < 0 || x > (SIZE_W * mlx->gm->map_w) || y < 0 || y > (SIZE_H * mlx->gm->map_h))
+	if (x < 0 || x >= (SIZE_W * mlx->gm->map_w) || y < 0 || y >= (SIZE_H * mlx->gm->map_h))
 	{
 		ft_printf ("NTCHAWFO\n");
 		exit(0);
@@ -124,6 +124,7 @@ void	drow_map_pixel(t_mlx *mlx, int flag)
 
 int	cub_hook(t_mlx *mlx, t_data *dt, int key)
 {
+	
 	if (key == -1)
 		return (0);
 	if (key == LEFT_K)
@@ -135,9 +136,6 @@ int	cub_hook(t_mlx *mlx, t_data *dt, int key)
 	else if (key == UP_K)
 		mlx->gm->plyr_y -= 4;
 	drow_map_pixel(mlx, 1);
-	// if (mlx->gm->plyr_y >= (SIZE_H * mlx->gm->map_h))
-	// 	exit(0);
-	ft_printf ("%d-------%d\n", mlx->gm->plyr_y, mlx->gm->plyr_x);
 	drow_player(mlx, mlx->gm->plyr_x, mlx->gm->plyr_y, dt->map[dt->p_x][dt->p_y], ORNG);
 	mlx_put_image_to_window(mlx->mlx_p, mlx->win, mlx->gm->img, 0, 0);
 	return (0);
