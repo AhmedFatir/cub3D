@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 12:23:36 by afatir            #+#    #+#             */
-/*   Updated: 2023/10/30 11:11:52 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/04 09:08:40 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,17 @@ char	*ft_strtrim_back(char *s1, char *set)
 	return (ft_substr(s1, 0, end + 1));
 }
 
-void	get_h_w(t_game *mlx)
+void	get_h_w(t_mlx *mlx)
 {
 	int		i;
 
 	i = 0; 
-	mlx->map_h = getmap_hi(mlx->dt->map);
-	mlx->map_w = 0;
-	while (i < mlx->map_h)
+	mlx->dt->map_h = getmap_hi(mlx->dt->map);
+	mlx->dt->map_w = 0;
+	while (i < mlx->dt->map_h)
 	{
-		if ((int)ft_strlen(mlx->dt->map[i]) > mlx->map_w)
-			mlx->map_w = (int)ft_strlen(mlx->dt->map[i]);
+		if ((int)ft_strlen(mlx->dt->map[i]) > mlx->dt->map_w)
+			mlx->dt->map_w = (int)ft_strlen(mlx->dt->map[i]);
 		i++;
 	}
 }

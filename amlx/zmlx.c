@@ -91,13 +91,13 @@ int	ft_exit(int key, t_mlx *mlx)
 	if (key == 53)
 		exit(0);
 	else if (key == 123)
-		mlx->x -= 10;
+		mlx->x -= 5;
 	else if (key == 124)
-		mlx->x += 10;
+		mlx->x += 5;
 	else if (key == 125)
-		mlx->y += 10;
+		mlx->y += 5;
 	else if (key == 126)
-		mlx->y -= 10;
+		mlx->y -= 5;
 	else 
 		return (0);
 	mlx_destroy_image(mlx->mlxp, mlx->dt->img);

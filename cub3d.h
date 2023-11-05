@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:32:06 by afatir            #+#    #+#             */
-/*   Updated: 2023/10/30 21:03:45 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/05 15:25:25 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,19 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <mlx.h>
+# include <math.h>
 
 # define SIZE_H 48
 # define SIZE_W 48
+
+# define FOV 60
+# define NUM_RAYS 500
+#define PLAYER_SPEED (TILE_SIZE * 0.1f)
+# define RAY_STEP 0.1
+# define TILE_SIZE 48
+# define ROTATION_SPEED (PI / 90)
+# define MAX_DISTANCE 1000
+# define PI 3.1415926535897
 
 # define WHI 0xf9fcfc
 # define BLK 0x000000
@@ -30,10 +40,12 @@
 # define ORNG 0xff9300
 # define RED 0xff0000
 
-# define LEFT_K 123
-# define RIGHT_K 124
-# define DOWN_K 125
-# define UP_K 126
+# define R_LEFT 123
+# define R_RIGHT 124
+# define LEFT_K 0
+# define RIGHT_K 2
+# define DOWN_K 1
+# define UP_K 13
 
 typedef struct s_map
 {
@@ -50,39 +62,48 @@ typedef struct s_col
 
 typedef struct s_data
 {
-	char	**map;
-	char	*no;
-	char	*we;
-	char	*so;
-	char	*ea;
-	char	*f;
-	int		p_x;
-	int		p_y;
-	char	*c;
+	char	**map;	// the map
+	char	*no;	//no pointer
+	char	*we;	//we pointer
+	char	*so;	//so pointer
+	char	*ea;	//ea pointer
+	char	*f;		//flor color
+	char	*c;		//color pinter
+	int		p_x;	//player position int map
+	int		p_y;	//player position int map
+	int		map_h;	//map hight
+	int		map_w;	//map wight
 	t_col	*col;
 }t_data;
 
-typedef struct s_game
+typedef struct s_player
 {
-	int		map_h;
-	int		map_w;
-	void	*img;
-	int		img_x;
-	int		img_y;
-	int		plyr_x;
-	int		plyr_y;
-	t_data	*dt;
-}t_game;
+	int		plyr_x;	//player x pixel
+	int		plyr_y;	//player y pixel
+	float	rot_angele;	//player rotation angel
+	int		rot_s;	//player rotation_speed
+	int		l_r;	//player rotation_direction
+	int		u_d;	//player movemment_direction
+	char	direc;	//player direction
+}t_player;
 
+typedef struct s_ray
+{
+	int		x;
+	int		y;
+}t_ray;
 typedef struct s_mlx
 {
-	void	*win;
-	void	*mlx_p;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	t_game	*gm;
+	void		*img;	// image mlx pointer
+	void		*win;	// window mlx pointer
+	void		*mlx_p;	// mlx pointer
+	char		*addr;	// mlx image address
+	int			bits_per_pixel; //mlx img bits
+	int			line_length;	//mlx line_lenght
+	int			endian;			//mlx indian
+	t_data		*dt;
+	t_ray		*ray;
+	t_player	*ply;
 }t_mlx;
 
 typedef struct s_info
@@ -135,7 +156,7 @@ void	check_midle_to(char *line, int k, int *i);
 int		is_sep(char c);
 void	check_directions(char *line, int *j, int *i, t_info *n);
 char	*ft_strtrim_back(char *s1, char *set);
-void	get_h_w(t_game *mlx);
+void	get_h_w(t_mlx *mlx);
 //execution.c
 void	execution(t_data *dt);
 #endif
