@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 14:09:51 by afatir            #+#    #+#             */
-/*   Updated: 2023/10/25 14:07:37 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/10 19:50:06 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void	check_player(char **map, t_data *dt, int h, int *i)
 			{
 				dt->p_x = j;
 				dt->p_y = k;
+				ft_printf("%d----%d\n", dt->p_x , dt->p_y);
 				count++;
 			}
 			k++;

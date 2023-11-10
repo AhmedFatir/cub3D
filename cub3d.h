@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:32:06 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/05 15:25:25 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/10 19:44:06 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@
 # define SIZE_W 48
 
 # define FOV 60
-# define NUM_RAYS 500
-#define PLAYER_SPEED (TILE_SIZE * 0.1f)
+# define NUM_RAYS 200
+# define PLAYER_SPEED (TILE_SIZE * 0.1f)
 # define RAY_STEP 0.1
-# define TILE_SIZE 48
-# define ROTATION_SPEED (PI / 90)
-# define MAX_DISTANCE 1000
-# define PI 3.1415926535897
+# define TILE_SIZE SIZE_H
+# define ROTATION_SPEED (M_PI / 90)
+# define MAX_DISTANCE 10000
+
 
 # define WHI 0xf9fcfc
 # define BLK 0x000000
@@ -80,7 +80,7 @@ typedef struct s_player
 {
 	int		plyr_x;	//player x pixel
 	int		plyr_y;	//player y pixel
-	float	rot_angele;	//player rotation angel
+	float	angle;	//player rotation angel
 	int		rot_s;	//player rotation_speed
 	int		l_r;	//player rotation_direction
 	int		u_d;	//player movemment_direction
