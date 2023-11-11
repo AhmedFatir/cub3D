@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:32:06 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/10 19:44:06 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/11 14:23:17 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,12 @@
 # include <mlx.h>
 # include <math.h>
 
-# define SIZE_H 48
-# define SIZE_W 48
-
-# define FOV 60
-# define NUM_RAYS 200
+# define TILE_SIZE 48 // 1250*750
+# define FOV_RD 60 * (M_PI / 180.0)
+# define NUM_RAYS 1250
+# define RAY_INC FOV_RD / NUM_RAYS
 # define PLAYER_SPEED (TILE_SIZE * 0.1f)
-# define RAY_STEP 0.1
-# define TILE_SIZE SIZE_H
+# define RAY_STEP 1
 # define ROTATION_SPEED (M_PI / 90)
 # define MAX_DISTANCE 10000
 
@@ -39,6 +37,9 @@
 # define GREN 0x009300
 # define ORNG 0xff9300
 # define RED 0xff0000
+# define WALL_COLOR 0xFFFFFF
+# define FLOOR_COLOR 0x008000
+# define CEILING_COLOR 0x87CEEB
 
 # define R_LEFT 123
 # define R_RIGHT 124
@@ -89,9 +90,11 @@ typedef struct s_player
 
 typedef struct s_ray
 {
-	int		x;
-	int		y;
+	float	ray_ngl;
+	float	ray_x;
+	float	ray_y;
 }t_ray;
+
 typedef struct s_mlx
 {
 	void		*img;	// image mlx pointer
@@ -101,6 +104,7 @@ typedef struct s_mlx
 	int			bits_per_pixel; //mlx img bits
 	int			line_length;	//mlx line_lenght
 	int			endian;			//mlx indian
+	int			screenHeight;
 	t_data		*dt;
 	t_ray		*ray;
 	t_player	*ply;
