@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 14:09:51 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/10 21:15:00 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/13 14:04:24 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,28 +81,28 @@ void	check_midle(char **map, int h, int *i, int j)
 
 void	check_player(char **map, t_data *dt, int h, int *i)
 {
-	int		j;
-	int		k;
+	int		y;
+	int		x;
 	int		count;
 
-	j = 0;
+	y = 0;
 	count = 0;
-	while (j < h)
+	while (y < h)
 	{
-		k = 0;
-		while (map[j][k])
+		x = 0;
+		while (map[y][x])
 		{
-			if (!valide_symbols(map[j][k]))
+			if (!valide_symbols(map[y][x]))
 				*i = 1;
-			if (valide_symbols(map[j][k]) == 2)
+			if (valide_symbols(map[y][x]) == 2)
 			{
-				dt->p_x = j;
-				dt->p_y = k;
+				dt->p_y = y;
+				dt->p_x = x;
 				count++;
 			}
-			k++;
+			x++;
 		}
-		j++;
+		y++;
 	}
 	if (!count || count > 1)
 		*i = 1;

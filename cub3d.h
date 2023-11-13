@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:32:06 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/11 14:23:17 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/13 12:01:30 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@
 # include <mlx.h>
 # include <math.h>
 
-# define TILE_SIZE 48 // 1250*750
-# define FOV_RD 60 * (M_PI / 180.0)
+# define TILE_SIZE 50 // 1250*750
+# define FOV_RAD 60 * (M_PI / 180.0)
 # define NUM_RAYS 1250
-# define RAY_INC FOV_RD / NUM_RAYS
+# define RAY_INC FOV_RAD / NUM_RAYS
 # define PLAYER_SPEED (TILE_SIZE * 0.1f)
 # define RAY_STEP 1
 # define ROTATION_SPEED (M_PI / 90)
@@ -38,6 +38,7 @@
 # define ORNG 0xff9300
 # define RED 0xff0000
 # define WALL_COLOR 0xFFFFFF
+// # define LEFT_WALL_COLOR 0xCCCCCC
 # define FLOOR_COLOR 0x008000
 # define CEILING_COLOR 0x87CEEB
 
@@ -105,6 +106,7 @@ typedef struct s_mlx
 	int			line_length;	//mlx line_lenght
 	int			endian;			//mlx indian
 	int			screenHeight;
+	int			screenWidth;
 	t_data		*dt;
 	t_ray		*ray;
 	t_player	*ply;
