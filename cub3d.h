@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:32:06 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/13 12:01:30 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/15 15:13:59 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@
 # define FOV_RAD 60 * (M_PI / 180.0)
 # define NUM_RAYS 1250
 # define RAY_INC FOV_RAD / NUM_RAYS
-# define PLAYER_SPEED (TILE_SIZE * 0.1f)
+# define PLAYER_SPEED 7
 # define RAY_STEP 1
-# define ROTATION_SPEED (M_PI / 90)
+# define ROTATION_SPEED (M_PI / 60)
 # define MAX_DISTANCE 10000
 
 
@@ -55,6 +55,18 @@ typedef struct s_map
 	int				index;
 	struct s_map	*next;
 }t_map;
+
+typedef struct s_tex
+{
+	void		*img;	// image mlx pointer
+	void		*mlx_p;	// mlx pointer
+	int			*addr;	// mlx image address
+	int			bits_per_pixel; //mlx img bits
+	int			line_length;	//mlx line_lenght
+	int			endian;			//mlx indian
+	int			height;
+	int			width;
+}t_tex;
 
 typedef struct s_col
 {
@@ -110,6 +122,10 @@ typedef struct s_mlx
 	t_data		*dt;
 	t_ray		*ray;
 	t_player	*ply;
+	t_tex		tex_no;
+	t_tex		tex_so;
+	t_tex		tex_we;
+	t_tex		tex_ea;
 }t_mlx;
 
 typedef struct s_info
