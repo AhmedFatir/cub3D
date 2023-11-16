@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:32:06 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/15 15:13:59 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/16 19:18:54 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define FOV_RAD 60 * (M_PI / 180.0)
 # define NUM_RAYS 1250
 # define RAY_INC FOV_RAD / NUM_RAYS
-# define PLAYER_SPEED 7
+# define PLAYER_SPEED 5
 # define RAY_STEP 1
 # define ROTATION_SPEED (M_PI / 60)
 # define MAX_DISTANCE 10000
@@ -48,6 +48,7 @@
 # define RIGHT_K 2
 # define DOWN_K 1
 # define UP_K 13
+# define ESC 53
 
 typedef struct s_map
 {
@@ -61,9 +62,9 @@ typedef struct s_tex
 	void		*img;	// image mlx pointer
 	void		*mlx_p;	// mlx pointer
 	int			*addr;	// mlx image address
-	int			bits_per_pixel; //mlx img bits
-	int			line_length;	//mlx line_lenght
-	int			endian;			//mlx indian
+	int			bpp; //mlx img bits
+	int			line_len;	//mlx line_lenght
+	int			endi;			//mlx indian
 	int			height;
 	int			width;
 }t_tex;
@@ -95,10 +96,9 @@ typedef struct s_player
 	int		plyr_x;	//player x pixel
 	int		plyr_y;	//player y pixel
 	float	angle;	//player rotation angel
-	int		rot_s;	//player rotation_speed
-	int		l_r;	//player rotation_direction
+	int		rot;	//player rotation_direction
+	int		l_r;	//player movemment_direction
 	int		u_d;	//player movemment_direction
-	char	direc;	//player direction
 }t_player;
 
 typedef struct s_ray
@@ -110,15 +110,15 @@ typedef struct s_ray
 
 typedef struct s_mlx
 {
-	void		*img;	// image mlx pointer
-	void		*win;	// window mlx pointer
-	void		*mlx_p;	// mlx pointer
-	char		*addr;	// mlx image address
-	int			bits_per_pixel; //mlx img bits
-	int			line_length;	//mlx line_lenght
-	int			endian;			//mlx indian
-	int			screenHeight;
-	int			screenWidth;
+	void		*img;
+	void		*win;
+	void		*mlx_p;
+	char		*addr;
+	int			bpp;
+	int			line_len;
+	int			endi;
+	int			sc_height;
+	int			sc_width;
 	t_data		*dt;
 	t_ray		*ray;
 	t_player	*ply;
@@ -179,6 +179,29 @@ int		is_sep(char c);
 void	check_directions(char *line, int *j, int *i, t_info *n);
 char	*ft_strtrim_back(char *s1, char *set);
 void	get_h_w(t_mlx *mlx);
+///////////////////////////////EXECUTION////////////////////////////
+//mouvement.c
+void	cub_hook(t_mlx *mlx, float move_x, float move_y);
+int		ft_press(int key, t_mlx *mlx);
+int		ft_release(int key, t_mlx *mlx);
+void	move_player(t_mlx *mlx, float move_x, float move_y);
+void	rotate_player(t_mlx *mlx, int i);
+//2dmap.c
+void	draw_map_tile2d(t_mlx *mlx);
+void	draw_win(t_mlx *mlx, int x, int y, int color);
+void	drow_player(t_mlx *mlx, int x_p, int y_p, int color);
+void	map_2d(t_mlx *mlx, int raw_distance_to_wall);
 //execution.c
+int		ft_exit(t_mlx *mlx);
 void	execution(t_data *dt);
+int		drow_map_pixel(t_mlx *mlx);
+void	get_tex(t_mlx *mlx);
+void	get_angle(t_mlx *mlx);
+void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
+// raycasting.c
+t_tex	*get_texture(t_mlx *mlx);
+void	draw_wall(t_mlx *mlx, int ray_index, int wall_top_pixel, int wall_bottom_pixel);
+void	draw_floor_ceiling(t_mlx *mlx, int x, int wall_end, int wall_start);
+void	render_walls(t_mlx *mlx, int ray_index, float distance);
+void	cast_rays(t_mlx *mlx);
 #endif

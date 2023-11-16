@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 10:10:04 by afatir            #+#    #+#             */
-/*   Updated: 2023/10/25 14:15:43 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/16 19:13:36 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,20 +84,14 @@ char	*get_info(t_map *map, int *i, char *s)
 	t_map	*mp;
 	int		j;
 
-	j = 0;
 	mp = map;
 	while (mp && ft_strncmp(mp->line, "1", 1))
 	{
 		j = 0;
-		while (mp->line[j])
-		{
-			while (mp->line[j] == 32 || mp->line[j] == 9 || mp->line[j] == '\n')
-				j++;
-			if (!ft_strncmp(s, &mp->line[j], 2))
-				return (ft_strdup(mp->line));
-			else
-				break ;
-		}
+		while (mp->line[j] && is_sep(mp->line[j]))
+			j++;
+		if (!ft_strncmp(s, &mp->line[j], 2))
+			return (ft_strtrim(mp->line + 2, " \t\n"));
 		mp = mp->next;
 	}
 	*i = 1;
@@ -116,8 +110,8 @@ t_data	*parsing(t_data *dt, int ac, char **av, t_map *map)
 	print_error("Error\nwrong file format\n", &i);
 	dt->no = get_info(map, &i, "NO");
 	dt->so = get_info(map, &i, "SO");
-	dt->we = get_info(map, &i, "WE");
 	dt->ea = get_info(map, &i, "EA");
+	dt->we = get_info(map, &i, "WE");
 	dt->f = get_info(map, &i, "F ");
 	dt->c = get_info(map, &i, "C ");
 	ft_free_data(dt, map, &i, 1);

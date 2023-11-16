@@ -6,7 +6,7 @@
 #    By: afatir <afatir@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/01 07:32:35 by afatir            #+#    #+#              #
-#    Updated: 2023/10/30 11:09:21 by afatir           ###   ########.fr        #
+#    Updated: 2023/11/16 19:20:08 by afatir           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ MLX		= -lmlx -framework OpenGL -framework AppKit
 
 MOBJS	= ${SRCS:%.c=objectF/%.o}
 SRCS	= main.c linked_list.c fill_list.c parsing.c pars_map.c pars_colors.c \
-		pars_utils.c pars_utils2.c execution.c
+		pars_utils.c pars_utils2.c execution.c mouvement.c 2dmap.c raycasting.c
 
 
 mkdir := mkdir -p

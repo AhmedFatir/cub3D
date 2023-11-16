@@ -8,9 +8,9 @@
 typedef struct	s_data {
 	void	*img;
 	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
+	int		bpp;
+	int		line_len;
+	int		endi;
 }				t_data;
 
 typedef struct	s_mlx {
@@ -25,7 +25,7 @@ typedef struct	s_mlx {
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	dst = data->addr + (y * data->line_len + x * (data->bpp / 8));
 	*(unsigned int*)dst = color;
 }
 
@@ -116,7 +116,7 @@ int	main(void)
 	mlx.mlxp = mlx_init();
 	mlx.win = mlx_new_window(mlx.mlxp, WITH, HIGT, "Hello world!");
 	img.img = mlx_new_image(mlx.mlxp, WITH, HIGT);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
+	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.line_len, &img.endi);
 	mlx.dt = &img;
 	/////////////////////////////////////////////
 	mlx.x = WITH / 2;
