@@ -6,11 +6,29 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:30:47 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/16 18:05:52 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/18 15:49:13 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	get_angle(t_mlx *mlx)
+{
+	char	c;
+
+	c = mlx->dt->map[mlx->dt->p_y][mlx->dt->p_x];
+	if (c == 'N')
+		mlx->ply->angle = 3 * M_PI / 2;
+	if (c == 'S')
+		mlx->ply->angle = M_PI / 2;
+	if (c == 'E')
+		mlx->ply->angle = 0;
+	if (c == 'W')
+		mlx->ply->angle = M_PI;
+	mlx->ply->plyr_x = (mlx->dt->p_x * TILE_SIZE);
+	mlx->ply->plyr_y = (mlx->dt->p_y * TILE_SIZE);
+	mlx->ply->fov_rd = (FOV * M_PI / 180);
+}
 
 void	draw_map_tile2d(t_mlx *mlx)
 {
@@ -85,22 +103,20 @@ void	drow_player(t_mlx *mlx, int x_p, int y_p, int color)
 	}
 }
 
-void	map_2d(t_mlx *mlx, int raw_distance_to_wall)
+void	draw_ray_2d(t_mlx *mlx, double angle, double distance, int color)
 {
-	float	s_x;
-	float	s_y;
-	float	t;
+	double	x;
+	double	y;
+	double	t;
 
-	mlx->ray->ray_x = cos(mlx->ray->ray_ngl) * RAY_STEP;
-	mlx->ray->ray_y = sin(mlx->ray->ray_ngl) * RAY_STEP;
-	s_x = mlx->ply->plyr_x;
-	s_y = mlx->ply->plyr_y;
 	t = 0;
-	while (t < raw_distance_to_wall)
+	y = mlx->ply->plyr_y;
+	x = mlx->ply->plyr_x;
+	while (t < distance)
 	{
-		my_mlx_pixel_put(mlx, (int)s_x, (int)s_y, RED);
-		s_x += mlx->ray->ray_x;
-		s_y += mlx->ray->ray_y;
-		t += RAY_STEP;
+		my_mlx_pixel_put(mlx, (int)x, (int)y, color);
+		x += 1 * cos(angle);
+		y += 1 * sin(angle);
+		t++;
 	}
 }

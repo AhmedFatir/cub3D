@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:32:06 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/16 19:18:54 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/18 16:03:45 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,18 @@
 # include <mlx.h>
 # include <math.h>
 
-# define TILE_SIZE 50 // 1250*750
-# define FOV_RAD 60 * (M_PI / 180.0)
-# define NUM_RAYS 1250
-# define RAY_INC FOV_RAD / NUM_RAYS
+# define TILE_SIZE 50
+# define FOV 60
+# define ROTATION_SPEED 0.05
 # define PLAYER_SPEED 5
-# define RAY_STEP 1
-# define ROTATION_SPEED (M_PI / 60)
-# define MAX_DISTANCE 10000
 
-
-# define WHI 0xf9fcfc
 # define BLK 0x000000
 # define GREY 0x808080
-# define GREN 0x009300
-# define ORNG 0xff9300
-# define RED 0xff0000
-# define WALL_COLOR 0xFFFFFF
-// # define LEFT_WALL_COLOR 0xCCCCCC
-# define FLOOR_COLOR 0x008000
-# define CEILING_COLOR 0x87CEEB
+# define BLU 0x87CEEB
+# define GREN 0x008000
+# define ORNG 0xFF9300
+# define RED 0xFF0000
+# define WHI 0xFFFFFF
 
 # define R_LEFT 123
 # define R_RIGHT 124
@@ -59,12 +51,12 @@ typedef struct s_map
 
 typedef struct s_tex
 {
-	void		*img;	// image mlx pointer
-	void		*mlx_p;	// mlx pointer
-	int			*addr;	// mlx image address
-	int			bpp; //mlx img bits
-	int			line_len;	//mlx line_lenght
-	int			endi;			//mlx indian
+	void		*img;
+	void		*mlx_p;
+	int			*addr;
+	int			bpp;
+	int			line_len;
+	int			endi;
 	int			height;
 	int			width;
 }t_tex;
@@ -77,35 +69,42 @@ typedef struct s_col
 
 typedef struct s_data
 {
-	char	**map;	// the map
-	char	*no;	//no pointer
-	char	*we;	//we pointer
-	char	*so;	//so pointer
-	char	*ea;	//ea pointer
-	char	*f;		//flor color
-	char	*c;		//color pinter
-	int		p_x;	//player position int map
-	int		p_y;	//player position int map
-	int		map_h;	//map hight
-	int		map_w;	//map wight
+	char	**map;
+	char	*no;
+	char	*we;
+	char	*so;
+	char	*ea;
+	char	*f;	
+	char	*c;	
+	int		p_x;
+	int		p_y;
+	int		map_h;
+	int		map_w;
 	t_col	*col;
 }t_data;
 
 typedef struct s_player
 {
-	int		plyr_x;	//player x pixel
-	int		plyr_y;	//player y pixel
-	float	angle;	//player rotation angel
-	int		rot;	//player rotation_direction
-	int		l_r;	//player movemment_direction
-	int		u_d;	//player movemment_direction
+	int		plyr_x;
+	int		plyr_y;
+	float	angle;
+	float	fov_rd;
+	int		rot;
+	int		l_r;
+	int		u_d;
 }t_player;
 
 typedef struct s_ray
 {
+	int		ray_v;
 	float	ray_ngl;
+	float	horiz_x;
+	float	horiz_y;
+	float	vert_x;
+	float	vert_y;
 	float	ray_x;
 	float	ray_y;
+	float	distance;
 }t_ray;
 
 typedef struct s_mlx
@@ -137,7 +136,6 @@ typedef struct s_info
 	int		f;
 	int		c;
 }t_info;
-
 // fill_list.c
 void	print_error(char *s, int *i);
 void	init_n(t_info *n);
@@ -175,6 +173,7 @@ int		check_if_full(char *map);
 int		valide_symbols(char c);
 void	check_midle_to(char *line, int k, int *i);
 //pars_utils2.c
+float	nor_angle(float angle);
 int		is_sep(char c);
 void	check_directions(char *line, int *j, int *i, t_info *n);
 char	*ft_strtrim_back(char *s1, char *set);
@@ -187,21 +186,19 @@ int		ft_release(int key, t_mlx *mlx);
 void	move_player(t_mlx *mlx, float move_x, float move_y);
 void	rotate_player(t_mlx *mlx, int i);
 //2dmap.c
+void	get_angle(t_mlx *mlx);
 void	draw_map_tile2d(t_mlx *mlx);
 void	draw_win(t_mlx *mlx, int x, int y, int color);
 void	drow_player(t_mlx *mlx, int x_p, int y_p, int color);
-void	map_2d(t_mlx *mlx, int raw_distance_to_wall);
+void	draw_ray_2d(t_mlx *mlx, double angle, double distance, int color);
 //execution.c
 int		ft_exit(t_mlx *mlx);
 void	execution(t_data *dt);
 int		drow_map_pixel(t_mlx *mlx);
 void	get_tex(t_mlx *mlx);
-void	get_angle(t_mlx *mlx);
 void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
 // raycasting.c
-t_tex	*get_texture(t_mlx *mlx);
-void	draw_wall(t_mlx *mlx, int ray_index, int wall_top_pixel, int wall_bottom_pixel);
-void	draw_floor_ceiling(t_mlx *mlx, int x, int wall_end, int wall_start);
-void	render_walls(t_mlx *mlx, int ray_index, float distance);
 void	cast_rays(t_mlx *mlx);
+// render.c
+void	render_wall(t_mlx *mlx, int ray);
 #endif

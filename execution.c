@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:23:08 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/16 19:14:45 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/18 15:39:16 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,32 +31,15 @@ void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
 	char	*dst;
 
 	if (x < 0)
-		x = 0;
+		return ;
 	else if (x >= mlx->sc_width)
-		x = mlx->sc_width - 1;
+		return ;
 	if (y < 0)
-		y = 0;
+		return ;
 	else if (y >= mlx->sc_height)
-		y = mlx->sc_height - 1;
+		return ;
 	dst = mlx->addr + (y * mlx->line_len + x * (mlx->bpp / 8));
-	*(unsigned int *)dst = color;
-}
-
-void	get_angle(t_mlx *mlx)
-{
-	char	c;
-
-	c = mlx->dt->map[mlx->dt->p_y][mlx->dt->p_x];
-	if (c == 'N')
-		mlx->ply->angle = 3 * M_PI / 2;
-	if (c == 'S')
-		mlx->ply->angle = M_PI / 2;
-	if (c == 'E')
-		mlx->ply->angle = 0;
-	if (c == 'W')
-		mlx->ply->angle = M_PI;
-	mlx->ply->plyr_x = (mlx->dt->p_x * TILE_SIZE);
-	mlx->ply->plyr_y = (mlx->dt->p_y * TILE_SIZE);
+	*(int *)dst = color;
 }
 
 void	get_tex(t_mlx *mlx)
@@ -86,9 +69,9 @@ int	drow_map_pixel(t_mlx *mlx)
 {
 	mlx_clear_window(mlx->mlx_p, mlx->win);
 	mlx->img = mlx_new_image(mlx->mlx_p, mlx->sc_width, mlx->sc_height);
-	mlx->addr = mlx_get_data_addr(mlx->img, &mlx->bpp, &mlx->line_len, &mlx->endi);
+	mlx->addr = mlx_get_data_addr(mlx->img, &mlx->bpp, \
+		&mlx->line_len, &mlx->endi);
 	cub_hook(mlx, 0, 0);
-	// draw_map_tile2d(mlx);
 	cast_rays(mlx);
 	mlx_put_image_to_window(mlx->mlx_p, mlx->win, mlx->img, 0, 0);
 	return (0);
@@ -97,6 +80,7 @@ int	drow_map_pixel(t_mlx *mlx)
 void	execution(t_data *dt)
 {
 	t_mlx	mlx;
+
 	mlx.ply = (t_player *)ft_calloc(sizeof(t_player), 1);
 	mlx.ray = (t_ray *)ft_calloc(sizeof(t_ray), 1);
 	mlx.dt = dt;
