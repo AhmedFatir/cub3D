@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 12:23:36 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/23 01:23:05 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/23 16:44:03 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 float	nor_angle(float angle)
 {
-	angle = fmod(angle, 2 * M_PI);
 	if (angle < 0)
-		angle = (2 * M_PI) + angle;
+		angle += (2 * M_PI);
+	else if (angle > (2 * M_PI))
+		angle -= (2 * M_PI);
 	return (angle);
 }
 

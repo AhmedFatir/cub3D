@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:30:47 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/23 01:30:58 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/23 07:41:14 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	draw_ray_2d(t_mlx *mlx, double angle, double distance, int color)
 {
 	double	x;
 	double	y;
-	double	t;
+	int		t;
 
 	t = 0;
 	y = mlx->ply->plyr_y;

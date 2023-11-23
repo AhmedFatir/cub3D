@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:32:06 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/23 04:15:35 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/23 07:40:51 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ typedef struct s_player
 {
 	int		plyr_x;
 	int		plyr_y;
-	float	angle;
+	double	angle;
 	float	fov_rd;
 	int		rot;
 	int		l_r;
@@ -99,14 +99,12 @@ typedef struct s_player
 typedef struct s_ray
 {
 	int		ray_v;
-	float	ray_ngl;
-	float	horiz_x;
-	float	horiz_y;
-	float	vert_x;
-	float	vert_y;
-	float	ray_x;
-	float	ray_y;
-	float	distance;
+	double	ray_ngl;
+	double	horiz_x;
+	double	horiz_y;
+	double	vert_x;
+	double	vert_y;
+	double	distance;
 }t_ray;
 
 typedef struct s_mlx
@@ -180,10 +178,10 @@ char	*ft_strtrim_back(char *s1, char *set);
 void	get_h_w(t_mlx *mlx);
 ///////////////////////////////EXECUTION////////////////////////////
 //mouvement.c
-void	cub_hook(t_mlx *mlx, float move_x, float move_y);
+void	cub_hook(t_mlx *mlx, double move_x, double move_y);
 int		ft_press(int key, t_mlx *mlx);
 int		ft_release(int key, t_mlx *mlx);
-void	move_player(t_mlx *mlx, float move_x, float move_y);
+void	move_player(t_mlx *mlx, double move_x, double move_y);
 void	rotate_player(t_mlx *mlx, int i);
 //2dmap.c
 void	get_angle(t_mlx *mlx);

@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:26:29 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/23 06:15:17 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/23 07:40:40 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	rotate_player(t_mlx *mlx, int i)
 	}
 }
 
-void	move_player(t_mlx *mlx, float move_x, float move_y)
+void	move_player(t_mlx *mlx, double move_x, double move_y)
 {
 	int		map_grid_y;
 	int		map_grid_x;
@@ -76,7 +76,7 @@ int	ft_press(int key, t_mlx *mlx)
 	return (0);
 }
 
-void	cub_hook(t_mlx *mlx, float move_x, float move_y)
+void	cub_hook(t_mlx *mlx, double move_x, double move_y)
 {
 	if (mlx->ply->rot == 1)
 		rotate_player(mlx, 1);

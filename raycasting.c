@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:36:01 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/23 02:44:32 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/23 17:24:41 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,65 +67,65 @@ int unit_circle(float angle, char c)
 	return (0);
 }
 
-float	get_x_inter(t_mlx *mlx, float angl)
+float	get_h_inter(t_mlx *mlx, float angl)
 {
-	float	x_inter;
-	float	y_inter;
+	float	h_x;
+	float	h_y;
 	float	x_step;
 	float	y_step;
 	int		check;
 
-	y_inter = floor(mlx->ply->plyr_y / TILE_SIZE) * TILE_SIZE;
 	y_step = TILE_SIZE;
-	check = check_inter(angl, &y_inter, &y_step, 1);
-	x_inter = mlx->ply->plyr_x + (y_inter - mlx->ply->plyr_y) / tan(angl);
 	x_step = TILE_SIZE / tan(angl);
+	h_y = floor(mlx->ply->plyr_y / TILE_SIZE) * TILE_SIZE;
+	check = check_inter(angl, &h_y, &y_step, 1);
+	h_x = mlx->ply->plyr_x + (h_y - mlx->ply->plyr_y) / tan(angl);
 	if ((unit_circle(angl, 'y') && x_step > 0) || \
 		(!unit_circle(angl, 'y') && x_step < 0))
 		x_step *= -1;
-	while (check_wall(x_inter, y_inter - check, mlx))
+	while (check_wall(h_x, h_y - check, mlx))
 	{
-		x_inter += x_step;
-		y_inter += y_step;
+		h_x += x_step;
+		h_y += y_step;
 	}
-	mlx->ray->horiz_x = x_inter;
-	mlx->ray->horiz_y = y_inter;
-	return (sqrt(pow(x_inter - mlx->ply->plyr_x, 2) + \
-	pow(y_inter - mlx->ply->plyr_y, 2)));
+	mlx->ray->horiz_x = h_x;
+	mlx->ray->horiz_y = h_y;
+	return (sqrt(pow(h_x - mlx->ply->plyr_x, 2) + \
+	pow(h_y - mlx->ply->plyr_y, 2)));
 }
 
 
-float	get_y_inter(t_mlx *mlx, float angl)
+float	get_v_inter(t_mlx *mlx, float angl)
 {
-	float	x_inter;
-	float	y_inter;
+	float	v_x;
+	float	v_y;
 	float	x_step;
 	float	y_step;
 	int		check;
 
-	x_inter = floor(mlx->ply->plyr_x / TILE_SIZE) * TILE_SIZE;
 	x_step = TILE_SIZE;
-	check = check_inter(angl, &x_inter, &x_step, 0);
-	y_inter = mlx->ply->plyr_y + (x_inter - mlx->ply->plyr_x) * tan(angl);
 	y_step = TILE_SIZE * tan(angl);
+	v_x = floor(mlx->ply->plyr_x / TILE_SIZE) * TILE_SIZE;
+	check = check_inter(angl, &v_x, &x_step, 0);
+	v_y = mlx->ply->plyr_y + (v_x - mlx->ply->plyr_x) * tan(angl);
 	if ((unit_circle(angl, 'x') && y_step < 0) || \
 		(!unit_circle(angl, 'x') && y_step > 0))
 		y_step *= -1;
-	while (check_wall(x_inter - check, y_inter, mlx))
+	while (check_wall(v_x - check, v_y, mlx))
 	{
-		x_inter += x_step;
-		y_inter += y_step;
+		v_x += x_step;
+		v_y += y_step;
 	}
-	mlx->ray->vert_x = x_inter;
-	mlx->ray->vert_y = y_inter;
-	return (sqrt(pow(x_inter - mlx->ply->plyr_x, 2) + \
-	pow(y_inter - mlx->ply->plyr_y, 2)));
+	mlx->ray->vert_x = v_x;
+	mlx->ray->vert_y = v_y;
+	return (sqrt(pow(v_x - mlx->ply->plyr_x, 2) + \
+	pow(v_y - mlx->ply->plyr_y, 2)));
 }
 
 void	cast_rays(t_mlx *mlx)
 {
-	double	x_inter;
-	double	y_inter;
+	double	h_inter;
+	double	v_inter;
 	int		ray;
 
 	draw_map_tile2d(mlx);
@@ -134,13 +134,13 @@ void	cast_rays(t_mlx *mlx)
 	while (ray < S_W)
 	{
 		mlx->ray->ray_v = 0;
-		x_inter = get_x_inter(mlx, nor_angle(mlx->ray->ray_ngl));
-		y_inter = get_y_inter(mlx, nor_angle(mlx->ray->ray_ngl));
-		if (y_inter < x_inter)
-			mlx->ray->distance = y_inter;
+		h_inter = get_h_inter(mlx, nor_angle(mlx->ray->ray_ngl));
+		v_inter = get_v_inter(mlx, nor_angle(mlx->ray->ray_ngl));
+		if (v_inter < h_inter)
+			mlx->ray->distance = v_inter;
 		else
 		{
-			mlx->ray->distance = x_inter;
+			mlx->ray->distance = h_inter;
 			mlx->ray->ray_v = 1;
 		}
 		// render_wall(mlx, ray);
