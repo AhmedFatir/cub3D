@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:32:06 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/18 16:03:45 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/23 04:15:35 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@
 # include <mlx.h>
 # include <math.h>
 
-# define TILE_SIZE 50
+# define S_W 1440
+# define S_H 720
+# define TILE_SIZE 48
 # define FOV 60
 # define ROTATION_SPEED 0.05
 # define PLAYER_SPEED 5
@@ -116,8 +118,6 @@ typedef struct s_mlx
 	int			bpp;
 	int			line_len;
 	int			endi;
-	int			sc_height;
-	int			sc_width;
 	t_data		*dt;
 	t_ray		*ray;
 	t_player	*ply;

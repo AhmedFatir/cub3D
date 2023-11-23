@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:23:08 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/18 15:39:16 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/23 01:22:47 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
 
 	if (x < 0)
 		return ;
-	else if (x >= mlx->sc_width)
+	else if (x >= S_W)
 		return ;
 	if (y < 0)
 		return ;
-	else if (y >= mlx->sc_height)
+	else if (y >= S_H)
 		return ;
 	dst = mlx->addr + (y * mlx->line_len + x * (mlx->bpp / 8));
 	*(int *)dst = color;
@@ -68,7 +68,7 @@ void	get_tex(t_mlx *mlx)
 int	drow_map_pixel(t_mlx *mlx)
 {
 	mlx_clear_window(mlx->mlx_p, mlx->win);
-	mlx->img = mlx_new_image(mlx->mlx_p, mlx->sc_width, mlx->sc_height);
+	mlx->img = mlx_new_image(mlx->mlx_p, S_W, S_H);
 	mlx->addr = mlx_get_data_addr(mlx->img, &mlx->bpp, \
 		&mlx->line_len, &mlx->endi);
 	cub_hook(mlx, 0, 0);
@@ -86,7 +86,7 @@ void	execution(t_data *dt)
 	mlx.dt = dt;
 	get_h_w(&mlx);
 	mlx.mlx_p = mlx_init();
-	mlx.win = mlx_new_window(mlx.mlx_p, mlx.sc_width, mlx.sc_height, "cub3D");
+	mlx.win = mlx_new_window(mlx.mlx_p, S_W, S_H, "cub3D");
 	get_tex(&mlx);
 	get_angle(&mlx);
 	mlx_hook(mlx.win, 17, 0, ft_exit, &mlx);

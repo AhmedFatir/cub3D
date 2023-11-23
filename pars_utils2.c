@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 12:23:36 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/18 15:38:02 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/23 01:23:05 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,4 @@ void	get_h_w(t_mlx *mlx)
 			mlx->dt->map_w = (int)ft_strlen(mlx->dt->map[i]);
 		i++;
 	}
-	mlx->sc_height = mlx->dt->map_h * TILE_SIZE;
-	mlx->sc_width = mlx->dt->map_w * TILE_SIZE;
 }

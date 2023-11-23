@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:30:47 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/18 15:49:13 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/23 01:30:58 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	get_angle(t_mlx *mlx)
 		mlx->ply->angle = 0;
 	if (c == 'W')
 		mlx->ply->angle = M_PI;
-	mlx->ply->plyr_x = (mlx->dt->p_x * TILE_SIZE);
-	mlx->ply->plyr_y = (mlx->dt->p_y * TILE_SIZE);
+	mlx->ply->plyr_x = (mlx->dt->p_x * TILE_SIZE) + TILE_SIZE / 2;
+	mlx->ply->plyr_y = (mlx->dt->p_y * TILE_SIZE) + TILE_SIZE / 2;
 	mlx->ply->fov_rd = (FOV * M_PI / 180);
 }
 

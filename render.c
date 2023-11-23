@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 15:05:46 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/18 16:09:19 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/23 01:22:47 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	draw_floor_ceiling(t_mlx *mlx, int ray, int t_pix, int b_pix)
 	int		i;
 
 	i = b_pix;
-	while (i < mlx->sc_height)
+	while (i < S_H)
 	{
 		my_mlx_pixel_put(mlx, ray, i, GREN);
 		i++;
@@ -97,10 +97,10 @@ void	render_wall(t_mlx *mlx, int ray)
 	double	t_pix;
 
 	mlx->ray->distance *= cos(nor_angle(mlx->ray->ray_ngl - mlx->ply->angle));
-	wall_h = (TILE_SIZE / mlx->ray->distance) * ((mlx->sc_width / 2) / \
+	wall_h = (TILE_SIZE / mlx->ray->distance) * ((S_W / 2) / \
 	tan(mlx->ply->fov_rd / 2));
-	b_pix = (mlx->sc_height / 2) + (wall_h / 2);
-	t_pix = (mlx->sc_height / 2) - (wall_h / 2);
+	b_pix = (S_H / 2) + (wall_h / 2);
+	t_pix = (S_H / 2) - (wall_h / 2);
 	draw_wall(mlx, ray, t_pix, b_pix);
 	draw_floor_ceiling(mlx, ray, t_pix, b_pix);
 }

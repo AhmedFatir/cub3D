@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:26:29 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/16 18:00:25 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/23 06:15:17 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ void	rotate_player(t_mlx *mlx, int i)
 {
 	if (i == 1)
 	{
-		mlx->ply->angle -= ROTATION_SPEED;
-		if (mlx->ply->angle < 0)
-			mlx->ply->angle += 2 * M_PI;
-	}
-	else
-	{
 		mlx->ply->angle += ROTATION_SPEED;
 		if (mlx->ply->angle >= 2 * M_PI) 
 			mlx->ply->angle -= 2 * M_PI;
+	}
+	else
+	{
+		mlx->ply->angle -= ROTATION_SPEED;
+		if (mlx->ply->angle < 0)
+			mlx->ply->angle += 2 * M_PI;
 	}
 }
 
@@ -65,13 +65,13 @@ int	ft_press(int key, t_mlx *mlx)
 		mlx->ply->u_d = 1;
 	if (key == DOWN_K)
 		mlx->ply->u_d = -1;
-	if (key == LEFT_K)
-		mlx->ply->l_r = 1;
 	if (key == RIGHT_K)
+		mlx->ply->l_r = 1;
+	if (key == LEFT_K)
 		mlx->ply->l_r = -1;
-	if (key == R_LEFT)
-		mlx->ply->rot = 1;
 	if (key == R_RIGHT)
+		mlx->ply->rot = 1;
+	if (key == R_LEFT)
 		mlx->ply->rot = -1;
 	return (0);
 }
@@ -82,25 +82,25 @@ void	cub_hook(t_mlx *mlx, float move_x, float move_y)
 		rotate_player(mlx, 1);
 	if (mlx->ply->rot == -1)
 		rotate_player(mlx, 0);
-	if (mlx->ply->l_r == -1)
+	if (mlx->ply->l_r == 1)
 	{
 		move_x = -sin(mlx->ply->angle) * PLAYER_SPEED;
 		move_y = cos(mlx->ply->angle) * PLAYER_SPEED;
 	}
-	if (mlx->ply->l_r == 1)
+	if (mlx->ply->l_r == -1)
 	{
 		move_x = sin(mlx->ply->angle) * PLAYER_SPEED;
 		move_y = -cos(mlx->ply->angle) * PLAYER_SPEED;
-	}
-	if (mlx->ply->u_d == -1)
-	{
-		move_x = -cos(mlx->ply->angle) * PLAYER_SPEED;
-		move_y = -sin(mlx->ply->angle) * PLAYER_SPEED;
 	}
 	if (mlx->ply->u_d == 1)
 	{
 		move_x = cos(mlx->ply->angle) * PLAYER_SPEED;
 		move_y = sin(mlx->ply->angle) * PLAYER_SPEED;
+	}
+	if (mlx->ply->u_d == -1)
+	{
+		move_x = -cos(mlx->ply->angle) * PLAYER_SPEED;
+		move_y = -sin(mlx->ply->angle) * PLAYER_SPEED;
 	}
 	move_player(mlx, move_x, move_y);
 }
