@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:26:29 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/23 07:40:40 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/25 16:56:14 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,36 +46,6 @@ void	move_player(t_mlx *mlx, double move_x, double move_y)
 	}
 }
 
-int	ft_release(int key, t_mlx *mlx)
-{
-	if (key == UP_K || key == DOWN_K)
-		mlx->ply->u_d = 0;
-	if (key == LEFT_K || key == RIGHT_K)
-		mlx->ply->l_r = 0;
-	if (key == R_LEFT || key == R_RIGHT)
-		mlx->ply->rot = 0;
-	return (0);
-}
-
-int	ft_press(int key, t_mlx *mlx)
-{
-	if (key == ESC)
-		ft_exit(mlx);
-	if (key == UP_K)
-		mlx->ply->u_d = 1;
-	if (key == DOWN_K)
-		mlx->ply->u_d = -1;
-	if (key == RIGHT_K)
-		mlx->ply->l_r = 1;
-	if (key == LEFT_K)
-		mlx->ply->l_r = -1;
-	if (key == R_RIGHT)
-		mlx->ply->rot = 1;
-	if (key == R_LEFT)
-		mlx->ply->rot = -1;
-	return (0);
-}
-
 void	cub_hook(t_mlx *mlx, double move_x, double move_y)
 {
 	if (mlx->ply->rot == 1)
@@ -103,4 +73,43 @@ void	cub_hook(t_mlx *mlx, double move_x, double move_y)
 		move_y = -sin(mlx->ply->angle) * PLAYER_SPEED;
 	}
 	move_player(mlx, move_x, move_y);
+}
+
+void	ft_reles(mlx_key_data_t keydata, t_mlx *mlx)
+{
+	if (keydata.key == MLX_KEY_D && (keydata.action == MLX_RELEASE))
+		mlx->ply->l_r = 0;
+	else if (keydata.key == MLX_KEY_A && (keydata.action == MLX_RELEASE))
+		mlx->ply->l_r = 0;
+	else if (keydata.key == MLX_KEY_S && (keydata.action == MLX_RELEASE))
+		mlx->ply->u_d = 0;
+	else if (keydata.key == MLX_KEY_W && (keydata.action == MLX_RELEASE))
+		mlx->ply->u_d = 0;
+	else if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_RELEASE)
+		mlx->ply->rot = 0;
+	else if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_RELEASE)
+		mlx->ply->rot = 0;
+}
+
+void	key_press(mlx_key_data_t keydata, void *ml)
+{
+	t_mlx	*mlx;
+
+	mlx = ml;
+	if (keydata.key == MLX_KEY_ESCAPE && (keydata.action == MLX_PRESS \
+	|| keydata.action == MLX_REPEAT))
+		ft_exit(mlx);
+	else if (keydata.key == MLX_KEY_A && (keydata.action == MLX_PRESS))
+		mlx->ply->l_r = -1;
+	else if (keydata.key == MLX_KEY_D && (keydata.action == MLX_PRESS))
+		mlx->ply->l_r = 1;
+	else if (keydata.key == MLX_KEY_S && (keydata.action == MLX_PRESS))
+		mlx->ply->u_d = -1;
+	else if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
+		mlx->ply->u_d = 1;
+	else if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
+		mlx->ply->rot = -1;
+	else if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS)
+		mlx->ply->rot = 1;
+	ft_reles(keydata, mlx);
 }

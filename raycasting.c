@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:36:01 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/23 17:24:41 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/25 17:44:04 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ int	check_wall(float x, float y, t_mlx *mlx)
 		return (0);
 	x_m = floor (x / TILE_SIZE);
 	y_m = floor (y / TILE_SIZE);
-	if ((y >= S_H || x >= S_W || (y_m >= mlx->dt->map_h || x_m >= mlx->dt->map_w)))
+	if ((y >= S_H || x >= S_W || (y_m >= mlx->dt->map_h || \
+	x_m >= mlx->dt->map_w)))
 		return (0);
 	if (mlx->dt->map[y_m] && x_m <= (int)ft_strlen(mlx->dt->map[y_m]))
 		if (mlx->dt->map[y_m][x_m] == '1')
@@ -52,12 +53,12 @@ int	check_wall(float x, float y, t_mlx *mlx)
 	return (1);
 }
 
-int unit_circle(float angle, char c)
+int	unit_circle(float angle, char c)
 {
 	if (c == 'x')
 	{
 		if (angle > 0 && angle < M_PI)
-			return (1);			
+			return (1);
 	}
 	else if (c == 'y')
 	{
@@ -76,7 +77,7 @@ float	get_h_inter(t_mlx *mlx, float angl)
 	int		check;
 
 	y_step = TILE_SIZE;
-	x_step = TILE_SIZE / tan(angl);
+	x_step = TILE_SIZE / tan(angl); 
 	h_y = floor(mlx->ply->plyr_y / TILE_SIZE) * TILE_SIZE;
 	check = check_inter(angl, &h_y, &y_step, 1);
 	h_x = mlx->ply->plyr_x + (h_y - mlx->ply->plyr_y) / tan(angl);
@@ -93,7 +94,6 @@ float	get_h_inter(t_mlx *mlx, float angl)
 	return (sqrt(pow(h_x - mlx->ply->plyr_x, 2) + \
 	pow(h_y - mlx->ply->plyr_y, 2)));
 }
-
 
 float	get_v_inter(t_mlx *mlx, float angl)
 {

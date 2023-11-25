@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 15:05:46 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/23 01:22:47 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/25 17:40:50 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,23 +68,13 @@ int	get_color(t_mlx *mlx, int ray_v)
 
 void	draw_wall(t_mlx *mlx, int ray, int t_pix, int b_pix)
 {
-	t_tex	*tex;
-	double	y_t;
-	double	x_t;
 	int		y;
+	int		c;
 
-	tex = get_texture(mlx, mlx->ray->ray_v);
-	if (mlx->ray->ray_v == 1)
-		x_t = fmod(mlx->ray->vert_y, TILE_SIZE) * tex->width / TILE_SIZE;
-	else
-		x_t = fmod(mlx->ray->horiz_x, TILE_SIZE) * tex->width / TILE_SIZE;
 	y = t_pix;
 	while (y < b_pix)
 	{
-		y_t = (y - t_pix) * tex->height / (b_pix - t_pix);
-		// int *color = tex->addr + (int)y_t * tex->width + (int)x_t;
-		// my_mlx_pixel_put(mlx, ray, y, *color);
-		int	c = get_color(mlx, mlx->ray->ray_v);
+		c = get_color(mlx, mlx->ray->ray_v);
 		my_mlx_pixel_put(mlx, ray, y, c);
 		y++;
 	}

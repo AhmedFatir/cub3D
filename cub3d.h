@@ -6,20 +6,20 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:32:06 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/23 07:40:51 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/25 17:39:10 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "libft_gcl_ptf/libft.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>
-# include <mlx.h>
 # include <math.h>
+# include "libft_gcl_ptf/libft.h"
+# include "/Users/afatir/Desktop/MLX42/include/MLX42/MLX42.h"
 
 # define S_W 1440
 # define S_H 720
@@ -35,14 +35,6 @@
 # define ORNG 0xFF9300
 # define RED 0xFF0000
 # define WHI 0xFFFFFF
-
-# define R_LEFT 123
-# define R_RIGHT 124
-# define LEFT_K 0
-# define RIGHT_K 2
-# define DOWN_K 1
-# define UP_K 13
-# define ESC 53
 
 typedef struct s_map
 {
@@ -85,6 +77,13 @@ typedef struct s_data
 	t_col	*col;
 }t_data;
 
+typedef struct s_txtr
+{
+	char			*key;
+	char			value;
+	struct s_txtr	*next;
+}	t_txtr;
+
 typedef struct s_player
 {
 	int		plyr_x;
@@ -109,9 +108,9 @@ typedef struct s_ray
 
 typedef struct s_mlx
 {
-	void		*img;
+	mlx_image_t	*img;
+	mlx_t		*mlx_p;
 	void		*win;
-	void		*mlx_p;
 	char		*addr;
 	int			bpp;
 	int			line_len;
@@ -179,8 +178,7 @@ void	get_h_w(t_mlx *mlx);
 ///////////////////////////////EXECUTION////////////////////////////
 //mouvement.c
 void	cub_hook(t_mlx *mlx, double move_x, double move_y);
-int		ft_press(int key, t_mlx *mlx);
-int		ft_release(int key, t_mlx *mlx);
+void	key_press(mlx_key_data_t keydata, void *ml);
 void	move_player(t_mlx *mlx, double move_x, double move_y);
 void	rotate_player(t_mlx *mlx, int i);
 //2dmap.c
@@ -192,7 +190,7 @@ void	draw_ray_2d(t_mlx *mlx, double angle, double distance, int color);
 //execution.c
 int		ft_exit(t_mlx *mlx);
 void	execution(t_data *dt);
-int		drow_map_pixel(t_mlx *mlx);
+void	drow_map_pixel(void *mlxl);
 void	get_tex(t_mlx *mlx);
 void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
 // raycasting.c

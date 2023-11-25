@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:23:08 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/23 01:22:47 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/25 17:43:47 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_exit(t_mlx *mlx)
 	int		i;
 
 	i = 1;
-	mlx_destroy_window(mlx->mlx_p, mlx->win);
+	mlx_delete_image(mlx->mlx_p, mlx->img);
 	ft_free_data(mlx->dt, NULL, &i, 0);
 	free(mlx->ply);
 	free(mlx->ray);
@@ -28,8 +28,6 @@ int	ft_exit(t_mlx *mlx)
 
 void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
 {
-	char	*dst;
-
 	if (x < 0)
 		return ;
 	else if (x >= S_W)
@@ -38,43 +36,19 @@ void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
 		return ;
 	else if (y >= S_H)
 		return ;
-	dst = mlx->addr + (y * mlx->line_len + x * (mlx->bpp / 8));
-	*(int *)dst = color;
+	mlx_put_pixel(mlx->img, x, y, color);
 }
 
-void	get_tex(t_mlx *mlx)
+void	drow_map_pixel(void *mlxl)
 {
-	mlx->tex_no.img = mlx_xpm_file_to_image(mlx->mlx_p, \
-	mlx->dt->no, &mlx->tex_no.width, &mlx->tex_no.height);
-	mlx->tex_so.img = mlx_xpm_file_to_image(mlx->mlx_p, \
-	mlx->dt->so, &mlx->tex_so.width, &mlx->tex_so.height);
-	mlx->tex_ea.img = mlx_xpm_file_to_image(mlx->mlx_p, \
-	mlx->dt->ea, &mlx->tex_ea.width, &mlx->tex_ea.height);
-	mlx->tex_we.img = mlx_xpm_file_to_image(mlx->mlx_p, \
-	mlx->dt->we, &mlx->tex_we.width, &mlx->tex_we.height);
-	if (!mlx->tex_we.img || !mlx->tex_ea.img || \
-	!mlx->tex_so.img || !mlx->tex_no.img)
-		ft_exit(mlx);
-	mlx->tex_no.addr = (int *)mlx_get_data_addr(mlx->tex_no.img, \
-	&mlx->tex_no.bpp, &mlx->tex_no.line_len, &mlx->tex_no.endi);
-	mlx->tex_so.addr = (int *)mlx_get_data_addr(mlx->tex_so.img, \
-	&mlx->tex_so.bpp, &mlx->tex_so.line_len, &mlx->tex_so.endi);
-	mlx->tex_ea.addr = (int *)mlx_get_data_addr(mlx->tex_ea.img, \
-	&mlx->tex_ea.bpp, &mlx->tex_ea.line_len, &mlx->tex_ea.endi);
-	mlx->tex_we.addr = (int *)mlx_get_data_addr(mlx->tex_we.img, \
-	&mlx->tex_we.bpp, &mlx->tex_we.line_len, &mlx->tex_we.endi);
-}
+	t_mlx	*mlx;
 
-int	drow_map_pixel(t_mlx *mlx)
-{
-	mlx_clear_window(mlx->mlx_p, mlx->win);
+	mlx = mlxl;
+	mlx_delete_image(mlx->mlx_p, mlx->img);
 	mlx->img = mlx_new_image(mlx->mlx_p, S_W, S_H);
-	mlx->addr = mlx_get_data_addr(mlx->img, &mlx->bpp, \
-		&mlx->line_len, &mlx->endi);
 	cub_hook(mlx, 0, 0);
 	cast_rays(mlx);
-	mlx_put_image_to_window(mlx->mlx_p, mlx->win, mlx->img, 0, 0);
-	return (0);
+	mlx_image_to_window(mlx->mlx_p, mlx->img, 0, 0);
 }
 
 void	execution(t_data *dt)
@@ -85,13 +59,11 @@ void	execution(t_data *dt)
 	mlx.ray = (t_ray *)ft_calloc(sizeof(t_ray), 1);
 	mlx.dt = dt;
 	get_h_w(&mlx);
-	mlx.mlx_p = mlx_init();
-	mlx.win = mlx_new_window(mlx.mlx_p, S_W, S_H, "cub3D");
-	get_tex(&mlx);
+	mlx.mlx_p = mlx_init(S_W, S_H, "cub3D", false);
 	get_angle(&mlx);
-	mlx_hook(mlx.win, 17, 0, ft_exit, &mlx);
-	mlx_hook(mlx.win, 2, 0, ft_press, &mlx);
-	mlx_hook(mlx.win, 3, 0, ft_release, &mlx);
-	mlx_loop_hook(mlx.mlx_p, drow_map_pixel, &mlx);
+	mlx_key_hook(mlx.mlx_p, &key_press, &mlx);
+	mlx_loop_hook(mlx.mlx_p, &drow_map_pixel, &mlx);
 	mlx_loop(mlx.mlx_p);
+	mlx_terminate(mlx.mlx_p);
+	ft_exit(&mlx);
 }
