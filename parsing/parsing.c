@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 00:41:00 by khbouych          #+#    #+#             */
-/*   Updated: 2023/11/26 19:40:40 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/26 19:48:47 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,5 @@ int	parsing(int ac, char **av, t_data *m, t_txtr *l_ture)
 	if (!color_ture(m, l_ture))
 		return (free_m(smlx), freelist(&l_ture), free(smlx), 0);
 	get_x_y_player(smlx,m);
-	// free_m(m->sq_map, m->map2d, m->ture2d, m->ff, m->cc);
-	// freelist(&l_ture);
-	// free(smlx);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 20:16:33 by khbouych          #+#    #+#             */
-/*   Updated: 2023/11/26 19:32:57 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/26 19:49:34 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,6 @@ void	get_x_y_player(t_mlx *smlx, t_data *m)
 			if (m->sq_map[i][j] == 'N' || m->sq_map[i][j] == 'S'
 				|| m->sq_map[i][j] == 'W' || m->sq_map[i][j] == 'E')
 			{
-				// printf("%c\n",i);
-				// printf("%c\n",j);
-				// printf("\n%s",m->sq_map[i]);
 				m->p_x = j;
 				m->p_y = i;
 				return ;
