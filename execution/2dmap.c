@@ -6,17 +6,17 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:30:47 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/23 07:41:14 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/26 19:31:12 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	get_angle(t_mlx *mlx)
 {
 	char	c;
 
-	c = mlx->dt->map[mlx->dt->p_y][mlx->dt->p_x];
+	c = mlx->dt->map2d[mlx->dt->p_y][mlx->dt->p_x];
 	if (c == 'N')
 		mlx->ply->angle = 3 * M_PI / 2;
 	if (c == 'S')
@@ -25,6 +25,9 @@ void	get_angle(t_mlx *mlx)
 		mlx->ply->angle = 0;
 	if (c == 'W')
 		mlx->ply->angle = M_PI;
+	// printf("\n%d\n", mlx->dt->p_x);
+	// printf("%d\n", mlx->dt->p_y);
+	// exit(0);
 	mlx->ply->plyr_x = (mlx->dt->p_x * TILE_SIZE) + TILE_SIZE / 2;
 	mlx->ply->plyr_y = (mlx->dt->p_y * TILE_SIZE) + TILE_SIZE / 2;
 	mlx->ply->fov_rd = (FOV * M_PI / 180);
@@ -40,13 +43,13 @@ void	draw_map_tile2d(t_mlx *mlx)
 
 	y = 0;
 	y_p = 0;
-	while (y < mlx->dt->map_h)
+	while (y < mlx->dt->h_map)
 	{
 		x = 0;
 		x_p = 0;
-		while (mlx->dt->map[y][x])
+		while (mlx->dt->map2d[y][x])
 		{
-			c = mlx->dt->map[y][x];
+			c = mlx->dt->map2d[y][x];
 			draw_win(mlx, x_p, y_p, WHI);
 			if (c == '1')
 				draw_win(mlx, x_p, y_p, GREY);

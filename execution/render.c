@@ -6,11 +6,11 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 15:05:46 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/25 17:40:50 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/26 18:16:53 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	draw_floor_ceiling(t_mlx *mlx, int ray, int t_pix, int b_pix)
 {

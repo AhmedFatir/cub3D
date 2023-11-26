@@ -6,7 +6,7 @@
 #    By: afatir <afatir@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/01 07:32:35 by afatir            #+#    #+#              #
-#    Updated: 2023/11/26 18:26:52 by afatir           ###   ########.fr        #
+#    Updated: 2023/11/26 19:41:16 by afatir           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,29 +22,25 @@ LIB = -L/Users/${USER}/.brew/Cellar/glfw/3.3.8/lib
 CC		= cc
 CFLAGS	= -Wall -Werror -Wextra #-fsanitize=address -g
 
-MOBJS	= ${SRCS:%.c=objectF/%.o}
-SRCS	= main.c linked_list.c fill_list.c parsing.c pars_map.c pars_colors.c \
-		pars_utils.c pars_utils2.c execution.c mouvement.c 2dmap.c raycasting.c render.c
+MOBJS	= ${SRCS:%.c=%.o}
+SRCS	= main.c execution/execution.c execution/mouvement.c execution/2dmap.c execution/raycasting.c execution/render.c \
+			parsing/o_list.c parsing/o_map.c parsing/outils_.c parsing/outils.c parsing/p_map.c parsing/p_map1.c parsing/p_map2.c \
+			parsing/p_textures1.c parsing/p_textures2.c parsing/par1.c parsing/parsing.c
 
 
-mkdir := mkdir -p
 all: $(NAME)
 
 $(NAME): $(MOBJS)
-	@$(mkdir) objectF
 	@make -s -C $(LIB_FT)
 	@$(CC) $(CFLAGS) $(FLAG_MLX) $(MOBJS) $(LIB_FT_A) $(MLX) $(LIB) -o $(NAME)
 
-objectF/%.o: %.c cub3d.h | objectF
+%.o: %.c cub3d.h
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
-objectF:
-	@$(mkdir) objectF
 
 clean:
 	@make clean -s -C $(LIB_FT)
 	@rm -f $(MOBJS)
-	@rm -rf objectF
 
 fclean: clean
 	@make fclean -s -C $(LIB_FT)

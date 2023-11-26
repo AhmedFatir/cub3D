@@ -6,11 +6,11 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:26:29 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/25 16:56:14 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/26 18:51:25 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	rotate_player(t_mlx *mlx, int i)
 {
@@ -39,7 +39,7 @@ void	move_player(t_mlx *mlx, double move_x, double move_y)
 	new_y = roundf(mlx->ply->plyr_y + move_y);
 	map_grid_x = (new_x / TILE_SIZE);
 	map_grid_y = (new_y / TILE_SIZE);
-	if (mlx->dt->map[map_grid_y][map_grid_x] != '1')
+	if (mlx->dt->map2d[map_grid_y][map_grid_x] != '1')
 	{
 		mlx->ply->plyr_x = new_x;
 		mlx->ply->plyr_y = new_y;

@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:32:06 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/26 18:26:32 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/26 19:37:46 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # define S_H 720
 # define TILE_SIZE 48
 # define FOV 60
-# define ROTATION_SPEED 0.05
-# define PLAYER_SPEED 5
+# define ROTATION_SPEED 0.04
+# define PLAYER_SPEED 3
 
 # define BLK 0x000000FF
 # define GREY 0x808080
@@ -36,51 +36,39 @@
 # define RED 0xFF0000FF
 # define WHI 0xFFFFFF
 
-typedef struct s_map
-{
-	char			*line;
-	int				index;
-	struct s_map	*next;
-}t_map;
-
 typedef struct s_tex
 {
 	void		*img;
 	void		*mlx_p;
 	int			*addr;
-	int			bpp;
-	int			line_len;
-	int			endi;
 	int			height;
 	int			width;
 }t_tex;
 
-typedef struct s_col
-{
-	char	**f;
-	char	**c;
-}t_col;
 
 typedef struct s_data
 {
-	char	**map;
-	char	*no;
-	char	*we;
-	char	*so;
-	char	*ea;
-	char	*f;	
-	char	*c;	
+	char	**map2d;
 	int		p_x;
 	int		p_y;
-	int		map_h;
-	int		map_w;
-	t_col	*col;
+	int		w_map;
+	int		h_map;
+	char 	**ff;
+	char 	**cc;
+	int fd;
+	int i;
+	char *line;
+	char *ture;
+	char *map;
+	char **ture2d;
+	char **sq_map;
+	char	**rgb;
 }t_data;
 
 typedef struct s_txtr
 {
 	char			*key;
-	char			value;
+	char			*value;
 	struct s_txtr	*next;
 }	t_txtr;
 
@@ -110,11 +98,6 @@ typedef struct s_mlx
 {
 	mlx_image_t	*img;
 	mlx_t		*mlx_p;
-	void		*win;
-	char		*addr;
-	int			bpp;
-	int			line_len;
-	int			endi;
 	t_data		*dt;
 	t_ray		*ray;
 	t_player	*ply;
@@ -124,59 +107,9 @@ typedef struct s_mlx
 	t_tex		tex_ea;
 }t_mlx;
 
-typedef struct s_info
-{
-	int		no;
-	int		we;
-	int		so;
-	int		ea;
-	int		f;
-	int		c;
-}t_info;
-// fill_list.c
-void	print_error(char *s, int *i);
-void	init_n(t_info *n);
-void	ft_free_data(t_data *dt, t_map *map, int *i, int j);
-void	check_extention(int ac, char **av);
-void	fill_list(int ac, char **av, t_map **map);
-//linked_list.c
-void	free_list(t_map *list);
-t_map	*cr_list(char *cmd);
-void	add_end(t_map **a, t_map *n);
-int		strlen_list(t_map **a);
-char	*get_index_list(t_map *map, int index);
-//parsing.c
-char	**load_map(t_map *map, int *i, int j);
-void	check_line(char *line, t_info *n, int j, int *i);
-void	check_info(t_map *map, int *i);
-char	*get_info(t_map *map, int *i, char *s);
-t_data	*parsing(t_data *dt, int ac, char **av, t_map *map);
-// pars_map.c
-void	check_sides(char **map, int h, int *i);
-void	check_first_last(char *line, int *i);
-void	check_midle(char **map, int h, int *i, int j);
-void	check_player(char **map, t_data *dt, int h, int *i);
-char	**get_map(t_map *map, t_data *dt, int *i);
-// pars_colors.c
-void	check_colors(t_data *dt, int *i, char x, int count);
-void	norme_colors(char *c, int *j, int *k);
-void	alloc_color(t_col *col, char x, char *p);
-int		check_color_numbers(char **p);
-void	triming(t_data *dt, int *i, int j, char	*p);
-//pars_utils.c
-int		check_if_map(char *line);
-int		getmap_hi(char **map);
-int		check_if_full(char *map);
-int		valide_symbols(char c);
-void	check_midle_to(char *line, int k, int *i);
-//pars_utils2.c
-float	nor_angle(float angle);
-int		is_sep(char c);
-void	check_directions(char *line, int *j, int *i, t_info *n);
-char	*ft_strtrim_back(char *s1, char *set);
-void	get_h_w(t_mlx *mlx);
 ///////////////////////////////EXECUTION////////////////////////////
 //mouvement.c
+float	nor_angle(float angle);
 void	cub_hook(t_mlx *mlx, double move_x, double move_y);
 void	key_press(mlx_key_data_t keydata, void *ml);
 void	move_player(t_mlx *mlx, double move_x, double move_y);
@@ -197,4 +130,67 @@ void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
 void	cast_rays(t_mlx *mlx);
 // render.c
 void	render_wall(t_mlx *mlx, int ray);
+
+/////////////////////////////////////PARSING//////////////////////
+//o_list.c
+char	*removespaces(char *str);
+int	check_duplicat(t_data *m);
+// static void	ft_skipp(int *i, const char *p_str, int *sign);
+int	ft_atoi(const char *str);
+// char	*ft_strrchr(char *str, int c);
+// o_map.c
+int	getsize_largline(char **map);
+int	getsizemap(char **map);
+char	*fixline(char *line, int maxlen);
+int	h_map(char **map);
+int	v_map(char **map);
+//outils_.c
+// void	*ft_memset(void *s, int c, unsigned int len);
+// void	*ft_calloc(unsigned int count, unsigned int size);
+// char	*ft_substr(char *s, unsigned int start, unsigned int len);
+char	*ft_strtrim(char *s1, char *set);
+// outils.c 
+// void	*ft_memcpy(void *dest, const void *src, unsigned int n);
+// char	*ft_strdup(char *s1);
+int	ft_isdigit(int c);
+int	checkcolorvalues(char **rgb);
+int	ft_process_rgb_color(t_txtr *tmp, t_data *m);
+// p_map.c
+int	if_surrounded(char *line);
+int	if_validmap(char *line, int *flag);
+int	suroundedbyone(char **map);
+int	check_color_textures(char *line);
+int	check_l_surroundedbyone(char *line);
+// p_map1.c
+char	*getmap(t_data *m);
+int	read_map_(t_data *m, int count);
+void	freeme(char *ture, char *line, int fd);
+int	read_map(char *av, t_data *m, int *count);
+//  p_map2.c
+char	*getlastline(char **map);
+int	check_first_last_line(char **map);
+int	check_countture(t_data *m, int count);
+// p_textures1.c
+int	check_ifvalid(char *line);
+int	checktures_space_tab(char **ture2d, int count);
+int	check_pos_ofv(char *line);
+int	count_vergules(char *rgb);
+int	parse_rgb(char **ture2d);
+// p_textures2.c
+int	get_index(char *line, int i);
+t_txtr	*new_texture(char *line);
+t_txtr	*lst_back_ture(t_txtr *l_ture, t_txtr *new);
+void	lst_back_ture2(t_txtr **l_ture, t_txtr *new);
+int	lst_ture(t_data *m, t_txtr **l_ture);
+//  par1.c
+int	valid_map(t_data *m);
+void	get_x_y_player(t_mlx *smlx, t_data *m);
+void	free_2d(char **m);
+void	free1(t_data *m, t_txtr *l_ture);
+int	checkextension(char *fname);
+// parsing.c
+void	free_m(t_mlx *mlx);
+int	color_ture(t_data *m, t_txtr *l_ture);
+int	parsing(int ac, char **av, t_data *m, t_txtr *l_ture);
+void	freelist(t_txtr **head);
 #endif

@@ -6,22 +6,29 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:23:08 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/25 17:43:47 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/26 19:37:56 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
+
+float	nor_angle(float angle)
+{
+	if (angle < 0)
+		angle += (2 * M_PI);
+	else if (angle > (2 * M_PI))
+		angle -= (2 * M_PI);
+	return (angle);
+}
 
 int	ft_exit(t_mlx *mlx)
 {
-	int		i;
-
-	i = 1;
 	mlx_delete_image(mlx->mlx_p, mlx->img);
-	ft_free_data(mlx->dt, NULL, &i, 0);
+	free_m(mlx);
+	// freelist(mlx .l_ture); // texture
 	free(mlx->ply);
 	free(mlx->ray);
-	print_error("Game closed\n", &i);
+	ft_putstr_fd("Game closed\n", 1);
 	exit(0);
 	return (0);
 }
@@ -58,7 +65,6 @@ void	execution(t_data *dt)
 	mlx.ply = (t_player *)ft_calloc(sizeof(t_player), 1);
 	mlx.ray = (t_ray *)ft_calloc(sizeof(t_ray), 1);
 	mlx.dt = dt;
-	get_h_w(&mlx);
 	mlx.mlx_p = mlx_init(S_W, S_H, "cub3D", false);
 	get_angle(&mlx);
 	mlx_key_hook(mlx.mlx_p, &key_press, &mlx);
