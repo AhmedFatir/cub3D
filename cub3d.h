@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:32:06 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/26 18:21:48 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/26 18:26:32 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <fcntl.h>
 # include <math.h>
 # include "libft_gcl_ptf/libft.h"
-# include "/Users/afatir/Desktop/MLX42/include/MLX42/MLX42.h"
+# include "/Users/afatir/MLX42/include/MLX42/MLX42.h"
 
 # define S_W 1440
 # define S_H 720

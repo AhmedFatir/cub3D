@@ -6,7 +6,7 @@
 #    By: afatir <afatir@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/01 07:32:35 by afatir            #+#    #+#              #
-#    Updated: 2023/11/25 17:44:25 by afatir           ###   ########.fr        #
+#    Updated: 2023/11/26 18:26:52 by afatir           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME	= cub3D
 LIB_FT	= libft_gcl_ptf/
 LIB_FT_A= libft_gcl_ptf/libft_gcl_ptf.a
 
-MLX = /Users/afatir/Desktop/MLX42/build/libmlx42.a
+MLX = /Users/afatir/MLX42/build/libmlx42.a
 FLAG_MLX = -framework Cocoa -framework OpenGL -framework IOKit -lglfw
 INCLUDE = -I/Users/${USER}/.brew/Cellar/glfw/3.3.8/include/GLFW
 LIB = -L/Users/${USER}/.brew/Cellar/glfw/3.3.8/lib
