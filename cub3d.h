@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:32:06 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/25 17:39:10 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/26 18:21:48 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@
 # define ROTATION_SPEED 0.05
 # define PLAYER_SPEED 5
 
-# define BLK 0x000000
+# define BLK 0x000000FF
 # define GREY 0x808080
-# define BLU 0x87CEEB
-# define GREN 0x008000
-# define ORNG 0xFF9300
-# define RED 0xFF0000
+# define BLU 0x87CEEBFF
+# define GREN 0x008000FF
+# define ORNG 0xFF9300FF
+# define RED 0xFF0000FF
 # define WHI 0xFFFFFF
 
 typedef struct s_map

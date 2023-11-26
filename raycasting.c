@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:36:01 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/25 17:44:04 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/26 18:22:25 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ void	cast_rays(t_mlx *mlx)
 	double	v_inter;
 	int		ray;
 
-	draw_map_tile2d(mlx);
+	// draw_map_tile2d(mlx);
 	ray = 0;
 	mlx->ray->ray_ngl = mlx->ply->angle - (mlx->ply->fov_rd / 2);
 	while (ray < S_W)
@@ -143,8 +143,8 @@ void	cast_rays(t_mlx *mlx)
 			mlx->ray->distance = h_inter;
 			mlx->ray->ray_v = 1;
 		}
-		// render_wall(mlx, ray);
-		draw_ray_2d(mlx, mlx->ray->ray_ngl, mlx->ray->distance, RED);
+		render_wall(mlx, ray);
+		// draw_ray_2d(mlx, mlx->ray->ray_ngl, mlx->ray->distance, RED);
 		ray++;
 		mlx->ray->ray_ngl += (mlx->ply->fov_rd / S_W);
 	}
