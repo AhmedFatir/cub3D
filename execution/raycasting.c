@@ -6,20 +6,20 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:36:01 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/26 19:51:02 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/28 06:02:05 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	check_inter(float angle, float *inter, float *step, int is_horizon)
+int	inter_check(float angle, float *inter, float *step, int is_horizon)
 {
 	if (is_horizon)
 	{
 		if (angle > 0 && angle < M_PI)
 		{
 			*inter += TILE_SIZE;
-			return (0);
+			return (-1);
 		}
 		*step *= -1;
 	}
@@ -28,14 +28,14 @@ int	check_inter(float angle, float *inter, float *step, int is_horizon)
 		if (!(angle > M_PI / 2 && angle < 3 * M_PI / 2)) 
 		{
 			*inter += TILE_SIZE;
-			return (0);
+			return (-1);
 		}
 		*step *= -1;
 	}
 	return (1);
 }
 
-int	check_wall(float x, float y, t_mlx *mlx)
+int	wall_hit(float x, float y, t_mlx *mlx)
 {
 	int		x_m;
 	int		y_m;
@@ -74,17 +74,17 @@ float	get_h_inter(t_mlx *mlx, float angl)
 	float	h_y;
 	float	x_step;
 	float	y_step;
-	int		check;
+	int		pixel;
 
 	y_step = TILE_SIZE;
 	x_step = TILE_SIZE / tan(angl); 
 	h_y = floor(mlx->ply->plyr_y / TILE_SIZE) * TILE_SIZE;
-	check = check_inter(angl, &h_y, &y_step, 1);
+	pixel = inter_check(angl, &h_y, &y_step, 1);
 	h_x = mlx->ply->plyr_x + (h_y - mlx->ply->plyr_y) / tan(angl);
 	if ((unit_circle(angl, 'y') && x_step > 0) || \
 		(!unit_circle(angl, 'y') && x_step < 0))
 		x_step *= -1;
-	while (check_wall(h_x, h_y - check, mlx))
+	while (wall_hit(h_x, h_y - pixel, mlx))
 	{
 		h_x += x_step;
 		h_y += y_step;
@@ -101,17 +101,17 @@ float	get_v_inter(t_mlx *mlx, float angl)
 	float	v_y;
 	float	x_step;
 	float	y_step;
-	int		check;
+	int		pixel;
 
 	x_step = TILE_SIZE;
 	y_step = TILE_SIZE * tan(angl);
 	v_x = floor(mlx->ply->plyr_x / TILE_SIZE) * TILE_SIZE;
-	check = check_inter(angl, &v_x, &x_step, 0);
+	pixel = inter_check(angl, &v_x, &x_step, 0);
 	v_y = mlx->ply->plyr_y + (v_x - mlx->ply->plyr_x) * tan(angl);
 	if ((unit_circle(angl, 'x') && y_step < 0) || \
 		(!unit_circle(angl, 'x') && y_step > 0))
 		y_step *= -1;
-	while (check_wall(v_x - check, v_y, mlx))
+	while (wall_hit(v_x - pixel, v_y, mlx))
 	{
 		v_x += x_step;
 		v_y += y_step;
@@ -128,7 +128,7 @@ void	cast_rays(t_mlx *mlx)
 	double	v_inter;
 	int		ray;
 
-	// draw_map_tile2d(mlx);
+	draw_map_tile2d(mlx);
 	ray = 0;
 	mlx->ray->ray_ngl = mlx->ply->angle - (mlx->ply->fov_rd / 2);
 	while (ray < S_W)
@@ -143,8 +143,8 @@ void	cast_rays(t_mlx *mlx)
 			mlx->ray->distance = h_inter;
 			mlx->ray->ray_v = 1;
 		}
-		render_wall(mlx, ray);
-		// draw_ray_2d(mlx, mlx->ray->ray_ngl, mlx->ray->distance, RED);
+		// render_wall(mlx, ray);
+		draw_ray_2d(mlx, mlx->ray->ray_ngl, mlx->ray->distance, RED);
 		ray++;
 		mlx->ray->ray_ngl += (mlx->ply->fov_rd / S_W);
 	}

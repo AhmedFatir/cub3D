@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:32:06 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/26 19:37:46 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/28 06:25:35 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ void	rotate_player(t_mlx *mlx, int i);
 void	get_angle(t_mlx *mlx);
 void	draw_map_tile2d(t_mlx *mlx);
 void	draw_win(t_mlx *mlx, int x, int y, int color);
-void	drow_player(t_mlx *mlx, int x_p, int y_p, int color);
+void	draw_player(t_mlx *mlx, int x_p, int y_p, int color);
 void	draw_ray_2d(t_mlx *mlx, double angle, double distance, int color);
 //execution.c
 int		ft_exit(t_mlx *mlx);

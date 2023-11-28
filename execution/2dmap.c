@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:30:47 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/26 19:49:29 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/28 06:36:22 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	draw_map_tile2d(t_mlx *mlx)
 		y++;
 		y_p += TILE_SIZE;
 	}
-	drow_player(mlx, mlx->ply->plyr_x, mlx->ply->plyr_y, ORNG);
+	draw_player(mlx, mlx->ply->plyr_x, mlx->ply->plyr_y, ORNG);
 }
 
 void	draw_win(t_mlx *mlx, int x, int y, int color)
@@ -67,38 +67,36 @@ void	draw_win(t_mlx *mlx, int x, int y, int color)
 
 	y_m = y;
 	flag = 0;
+	x_m = x;
+	while (x_m < (x + TILE_SIZE))
+		my_mlx_pixel_put(mlx, x_m++, y_m, BLK);
 	while (y_m < (y + TILE_SIZE))
 	{
-		x_m = x;
-		if (!flag)
-		{
-			while (x_m < (x + TILE_SIZE))
-				my_mlx_pixel_put(mlx, x_m++, y_m, BLK);
-			flag = 1;
-		}
-		else
-		{
-			while (x_m < (x + TILE_SIZE))
-				my_mlx_pixel_put(mlx, x_m++, y_m, color);
-			my_mlx_pixel_put(mlx, x_m - 1, y_m, BLK);
-		}
+		while (x_m < (x + TILE_SIZE))
+			my_mlx_pixel_put(mlx, x_m++, y_m, color);
+		my_mlx_pixel_put(mlx, x_m - 1, y_m, BLK);
 		y_m++;
+		x_m = x;
 	}
 }
 
-void	drow_player(t_mlx *mlx, int x_p, int y_p, int color)
+void	draw_player(t_mlx *mlx, int x_p, int y_p, int color)
 {
 	int		x;
 	int		y;
+	int		r;
 
-	x_p -= TILE_SIZE / 2;
-	y_p -= TILE_SIZE / 2;
-	y = TILE_SIZE / 3;
-	while (y < (TILE_SIZE - TILE_SIZE / 3))
+	r = TILE_SIZE / 6;
+	y = -r;
+	while (y <= r)
 	{
-		x = TILE_SIZE / 3;
-		while (x < (TILE_SIZE - TILE_SIZE / 3))
-			my_mlx_pixel_put(mlx, x_p + x++, y_p + y, color);
+		x = -r;
+		while (x <= r)
+		{
+			if (pow(x, 2) + pow(y, 2) <= pow(r, 2))
+				my_mlx_pixel_put(mlx, x_p + x, y_p + y, color);
+			x++;
+		}
 		y++;
 	}
 }
