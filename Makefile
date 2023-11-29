@@ -6,7 +6,7 @@
 #    By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/01 07:32:35 by afatir            #+#    #+#              #
-#    Updated: 2023/11/29 17:09:00 by khbouych         ###   ########.fr        #
+#    Updated: 2023/11/29 17:43:44 by khbouych         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ INCLUDE = -I/Users/${USER}/.brew/Cellar/glfw/3.3.8/include/GLFW
 LIB = -L/Users/${USER}/.brew/Cellar/glfw/3.3.8/lib
 
 CC		= cc
-CFLAGS	= -Wall -Werror -Wextra -O3 -ffast-math
+CFLAGS	= -Wall -Werror -Wextra -O3 -ffast-math #-fsanitize=address -g
 
 MOBJS	= ${SRCS:%.c=%.o}
 SRCS	= main.c execution/execution.c execution/mouvement.c execution/2dmap.c execution/raycasting.c execution/render.c \
@@ -45,8 +45,10 @@ clean:
 fclean: clean
 	@make fclean -s -C $(LIB_FT)
 	@rm -f $(NAME)
+
 git :
 	git add .
 	git commit -m "khbouych"
 	git push
+
 re: fclean all

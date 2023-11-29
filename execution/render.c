@@ -6,7 +6,7 @@
 /*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 15:05:46 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/29 17:04:55 by khbouych         ###   ########.fr       */
+/*   Updated: 2023/11/29 18:00:18 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,14 @@ int	get_color(t_mlx *mlx, int ray_v)
 		if (mlx->ray->vert_x > mlx->ply->plyr_x)
 			return (WHI);
 		else
-			return (RED);
+			return (WHI);
 	}
 	else
 	{
 		if (mlx->ray->horiz_y > mlx->ply->plyr_y)
 			return (GREY);
 		else
-			return (ORNG);
+			return (GREY);
 	}
 }
 

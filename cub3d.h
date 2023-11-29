@@ -6,7 +6,7 @@
 /*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:32:06 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/29 16:01:38 by khbouych         ###   ########.fr       */
+/*   Updated: 2023/11/29 18:01:16 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@
 # include "libft_gcl_ptf/libft.h"
 # include "MLX42/include/MLX42/MLX42.h"
 
-# define S_W 1440
-# define S_H 720
-# define TILE_SIZE 48
+# define S_W 2400
+# define S_H 1200
+# define TILE_SIZE 64
 # define FOV 60
-# define ROTATION_SPEED 0.04
-# define PLAYER_SPEED 3
+# define ROTATION_SPEED 0.02
+# define PLAYER_SPEED 2
 
 # define BLK 0x000000FF
 # define GREY 0x808080
@@ -80,6 +80,8 @@ typedef struct s_player
 	int		rot;
 	int		l_r;
 	int		u_d;
+	int m_x;
+	int m_y;
 }t_player;
 
 typedef struct s_ray
