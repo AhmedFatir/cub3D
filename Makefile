@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: afatir <afatir@student.42.fr>              +#+  +:+       +#+         #
+#    By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/01 07:32:35 by afatir            #+#    #+#              #
-#    Updated: 2023/11/28 03:06:57 by afatir           ###   ########.fr        #
+#    Updated: 2023/11/29 17:09:00 by khbouych         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,13 +14,13 @@ NAME	= cub3D
 LIB_FT	= libft_gcl_ptf/
 LIB_FT_A= libft_gcl_ptf/libft_gcl_ptf.a
 
-MLX = /Users/afatir/MLX42/build/libmlx42.a
+MLX = MLX42/build/libmlx42.a
 FLAG_MLX = -framework Cocoa -framework OpenGL -framework IOKit -lglfw
 INCLUDE = -I/Users/${USER}/.brew/Cellar/glfw/3.3.8/include/GLFW
 LIB = -L/Users/${USER}/.brew/Cellar/glfw/3.3.8/lib
 
 CC		= cc
-CFLAGS	= -Wall -Werror -Wextra -fsanitize=address -g
+CFLAGS	= -Wall -Werror -Wextra -O3 -ffast-math
 
 MOBJS	= ${SRCS:%.c=%.o}
 SRCS	= main.c execution/execution.c execution/mouvement.c execution/2dmap.c execution/raycasting.c execution/render.c \
@@ -45,5 +45,8 @@ clean:
 fclean: clean
 	@make fclean -s -C $(LIB_FT)
 	@rm -f $(NAME)
-
+git :
+	git add .
+	git commit -m "khbouych"
+	git push
 re: fclean all

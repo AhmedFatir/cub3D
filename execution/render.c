@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
+/*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 15:05:46 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/28 21:05:25 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/29 17:04:55 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,14 @@ int	get_color(t_mlx *mlx, int ray_v)
 		if (mlx->ray->vert_x > mlx->ply->plyr_x)
 			return (WHI);
 		else
-			return (WHI);
+			return (RED);
 	}
 	else
 	{
 		if (mlx->ray->horiz_y > mlx->ply->plyr_y)
 			return (GREY);
 		else
-			return (GREY);
+			return (ORNG);
 	}
 }
 
@@ -74,8 +74,11 @@ void	draw_wall(t_mlx *mlx, int ray, int t_pix, int b_pix)
 	y = t_pix;
 	while (y < b_pix)
 	{
-		c = get_color(mlx, mlx->ray->ray_v);
-		my_mlx_pixel_put(mlx, ray, y, c);
+		// if ((y > 0 && y <= S_H) && (ray > 0 && ray <= S_W))
+		// {
+			c = get_color(mlx, mlx->ray->ray_v);
+			my_mlx_pixel_put(mlx, ray, y, c);
+		// }
 		y++;
 	}
 }
@@ -91,6 +94,11 @@ void	render_wall(t_mlx *mlx, int ray)
 	tan(mlx->ply->fov_rd / 2));
 	b_pix = (S_H / 2) + (wall_h / 2);
 	t_pix = (S_H / 2) - (wall_h / 2);
+
+	if (b_pix > S_H)
+		b_pix = S_H;
+	if (t_pix < 0)
+		t_pix = 0;
 	draw_wall(mlx, ray, t_pix, b_pix);
 	draw_floor_ceiling(mlx, ray, t_pix, b_pix);
 }

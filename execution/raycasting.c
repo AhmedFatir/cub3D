@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
+/*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:36:01 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/28 21:23:36 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/29 16:04:06 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ void	cast_rays(t_mlx *mlx)
 	double	v_inter;
 	int		ray;
 
-	draw_map_tile2d(mlx);
+	// draw_map_tile2d(mlx);
 	ray = 0;
 	mlx->ray->ray_ngl = mlx->ply->angle - (mlx->ply->fov_rd / 2);
 	while (ray < S_W)
@@ -143,8 +143,8 @@ void	cast_rays(t_mlx *mlx)
 			mlx->ray->distance = h_inter;
 			mlx->ray->ray_v = 1;
 		}
-		// render_wall(mlx, ray);
-		draw_ray_2d(mlx, mlx->ray->ray_ngl, mlx->ray->distance, RED);
+		render_wall(mlx, ray);
+		// draw_ray_2d(mlx, mlx->ray->ray_ngl, mlx->ray->distance, RED);
 		ray++;
 		mlx->ray->ray_ngl += (mlx->ply->fov_rd / S_W);
 	}

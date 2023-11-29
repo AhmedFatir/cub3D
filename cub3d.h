@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
+/*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:32:06 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/28 21:03:30 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/29 16:01:38 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <fcntl.h>
 # include <math.h>
 # include "libft_gcl_ptf/libft.h"
-# include "/Users/afatir/MLX42/include/MLX42/MLX42.h"
+# include "MLX42/include/MLX42/MLX42.h"
 
 # define S_W 1440
 # define S_H 720
