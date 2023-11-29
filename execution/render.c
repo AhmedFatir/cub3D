@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 15:05:46 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/26 18:16:53 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/28 21:05:25 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,21 @@ void	draw_floor_ceiling(t_mlx *mlx, int ray, int t_pix, int b_pix)
 	}
 }
 
-t_tex	*get_texture(t_mlx *mlx, int ray_v)
+mlx_texture_t	*get_texture(t_mlx *mlx, int ray_v)
 {
 	if (ray_v == 1)
 	{
 		if (mlx->ray->vert_x > mlx->ply->plyr_x)
-			return (&mlx->tex_ea);
+			return (mlx->tex->ea);
 		else
-			return (&mlx->tex_ea);
+			return (mlx->tex->ea);
 	}
 	else
 	{
 		if (mlx->ray->horiz_y > mlx->ply->plyr_y)
-			return (&mlx->tex_so);
+			return (mlx->tex->so);
 		else
-			return (&mlx->tex_so);
+			return (mlx->tex->so);
 	}
 }
 

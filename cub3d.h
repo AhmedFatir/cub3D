@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:32:06 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/28 06:25:35 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/28 21:03:30 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,10 @@
 
 typedef struct s_tex
 {
-	void		*img;
-	void		*mlx_p;
-	int			*addr;
-	int			height;
-	int			width;
+	mlx_texture_t*	no;
+	mlx_texture_t*	so;
+	mlx_texture_t*	we;
+	mlx_texture_t*	ea;
 }t_tex;
 
 
@@ -55,13 +54,13 @@ typedef struct s_data
 	int		h_map;
 	char 	**ff;
 	char 	**cc;
-	int fd;
-	int i;
-	char *line;
-	char *ture;
-	char *map;
-	char **ture2d;
-	char **sq_map;
+	int		fd;
+	int		i;
+	char	*line;
+	char	*ture;
+	char	*map;
+	char	**ture2d;
+	char	**sq_map;
 	char	**rgb;
 }t_data;
 
@@ -70,7 +69,7 @@ typedef struct s_txtr
 	char			*key;
 	char			*value;
 	struct s_txtr	*next;
-}	t_txtr;
+}t_txtr;
 
 typedef struct s_player
 {
@@ -101,10 +100,7 @@ typedef struct s_mlx
 	t_data		*dt;
 	t_ray		*ray;
 	t_player	*ply;
-	t_tex		tex_no;
-	t_tex		tex_so;
-	t_tex		tex_we;
-	t_tex		tex_ea;
+	t_tex		*tex;
 }t_mlx;
 
 ///////////////////////////////EXECUTION////////////////////////////
