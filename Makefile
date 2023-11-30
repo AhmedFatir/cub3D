@@ -3,10 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: afatir <afatir@student.42.fr>              +#+  +:+       +#+         #
+#    By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/01 07:32:35 by afatir            #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2023/11/30 20:33:39 by afatir           ###   ########.fr        #
+=======
+#    Updated: 2023/11/30 16:57:09 by khbouych         ###   ########.fr        #
+>>>>>>> 9bfd40f3d26e871d79c461f4fb2723bc392e4e3c
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +18,8 @@ NAME	= cub3D
 LIB_FT	= libft_gcl_ptf/
 LIB_FT_A= libft_gcl_ptf/libft_gcl_ptf.a
 
-MLX = ../MLX42/build/libmlx42.a
+MLX = MLX42/build/libmlx42.a
+# MLX = ../MLX42/build/libmlx42.a
 FLAG_MLX = -framework Cocoa -framework OpenGL -framework IOKit -lglfw
 INCLUDE = -I/Users/${USER}/.brew/Cellar/glfw/3.3.8/include/GLFW
 LIB = -L/Users/${USER}/.brew/Cellar/glfw/3.3.8/lib

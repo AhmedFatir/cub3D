@@ -3,12 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
+/*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:32:06 by afatir            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/11/30 23:21:43 by afatir           ###   ########.fr       */
+=======
+/*   Updated: 2023/11/30 16:55:21 by khbouych         ###   ########.fr       */
+>>>>>>> 9bfd40f3d26e871d79c461f4fb2723bc392e4e3c
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -19,15 +24,23 @@
 # include <fcntl.h>
 # include <math.h>
 # include "libft_gcl_ptf/libft.h"
-# include "../MLX42/include/MLX42/MLX42.h"
+# include "MLX42/include/MLX42/MLX42.h"
 
 # define S_W 2000
+<<<<<<< HEAD
 # define S_H 1000
 # define TILE_SIZE 15
 # define TILE_SIZE_MAP 50
 # define FOV 60
 # define ROTATION_SPEED 0.02
 # define PLAYER_SPEED 1
+=======
+# define S_H 1200
+# define TILE_SIZE 64
+# define FOV 60
+# define ROTATION_SPEED 0.03
+# define PLAYER_SPEED 5
+>>>>>>> 9bfd40f3d26e871d79c461f4fb2723bc392e4e3c
 
 # define BLK 0x000000FF
 # define GREY 0x808080FF
@@ -43,7 +56,7 @@ typedef struct s_tex
 	mlx_texture_t*	so;
 	mlx_texture_t*	we;
 	mlx_texture_t*	ea;
-}t_tex;
+}	t_tex;
 
 
 typedef struct s_data
@@ -87,13 +100,13 @@ typedef struct s_player
 
 typedef struct s_ray
 {
-	int		flag;
 	double	ray_ngl;
 	double	horiz_x;
 	double	horiz_y;
 	double	vert_x;
 	double	vert_y;
 	double	distance;
+	int flag;
 }t_ray;
 
 typedef struct s_mlx
@@ -104,10 +117,12 @@ typedef struct s_mlx
 	t_ray		*ray;
 	t_player	*ply;
 	t_tex		*tex;
+	t_txtr		*l_ture;
 }t_mlx;
 
 ///////////////////////////////EXECUTION////////////////////////////
 //mouvement.c
+void printlist(t_txtr *l);
 float	nor_angle(float angle);
 void	cub_hook(t_mlx *mlx, double move_x, double move_y);
 void	key_press(mlx_key_data_t keydata, void *ml);

@@ -1,7 +1,16 @@
-NO textures/no.xpm
-SO textures/so.xpm
-WE textures/we.xpm
-EA textures/ea.xpm
+
+
+
+
+
+NO textures/no.png
+SO textures/so.png
+WE textures/we.png
+EA textures/ea.png
+
+
+
+
 F 220,100,0
 C 225,30,0
 

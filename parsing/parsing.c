@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
+/*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 00:41:00 by khbouych          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/11/30 20:36:00 by afatir           ###   ########.fr       */
+=======
+/*   Updated: 2023/11/30 16:58:46 by khbouych         ###   ########.fr       */
+>>>>>>> 9bfd40f3d26e871d79c461f4fb2723bc392e4e3c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +33,10 @@ void	free_m(t_mlx *mlx)
 int	color_ture(t_data *m, t_txtr *l_ture)
 {
 	t_txtr	*tmp;
-
 	tmp = l_ture;
 	while (tmp)
 	{
-		if (!ft_strncmp(tmp->key, "F", 1) || !ft_strncmp(tmp->key, "C", 1))
+		if (!ft_strncmp(tmp->key, "F", 2) || !ft_strncmp(tmp->key, "C", 2))
 		{
 			if (!ft_process_rgb_color(tmp, m))
 			{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   p_textures2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
+/*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 19:53:18 by khbouych          #+#    #+#             */
-/*   Updated: 2023/11/26 18:38:51 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/29 18:24:01 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ t_txtr	*lst_back_ture(t_txtr *l_ture, t_txtr *new)
 	tmp->next = new;
 	return (l_ture);
 }
+
 void	lst_back_ture2(t_txtr **l_ture, t_txtr *new)
 {
 	t_txtr	*tmp;
@@ -68,20 +69,19 @@ void	lst_back_ture2(t_txtr **l_ture, t_txtr *new)
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = new;
-	// return (l_ture);
 }
 
 int	lst_ture(t_data *m, t_txtr **l_ture)
 {
-	int		i;
+	int			i;
 	t_txtr	*tmp;
+
 	i = 0;
 	while (m->ture2d[i])
 	{
 		tmp = new_texture(m->ture2d[i++]);
 		if (!tmp)
 			return (0);
-		// (*l_ture) = lst_back_ture((*l_ture), tmp);
 		lst_back_ture2(l_ture, tmp);
 	}
 	return (1);

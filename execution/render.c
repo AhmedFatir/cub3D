@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
+/*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 15:05:46 by afatir            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/11/30 23:17:55 by afatir           ###   ########.fr       */
+=======
+/*   Updated: 2023/11/30 15:58:39 by khbouych         ###   ########.fr       */
+>>>>>>> 9bfd40f3d26e871d79c461f4fb2723bc392e4e3c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +112,45 @@ void	draw_wall(t_mlx *mlx, int ray, int t_pix, int b_pix, double wall_h)
 			exit (0);
 		y++;
 	}
+}
+
+//--------textures------------
+// mlx_texture_t	*get_texture(t_mlx *mlx, float angl)
+// {
+// 	if (mlx->ray->ray_v)
+// 	{
+// 		if (angl > 0 && angl < M_PI)
+// 			return (mlx->tex->we);
+// 		else
+// 			return (mlx->tex->ea);
+// 	}
+// 	else
+// 	{
+// 		if (angl > M_PI / 2 && angl < 3 * M_PI / 2)
+// 			return (mlx->tex->no);
+// 		else
+// 			return (mlx->tex->so);
+// 	}
+// 	return (NULL);
+// }
+
+uint32_t get_rgba(int r, int g, int b, int a)
+{
+    return (r << 24 | g << 16 | b << 8 | a << 0);
+}
+
+uint32_t ft_get_color(int ofsetx, int ofsety, mlx_texture_t *text)
+{
+    uint32_t	r;
+    uint32_t	g;
+    uint32_t	b;
+    uint32_t	a;
+
+    a = 255;
+	r = text->pixels[(ofsety * (text->width * 4)) + (ofsetx * 4)];
+    g = text->pixels[(ofsety * (text->width * 4)) + (ofsetx * 4) + 1];
+    b = text->pixels[(ofsety * (text->width * 4)) + (ofsetx * 4) + 2];
+    return (get_rgba(r, g, b, a));
 }
 
 void	render_wall(t_mlx *mlx, int ray)

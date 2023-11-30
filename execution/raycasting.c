@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
+/*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:36:01 by afatir            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/11/30 23:18:54 by afatir           ###   ########.fr       */
+=======
+/*   Updated: 2023/11/30 17:02:10 by khbouych         ###   ########.fr       */
+>>>>>>> 9bfd40f3d26e871d79c461f4fb2723bc392e4e3c
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +27,7 @@ int	inter_check(float angle, float *inter, float *step, int is_horizon)
 		}
 		*step *= -1;
 	}
-	else 
+	else
 	{
 		if (!(angle > M_PI / 2 && angle < 3 * M_PI / 2)) 
 		{
@@ -62,7 +66,7 @@ int	unit_circle(float angle, char c)
 	}
 	else if (c == 'y')
 	{
-		if (angle > M_PI / 2 && angle < 3 * (M_PI / 2))
+		if (angle > (M_PI / 2) && angle < (3 * M_PI) / 2)
 			return (1);
 	}
 	return (0);
@@ -121,7 +125,7 @@ float	get_v_inter(t_mlx *mlx, float angl)
 	return (sqrt(pow(v_x - mlx->ply->plyr_x, 2) + \
 	pow(v_y - mlx->ply->plyr_y, 2)));
 }
-
+//----------------------------------
 void	cast_rays(t_mlx *mlx)
 {
 	double	h_inter;

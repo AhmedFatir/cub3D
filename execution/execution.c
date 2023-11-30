@@ -3,12 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
+/*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:23:08 by afatir            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/11/30 23:24:47 by afatir           ###   ########.fr       */
+=======
+/*   Updated: 2023/11/30 17:04:35 by khbouych         ###   ########.fr       */
+>>>>>>> 9bfd40f3d26e871d79c461f4fb2723bc392e4e3c
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../cub3d.h"
 
@@ -61,6 +66,16 @@ void	drow_map_pixel(void *mlxl)
 }
 void	load_texture(t_tex *tex)
 {
+
+	// t_txtr *tmp;
+
+	// tmp = l_ture;
+	// while (tmp)
+	// {
+	// 	printf ("key = %s\n", tmp->key);
+	// 	tmp = tmp->next;
+	// }
+	// exit(0);
 	tex->ea = mlx_load_png("textures/ea.png");
 	tex->no = mlx_load_png("textures/no.png");
 	tex->so = mlx_load_png("textures/so.png");
