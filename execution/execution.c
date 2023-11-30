@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:23:08 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/30 13:39:07 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/30 15:33:37 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,10 @@
 
 float	nor_angle(float angle)
 {
-	// if (angle < 0)
-	// 	angle += (2 * M_PI);
-	angle = fmod(angle, 2 * M_PI);
-	// if (angle > (2 * M_PI))
-	// 	angle -= (2 * M_PI);
 	if (angle < 0)
 		angle += (2 * M_PI);
+	if (angle > (2 * M_PI))
+		angle -= (2 * M_PI);
 	return (angle);
 }
 
@@ -28,9 +25,9 @@ int	ft_exit(t_mlx *mlx)
 {
 	mlx_delete_image(mlx->mlx_p, mlx->img);
 	free_m(mlx);
-	// freelist(mlx .l_ture); // texture
 	free(mlx->ply);
 	free(mlx->ray);
+	free(mlx->tex);
 	ft_putstr_fd("Game closed\n", 1);
 	exit(0);
 	return (0);
@@ -58,7 +55,6 @@ void	drow_map_pixel(void *mlxl)
 	mlx->img = mlx_new_image(mlx->mlx_p, S_W, S_H);
 	cub_hook(mlx, 0, 0);
 	cast_rays(mlx);
-	// mini_cast_rays(mlx);
 	mlx_image_to_window(mlx->mlx_p, mlx->img, 0, 0);
 }
 void	load_texture(t_tex *tex)
@@ -96,8 +92,8 @@ void	execution(t_data *dt)
 	load_texture(mlx.tex);
 	mlx_key_hook(mlx.mlx_p, &key_press, &mlx);
 	mlx_loop_hook(mlx.mlx_p, &drow_map_pixel, &mlx);
-	// mlx_set_cursor_mode(mlx.mlx_p, MLX_MOUSE_DISABLED);
-	// mlx_cursor_hook(mlx.mlx_p, (void *)my_mouse, &mlx);
+	mlx_set_cursor_mode(mlx.mlx_p, MLX_MOUSE_DISABLED);
+	mlx_cursor_hook(mlx.mlx_p, (void *)my_mouse, &mlx);
 	mlx_loop(mlx.mlx_p);
 	mlx_terminate(mlx.mlx_p);
 	ft_exit(&mlx);
