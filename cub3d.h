@@ -6,9 +6,10 @@
 /*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:32:06 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/30 14:57:14 by khbouych         ###   ########.fr       */
+/*   Updated: 2023/11/30 16:55:21 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -21,20 +22,20 @@
 # include "libft_gcl_ptf/libft.h"
 # include "MLX42/include/MLX42/MLX42.h"
 
-# define S_W 2200
-# define S_H 1100
+# define S_W 2000
+# define S_H 1200
 # define TILE_SIZE 64
 # define FOV 60
-# define ROTATION_SPEED 0.02
-# define PLAYER_SPEED 3
+# define ROTATION_SPEED 0.03
+# define PLAYER_SPEED 5
 
 # define BLK 0x000000FF
-# define GREY 0x808080
+# define GREY 0x808080FF
 # define BLU 0x87CEEBFF
 # define GREN 0x008000FF
 # define ORNG 0xFF9300FF
 # define RED 0xFF0000FF
-# define WHI 0xFFFFFF
+# define WHI 0xFFFFFFFF
 
 typedef struct s_tex
 {
@@ -42,7 +43,7 @@ typedef struct s_tex
 	mlx_texture_t*	so;
 	mlx_texture_t*	we;
 	mlx_texture_t*	ea;
-}t_tex;
+}	t_tex;
 
 
 typedef struct s_data
@@ -80,13 +81,12 @@ typedef struct s_player
 	int		rot;
 	int		l_r;
 	int		u_d;
-	int m_x;
-	int m_y;
+	int		m_x;
+	int		m_y;
 }t_player;
 
 typedef struct s_ray
 {
-	int		ray_v;
 	double	ray_ngl;
 	double	horiz_x;
 	double	horiz_y;
@@ -104,10 +104,12 @@ typedef struct s_mlx
 	t_ray		*ray;
 	t_player	*ply;
 	t_tex		*tex;
+	t_txtr		*l_ture;
 }t_mlx;
 
 ///////////////////////////////EXECUTION////////////////////////////
 //mouvement.c
+void printlist(t_txtr *l);
 float	nor_angle(float angle);
 void	cub_hook(t_mlx *mlx, double move_x, double move_y);
 void	key_press(mlx_key_data_t keydata, void *ml);
@@ -126,6 +128,7 @@ void	drow_map_pixel(void *mlxl);
 void	get_tex(t_mlx *mlx);
 void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
 // raycasting.c
+int	unit_circle(float angle, char c);
 void	cast_rays(t_mlx *mlx);
 // render.c
 void	render_wall(t_mlx *mlx, int ray);

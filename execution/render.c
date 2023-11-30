@@ -6,7 +6,7 @@
 /*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 15:05:46 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/30 15:55:39 by khbouych         ###   ########.fr       */
+/*   Updated: 2023/11/30 15:58:39 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,78 +30,104 @@ void	draw_floor_ceiling(t_mlx *mlx, int ray, int t_pix, int b_pix)
 	}
 }
 
-// mlx_texture_t	*get_texture(t_mlx *mlx, int ray_v)
-// {
-// 	if (ray_v == 1)
-// 	{
-// 		if (mlx->ray->vert_x > mlx->ply->plyr_x)
-// 			return (mlx->tex->ea);
-// 		else
-// 			return (mlx->tex->ea);
-// 	}
-// 	else
-// 	{
-// 		if (mlx->ray->horiz_y > mlx->ply->plyr_y)
-// 			return (mlx->tex->so);
-// 		else
-// 			return (mlx->tex->so);
-// 	}
-// }
-
-int	get_color(t_mlx *mlx, int ray_v)
+mlx_texture_t	*get_texture(t_mlx *mlx, int flag)
 {
-	if (ray_v == 1)
+	if (flag == 1)
 	{
-		if (mlx->ray->vert_x > mlx->ply->plyr_x)
-			return (WHI);
+		if (mlx->ray->ray_ngl > 0 && mlx->ray->ray_ngl < M_PI)
+			return (mlx->tex->so);
 		else
-			return (WHI);
+			return (mlx->tex->no);
 	}
 	else
 	{
-		if (mlx->ray->horiz_y > mlx->ply->plyr_y)
-			return (GREY);
+		if (mlx->ray->ray_ngl > M_PI / 2 && mlx->ray->ray_ngl < 3 * (M_PI / 2))
+			return (mlx->tex->ea);
 		else
-			return (GREY);
+			return (mlx->tex->we);
 	}
 }
 
-void	draw_wall(t_mlx *mlx, int ray, int t_pix, int b_pix)
+int	get_color(t_mlx *mlx, int flag)
 {
-	int		y;
-	int		c;
+	if (flag == 1)
+	{
+		if (mlx->ray->ray_ngl > 0 && mlx->ray->ray_ngl < M_PI)
+			return (WHI);
+		else
+			return (RED);
+	}
+	else
+	{
+		if (mlx->ray->ray_ngl > M_PI / 2 && mlx->ray->ray_ngl < 3 * (M_PI / 2))
+			return (GREY);
+		else
+			return (ORNG);
+	}
+}
+
+unsigned int reverse_bytes(int c)
+{
+	unsigned int	b;
+
+	b = 0;
+	b |= (c & 0xFF) << 24;
+	b |= (c & 0xFF00) << 8;
+	b |= (c & 0xFF0000) >> 8;
+	b |= (c & 0xFF000000) >> 24;
+	return (b);
+}
+
+void	draw_wall(t_mlx *mlx, int ray, int t_pix, int b_pix, double wall_h)
+{
+	int				y;
+	int				c;
+	double			x_o;
+	double			y_o;
+	mlx_texture_t	*texture;
 
 	y = t_pix;
+	texture = get_texture(mlx, mlx->ray->flag);
+	uint32_t *arr = (uint32_t *)texture->pixels;
+	double y_step = (double)texture->height / wall_h;
+	if (mlx->ray->flag == 1)
+		x_o = (int)(mlx->ray->horiz_x  * (texture->width / TILE_SIZE)) % texture->width;
+	else
+		x_o = (int)(mlx->ray->vert_y  * (texture->width / TILE_SIZE)) % texture->width;
+	y_o = (y - (S_H / 2) + (wall_h / 2)) * y_step;
+	if (y_o < 0)
+		y_o = 0;
 	while (y < b_pix)
 	{
-		// if ((y > 0 && y <= S_H) && (ray > 0 && ray <= S_W))
-		// {
-			c = get_color(mlx, mlx->ray->ray_v);
-			my_mlx_pixel_put(mlx, ray, y, c);
-		// }
+		if (y_o >= 0 && y_o < texture->height && x_o >= 0 && x_o < texture->width) {
+			c = arr[(int)y_o * texture->width + (int)x_o];
+			y_o += y_step;
+			my_mlx_pixel_put(mlx, ray, y, reverse_bytes(c));
+		} else
+			exit (0);
 		y++;
 	}
 }
 
 //--------textures------------
-mlx_texture_t	*get_texture(t_mlx *mlx, float angl)
-{
-	if (mlx->ray->ray_v)
-	{
-		if (angl > 0 && angl < M_PI)
-			return (mlx->tex->we);
-		else
-			return (mlx->tex->ea);
-	}
-	else
-	{
-		if (angl > M_PI / 2 && angl < 3 * M_PI / 2)
-			return (mlx->tex->no);
-		else
-			return (mlx->tex->so);
-	}
-	return (NULL);
-}
+// mlx_texture_t	*get_texture(t_mlx *mlx, float angl)
+// {
+// 	if (mlx->ray->ray_v)
+// 	{
+// 		if (angl > 0 && angl < M_PI)
+// 			return (mlx->tex->we);
+// 		else
+// 			return (mlx->tex->ea);
+// 	}
+// 	else
+// 	{
+// 		if (angl > M_PI / 2 && angl < 3 * M_PI / 2)
+// 			return (mlx->tex->no);
+// 		else
+// 			return (mlx->tex->so);
+// 	}
+// 	return (NULL);
+// }
 
 uint32_t get_rgba(int r, int g, int b, int a)
 {
@@ -133,28 +159,10 @@ void	render_wall(t_mlx *mlx, int ray)
 	tan(mlx->ply->fov_rd / 2));
 	b_pix = (S_H / 2) + (wall_h / 2);
 	t_pix = (S_H / 2) - (wall_h / 2);
-
 	if (b_pix > S_H)
 		b_pix = S_H;
 	if (t_pix < 0)
 		t_pix = 0;
-	// draw_wall(mlx, ray, t_pix, b_pix);
-	mlx_texture_t	*txtr = get_texture(mlx, mlx->ray->ray_ngl);
-	float  ofsetx  = 0;
-	if (mlx->ray->ray_v)
-		ofsetx = fmodf(mlx->ray->horiz_y, TILE_SIZE) * ((float)txtr->width/ TILE_SIZE);
-	else
-		ofsetx = fmodf(mlx->ray->horiz_x, TILE_SIZE) * ((float)txtr->width / TILE_SIZE) ;
-	int index = t_pix;
-
-	while (index < b_pix)
-	{
-		int fixtop = index + (wall_h / 2) - (S_H/ 2);
-		int ofsety = fixtop * ((float)txtr->height / wall_h);
-		uint32_t color = ft_get_color(ofsetx, ofsety,txtr);
-		my_mlx_pixel_put(mlx, ray, index, color);
-		index++;
-	}
-	// ft_textures(mlx, ray, t_pix, b_pix,wall_h);
+	draw_wall(mlx, ray, t_pix, b_pix, wall_h);
 	draw_floor_ceiling(mlx, ray, t_pix, b_pix);
 }

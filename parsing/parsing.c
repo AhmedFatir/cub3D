@@ -6,7 +6,7 @@
 /*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 00:41:00 by khbouych          #+#    #+#             */
-/*   Updated: 2023/11/30 14:44:28 by khbouych         ###   ########.fr       */
+/*   Updated: 2023/11/30 16:58:46 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,10 @@ void	free_m(t_mlx *mlx)
 int	color_ture(t_data *m, t_txtr *l_ture)
 {
 	t_txtr	*tmp;
-
 	tmp = l_ture;
 	while (tmp)
 	{
-		if (!ft_strncmp(tmp->key, "F", 1) || !ft_strncmp(tmp->key, "C", 1))
+		if (!ft_strncmp(tmp->key, "F", 2) || !ft_strncmp(tmp->key, "C", 2))
 		{
 			if (!ft_process_rgb_color(tmp, m))
 			{
@@ -52,7 +51,7 @@ int	parsing(int ac, char **av, t_data *m, t_txtr *l_ture)
 	int		count;
 
 	smlx = ft_calloc(1 ,sizeof(t_mlx));
-	// l_ture = NULL;
+	l_ture = NULL;
 	if (ac != 2 || !checkextension(av[1]))
 		return (free(smlx), free(l_ture),
 			write(1, "Error\ninvalid args\n", 20), 0);
