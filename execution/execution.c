@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:23:08 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/30 15:33:37 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/30 23:24:47 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	drow_map_pixel(void *mlxl)
 	mlx->img = mlx_new_image(mlx->mlx_p, S_W, S_H);
 	cub_hook(mlx, 0, 0);
 	cast_rays(mlx);
+	draw_map_tile2d(mlx);
+	// draw_ray_2d(mlx, mlx->ray->ray_ngl, mlx->ray->distance, RED);
 	mlx_image_to_window(mlx->mlx_p, mlx->img, 0, 0);
 }
 void	load_texture(t_tex *tex)

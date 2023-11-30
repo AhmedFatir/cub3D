@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 15:05:46 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/30 15:27:30 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/30 23:17:55 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,20 @@ void	draw_floor_ceiling(t_mlx *mlx, int ray, int t_pix, int b_pix)
 
 mlx_texture_t	*get_texture(t_mlx *mlx, int flag)
 {
-	if (flag == 1)
-	{
-		if (mlx->ray->ray_ngl > 0 && mlx->ray->ray_ngl < M_PI)
-			return (mlx->tex->so);
-		else
-			return (mlx->tex->no);
-	}
-	else
+	mlx->ray->ray_ngl = nor_angle(mlx->ray->ray_ngl);
+	if (flag == 0)
 	{
 		if (mlx->ray->ray_ngl > M_PI / 2 && mlx->ray->ray_ngl < 3 * (M_PI / 2))
 			return (mlx->tex->ea);
 		else
 			return (mlx->tex->we);
+	}
+	else
+	{
+		if (mlx->ray->ray_ngl > 0 && mlx->ray->ray_ngl < M_PI)
+			return (mlx->tex->so);
+		else
+			return (mlx->tex->no);
 	}
 }
 
@@ -91,9 +92,9 @@ void	draw_wall(t_mlx *mlx, int ray, int t_pix, int b_pix, double wall_h)
 	uint32_t *arr = (uint32_t *)texture->pixels;
 	double y_step = (double)texture->height / wall_h;
 	if (mlx->ray->flag == 1)
-		x_o = (int)(mlx->ray->horiz_x  * (texture->width / TILE_SIZE)) % texture->width;
+		x_o = (int)(mlx->ray->horiz_x  * (texture->width / TILE_SIZE_MAP)) % texture->width;
 	else
-		x_o = (int)(mlx->ray->vert_y  * (texture->width / TILE_SIZE)) % texture->width;
+		x_o = (int)(mlx->ray->vert_y  * (texture->width / TILE_SIZE_MAP)) % texture->width;
 	y_o = (y - (S_H / 2) + (wall_h / 2)) * y_step;
 	if (y_o < 0)
 		y_o = 0;

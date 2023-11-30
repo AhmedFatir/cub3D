@@ -6,7 +6,7 @@
 #    By: afatir <afatir@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/01 07:32:35 by afatir            #+#    #+#              #
-#    Updated: 2023/11/30 15:26:25 by afatir           ###   ########.fr        #
+#    Updated: 2023/11/30 20:33:39 by afatir           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ INCLUDE = -I/Users/${USER}/.brew/Cellar/glfw/3.3.8/include/GLFW
 LIB = -L/Users/${USER}/.brew/Cellar/glfw/3.3.8/lib
 
 CC		= cc
-CFLAGS	= -Wall -Werror -Wextra -O3 -ffast-math #-fsanitize=address -g
+CFLAGS	= -Wall -Werror -Wextra -O3 -ffast-math -fsanitize=address -g
 
 MOBJS	= ${SRCS:%.c=%.o}
 SRCS	= main.c execution/execution.c execution/mouvement.c execution/2dmap.c execution/raycasting.c execution/render.c \

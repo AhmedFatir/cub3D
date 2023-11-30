@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:30:47 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/28 06:36:22 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/30 23:25:34 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ void	draw_map_tile2d(t_mlx *mlx)
 	{
 		x = 0;
 		x_p = 0;
-		while (mlx->dt->map2d[y][x])
+		while (mlx->dt->sq_map[y][x])
 		{
-			c = mlx->dt->map2d[y][x];
+			c = mlx->dt->sq_map[y][x];
 			draw_win(mlx, x_p, y_p, WHI);
 			if (c == '1')
 				draw_win(mlx, x_p, y_p, GREY);
@@ -68,13 +68,13 @@ void	draw_win(t_mlx *mlx, int x, int y, int color)
 	y_m = y;
 	flag = 0;
 	x_m = x;
-	while (x_m < (x + TILE_SIZE))
-		my_mlx_pixel_put(mlx, x_m++, y_m, BLK);
+	// while (x_m < (x + TILE_SIZE))
+	// 	my_mlx_pixel_put(mlx, x_m++, y_m, BLK);
 	while (y_m < (y + TILE_SIZE))
 	{
 		while (x_m < (x + TILE_SIZE))
 			my_mlx_pixel_put(mlx, x_m++, y_m, color);
-		my_mlx_pixel_put(mlx, x_m - 1, y_m, BLK);
+		// my_mlx_pixel_put(mlx, x_m - 1, y_m, BLK);
 		y_m++;
 		x_m = x;
 	}
@@ -86,7 +86,7 @@ void	draw_player(t_mlx *mlx, int x_p, int y_p, int color)
 	int		y;
 	int		r;
 
-	r = TILE_SIZE / 6;
+	r = TILE_SIZE / 3;
 	y = -r;
 	while (y <= r)
 	{

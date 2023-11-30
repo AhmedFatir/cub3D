@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:32:06 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/30 15:26:38 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/30 23:21:43 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,13 @@
 # include "libft_gcl_ptf/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 
-# define S_W 1440
-# define S_H 720
-# define TILE_SIZE 50
+# define S_W 2000
+# define S_H 1000
+# define TILE_SIZE 15
+# define TILE_SIZE_MAP 50
 # define FOV 60
 # define ROTATION_SPEED 0.02
-# define PLAYER_SPEED 2
+# define PLAYER_SPEED 1
 
 # define BLK 0x000000FF
 # define GREY 0x808080FF
