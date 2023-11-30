@@ -6,7 +6,7 @@
 /*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:36:01 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/29 16:04:06 by khbouych         ###   ########.fr       */
+/*   Updated: 2023/11/30 01:04:35 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ float	get_v_inter(t_mlx *mlx, float angl)
 	return (sqrt(pow(v_x - mlx->ply->plyr_x, 2) + \
 	pow(v_y - mlx->ply->plyr_y, 2)));
 }
-
+//----------------------------------
 void	cast_rays(t_mlx *mlx)
 {
 	double	h_inter;

@@ -6,7 +6,7 @@
 /*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:23:08 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/29 18:05:24 by khbouych         ###   ########.fr       */
+/*   Updated: 2023/11/30 14:48:18 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ void	drow_map_pixel(void *mlxl)
 }
 void	load_texture(t_tex *tex)
 {
-	tex->ea = mlx_load_png("textures/ea.png");
-	tex->no = mlx_load_png("textures/no.png");
-	tex->so = mlx_load_png("textures/so.png");
-	tex->we = mlx_load_png("textures/we.png");
+	tex->ea = mlx_load_png("textures/bleu.png");
+	tex->no = mlx_load_png("textures/pink.png");
+	tex->so = mlx_load_png("textures/red.png");
+	tex->we = mlx_load_png("textures/green.png");
 }
 void my_mouse(void *param)
 {
@@ -92,8 +92,8 @@ void	execution(t_data *dt)
 	load_texture(mlx.tex);
 	mlx_key_hook(mlx.mlx_p, &key_press, &mlx);
 	mlx_loop_hook(mlx.mlx_p, &drow_map_pixel, &mlx);
-	mlx_set_cursor_mode(mlx.mlx_p, MLX_MOUSE_DISABLED);
-	mlx_cursor_hook(mlx.mlx_p, (void *)my_mouse, &mlx);
+	// mlx_set_cursor_mode(mlx.mlx_p, MLX_MOUSE_DISABLED);
+	// mlx_cursor_hook(mlx.mlx_p, (void *)my_mouse, &mlx);
 	mlx_loop(mlx.mlx_p);
 	mlx_terminate(mlx.mlx_p);
 	ft_exit(&mlx);

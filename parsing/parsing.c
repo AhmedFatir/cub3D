@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
+/*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 00:41:00 by khbouych          #+#    #+#             */
-/*   Updated: 2023/11/26 19:48:47 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/30 14:44:28 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	parsing(int ac, char **av, t_data *m, t_txtr *l_ture)
 	int		count;
 
 	smlx = ft_calloc(1 ,sizeof(t_mlx));
-	l_ture = NULL;
+	// l_ture = NULL;
 	if (ac != 2 || !checkextension(av[1]))
 		return (free(smlx), free(l_ture),
 			write(1, "Error\ninvalid args\n", 20), 0);
