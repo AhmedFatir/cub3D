@@ -3,16 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:32:06 by afatir            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/11/30 23:21:43 by afatir           ###   ########.fr       */
-=======
-/*   Updated: 2023/11/30 16:55:21 by khbouych         ###   ########.fr       */
->>>>>>> 9bfd40f3d26e871d79c461f4fb2723bc392e4e3c
+/*   Updated: 2023/11/30 23:33:36 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 
 #ifndef CUB3D_H
@@ -24,23 +21,15 @@
 # include <fcntl.h>
 # include <math.h>
 # include "libft_gcl_ptf/libft.h"
-# include "MLX42/include/MLX42/MLX42.h"
+# include "../MLX42/include/MLX42/MLX42.h"
 
 # define S_W 2000
-<<<<<<< HEAD
 # define S_H 1000
 # define TILE_SIZE 15
 # define TILE_SIZE_MAP 50
 # define FOV 60
-# define ROTATION_SPEED 0.02
-# define PLAYER_SPEED 1
-=======
-# define S_H 1200
-# define TILE_SIZE 64
-# define FOV 60
 # define ROTATION_SPEED 0.03
-# define PLAYER_SPEED 5
->>>>>>> 9bfd40f3d26e871d79c461f4fb2723bc392e4e3c
+# define PLAYER_SPEED 1
 
 # define BLK 0x000000FF
 # define GREY 0x808080FF
