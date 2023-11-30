@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:36:01 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/29 18:07:16 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/30 12:22:48 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	inter_check(float angle, float *inter, float *step, int is_horizon)
 		if (angle > 0 && angle < M_PI)
 		{
 			*inter += TILE_SIZE;
-			return (-1);
+			return (0);
 		}
 		*step *= -1;
 	}
@@ -28,7 +28,7 @@ int	inter_check(float angle, float *inter, float *step, int is_horizon)
 		if (!(angle > M_PI / 2 && angle < 3 * M_PI / 2)) 
 		{
 			*inter += TILE_SIZE;
-			return (-1);
+			return (0);
 		}
 		*step *= -1;
 	}
@@ -62,7 +62,7 @@ int	unit_circle(float angle, char c)
 	}
 	else if (c == 'y')
 	{
-		if (angle > M_PI / 2 && angle < 3 * M_PI / 2)
+		if (angle > M_PI / 2 && angle < 3 * (M_PI / 2))
 			return (1);
 	}
 	return (0);
@@ -128,12 +128,12 @@ void	cast_rays(t_mlx *mlx)
 	double	v_inter;
 	int		ray;
 
-	draw_map_tile2d(mlx);
+	// draw_map_tile2d(mlx);
 	ray = 0;
 	mlx->ray->ray_ngl = mlx->ply->angle - (mlx->ply->fov_rd / 2);
 	while (ray < S_W)
 	{
-		mlx->ray->ray_v = 0;
+		mlx->ray->flag = 0;
 		h_inter = get_h_inter(mlx, nor_angle(mlx->ray->ray_ngl));
 		v_inter = get_v_inter(mlx, nor_angle(mlx->ray->ray_ngl));
 		if (v_inter < h_inter)
@@ -141,10 +141,10 @@ void	cast_rays(t_mlx *mlx)
 		else
 		{
 			mlx->ray->distance = h_inter;
-			mlx->ray->ray_v = 1;
+			mlx->ray->flag = 1;
 		}
-		// render_wall(mlx, ray);
-		draw_ray_2d(mlx, mlx->ray->ray_ngl, mlx->ray->distance, RED);
+		render_wall(mlx, ray);
+		// draw_ray_2d(mlx, mlx->ray->ray_ngl, mlx->ray->distance, RED);
 		ray++;
 		mlx->ray->ray_ngl += (mlx->ply->fov_rd / S_W);
 	}

@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:32:06 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/29 18:07:12 by afatir           ###   ########.fr       */
+/*   Updated: 2023/11/30 15:26:38 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,22 @@
 # include <fcntl.h>
 # include <math.h>
 # include "libft_gcl_ptf/libft.h"
-# include "/Users/afatir/MLX42/include/MLX42/MLX42.h"
+# include "../MLX42/include/MLX42/MLX42.h"
 
 # define S_W 1440
 # define S_H 720
-# define TILE_SIZE 48
+# define TILE_SIZE 50
 # define FOV 60
-# define ROTATION_SPEED 0.04
-# define PLAYER_SPEED 3
+# define ROTATION_SPEED 0.02
+# define PLAYER_SPEED 2
 
 # define BLK 0x000000FF
-# define GREY 0x808080
+# define GREY 0x808080FF
 # define BLU 0x87CEEBFF
 # define GREN 0x008000FF
 # define ORNG 0xFF9300FF
 # define RED 0xFF0000FF
-# define WHI 0xFFFFFF
+# define WHI 0xFFFFFFFF
 
 typedef struct s_tex
 {
@@ -80,11 +80,13 @@ typedef struct s_player
 	int		rot;
 	int		l_r;
 	int		u_d;
+	int		m_x;
+	int		m_y;
 }t_player;
 
 typedef struct s_ray
 {
-	int		ray_v;
+	int		flag;
 	double	ray_ngl;
 	double	horiz_x;
 	double	horiz_y;
@@ -123,6 +125,7 @@ void	drow_map_pixel(void *mlxl);
 void	get_tex(t_mlx *mlx);
 void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
 // raycasting.c
+int	unit_circle(float angle, char c);
 void	cast_rays(t_mlx *mlx);
 // render.c
 void	render_wall(t_mlx *mlx, int ray);
