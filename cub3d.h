@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
+/*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:32:06 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/30 23:33:36 by afatir           ###   ########.fr       */
+/*   Updated: 2023/12/01 04:50:06 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@
 # include "libft_gcl_ptf/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 
-# define S_W 2000
-# define S_H 1000
-# define TILE_SIZE 15
-# define TILE_SIZE_MAP 50
+# define S_W 1900
+# define S_H 900
+# define TILE_SIZE 64
+# define TILE_SIZE_MAP 30
 # define FOV 60
 # define ROTATION_SPEED 0.03
-# define PLAYER_SPEED 1
+# define PLAYER_SPEED 3
 
 # define BLK 0x000000FF
 # define GREY 0x808080FF
@@ -48,9 +48,18 @@ typedef struct s_tex
 }	t_tex;
 
 
+typedef struct s_txtr
+{
+	char			*key;
+	char			*value;
+	struct s_txtr	*next;
+}t_txtr;
+
 typedef struct s_data
 {
 	char	**map2d;
+	int rows;
+	int cols;
 	int		p_x;
 	int		p_y;
 	int		w_map;
@@ -65,14 +74,9 @@ typedef struct s_data
 	char	**ture2d;
 	char	**sq_map;
 	char	**rgb;
+	t_txtr	*t;
 }t_data;
 
-typedef struct s_txtr
-{
-	char			*key;
-	char			*value;
-	struct s_txtr	*next;
-}t_txtr;
 
 typedef struct s_player
 {
@@ -107,6 +111,7 @@ typedef struct s_mlx
 	t_player	*ply;
 	t_tex		*tex;
 	t_txtr		*l_ture;
+	mouse_mode_t mouse_mode;
 }t_mlx;
 
 ///////////////////////////////EXECUTION////////////////////////////
@@ -124,8 +129,8 @@ void	draw_win(t_mlx *mlx, int x, int y, int color);
 void	draw_player(t_mlx *mlx, int x_p, int y_p, int color);
 void	draw_ray_2d(t_mlx *mlx, double angle, double distance, int color);
 //execution.c
-int		ft_exit(t_mlx *mlx);
-void	execution(t_data *dt);
+void	ft_exit(t_mlx *mlx);
+void	execution(t_data *dt, t_txtr *l_ture);
 void	drow_map_pixel(void *mlxl);
 void	get_tex(t_mlx *mlx);
 void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
@@ -197,4 +202,5 @@ void	free_m(t_mlx *mlx);
 int	color_ture(t_data *m, t_txtr *l_ture);
 int	parsing(int ac, char **av, t_data *m, t_txtr *l_ture);
 void	freelist(t_txtr **head);
+uint32_t get_rgba(int r, int g, int b, int a);
 #endif

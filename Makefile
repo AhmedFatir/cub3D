@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: afatir <afatir@student.42.fr>              +#+  +:+       +#+         #
+#    By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/01 07:32:35 by afatir            #+#    #+#              #
-#    Updated: 2023/11/30 23:31:01 by afatir           ###   ########.fr        #
+#    Updated: 2023/12/01 04:35:37 by khbouych         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ INCLUDE = -I/Users/${USER}/.brew/Cellar/glfw/3.3.8/include/GLFW
 LIB = -L/Users/${USER}/.brew/Cellar/glfw/3.3.8/lib
 
 CC		= cc
-CFLAGS	= -Wall -Werror -Wextra -O3 -ffast-math -fsanitize=address -g
+CFLAGS	= -Wall -Werror -Wextra -O3 -ffast-math #-fsanitize=address -g
 
 MOBJS	= ${SRCS:%.c=%.o}
 SRCS	= main.c execution/execution.c execution/mouvement.c execution/2dmap.c execution/raycasting.c execution/render.c \
@@ -35,7 +35,7 @@ $(NAME): $(MOBJS)
 	@$(CC) $(CFLAGS) $(FLAG_MLX) $(MOBJS) $(LIB_FT_A) $(MLX) $(LIB) -o $(NAME)
 
 %.o: %.c cub3d.h
-	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 
 clean:
@@ -47,8 +47,9 @@ fclean: clean
 	@rm -f $(NAME)
 
 git :
+	make fclean
 	git add .
-	git commit -m "khbouych"
+	git commit -m "khbouych-01/12/2023-04:10:12"
 	git push
 
 re: fclean all

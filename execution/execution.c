@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
+/*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:23:08 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/30 23:32:10 by afatir           ###   ########.fr       */
+/*   Updated: 2023/12/01 04:49:50 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@ float	nor_angle(float angle)
 	return (angle);
 }
 
-int	ft_exit(t_mlx *mlx)
+void	ft_exit(t_mlx *mlx)
 {
 	mlx_delete_image(mlx->mlx_p, mlx->img);
 	free_m(mlx);
 	free(mlx->ply);
 	free(mlx->ray);
 	free(mlx->tex);
+	freelist(&mlx->dt->t);
 	ft_putstr_fd("Game closed\n", 1);
 	exit(0);
-	return (0);
 }
 
 void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
@@ -56,26 +56,44 @@ void	drow_map_pixel(void *mlxl)
 	mlx->img = mlx_new_image(mlx->mlx_p, S_W, S_H);
 	cub_hook(mlx, 0, 0);
 	cast_rays(mlx);
-	draw_map_tile2d(mlx);
+	// draw_map_tile2d(mlx);
 	// draw_ray_2d(mlx, mlx->ray->ray_ngl, mlx->ray->distance, RED);
 	mlx_image_to_window(mlx->mlx_p, mlx->img, 0, 0);
 }
-void	load_texture(t_tex *tex)
+void	load_texture(t_tex *tex ,t_txtr *l_ture)
 {
 
-	// t_txtr *tmp;
+	t_txtr *tmp;
+	tmp = l_ture;
 
-	// tmp = l_ture;
-	// while (tmp)
-	// {
-	// 	printf ("key = %s\n", tmp->key);
-	// 	tmp = tmp->next;
-	// }
-	// exit(0);
-	tex->ea = mlx_load_png("textures/ea.png");
-	tex->no = mlx_load_png("textures/no.png");
-	tex->so = mlx_load_png("textures/so.png");
-	tex->we = mlx_load_png("textures/we.png");
+	while (tmp)
+	{
+		if (!ft_strncmp(tmp->key, "NO", 2))
+		{
+			if (mlx_load_png(tmp->value) == NULL)
+				exit(0);
+			tex->no = mlx_load_png(tmp->value);
+		}
+		else if (!ft_strncmp(tmp->key, "SO", 2))
+		{
+			if (mlx_load_png(tmp->value) == NULL)
+				exit(0);
+			tex->so = mlx_load_png(tmp->value);
+		}
+		else if (!ft_strncmp(tmp->key, "WE", 2))
+		{
+			if (mlx_load_png(tmp->value) == NULL)
+				exit(0);
+			tex->we = mlx_load_png(tmp->value);
+		}
+		else if (!ft_strncmp(tmp->key, "EA", 2))
+		{
+			if (mlx_load_png(tmp->value) == NULL)
+				exit(0);
+			tex->ea = mlx_load_png(tmp->value);
+		}
+		tmp = tmp->next;
+	}
 }
 void my_mouse(void *param)
 {
@@ -85,12 +103,13 @@ void my_mouse(void *param)
 	static int fix;
 
 	if (fix++ == 0)
-		mlx->ply->m_x = 500;
+		mlx->ply->m_x = S_W/2;
+	usleep(1000);
 	mlx_get_mouse_pos(mlx->mlx_p, &mlx->ply->m_x, &mlx->ply->m_y);
-	mlx->ply->angle += (float)(mlx->ply->m_x - 500)/ 500;
-	mlx_set_mouse_pos(mlx->mlx_p, 500, 500);
+	mlx->ply->angle += (float)(mlx->ply->m_x - (S_W/2))/(S_H/ 2);
+	mlx_set_mouse_pos(mlx->mlx_p, (S_W/2), (S_H/ 2));
 }
-void	execution(t_data *dt)
+void	execution(t_data *dt, t_txtr *l_ture)
 {
 	t_mlx	mlx;
 
@@ -102,7 +121,7 @@ void	execution(t_data *dt)
 		exit(0);
 	mlx.mlx_p = mlx_init(S_W, S_H, "cub3D", false);
 	get_angle(&mlx);
-	load_texture(mlx.tex);
+	load_texture(mlx.tex, l_ture);
 	mlx_key_hook(mlx.mlx_p, &key_press, &mlx);
 	mlx_loop_hook(mlx.mlx_p, &drow_map_pixel, &mlx);
 	mlx_set_cursor_mode(mlx.mlx_p, MLX_MOUSE_DISABLED);

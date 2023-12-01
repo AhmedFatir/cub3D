@@ -1,20 +1,13 @@
 
+NO textures/vg4.png
+SO textures/vg1.png
+WE textures/vg2.png
+EA textures/vg3.png
 
+C 0,0,31
+F 60,179,113
 
-
-
-NO textures/no.png
-SO textures/so.png
-WE textures/we.png
-EA textures/ea.png
-
-
-
-
-F 220,100,0
-C 225,30,0
-
-11111111111111111111111111
+1111111111111111111111111
 100000000011000E0000000011
 10110000011100000100000011
 10010000000000001000000011
