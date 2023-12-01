@@ -1,8 +1,8 @@
 
-NO textures/vg4.png
-SO textures/vg1.png
-WE textures/vg2.png
-EA textures/vg3.png
+NO textures/siel_wall.png
+SO textures/nser.png
+WE textures/flag.png
+EA textures/hitler.png
 
 C 0,0,31
 F 60,179,113

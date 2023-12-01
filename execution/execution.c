@@ -6,7 +6,7 @@
 /*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:23:08 by afatir            #+#    #+#             */
-/*   Updated: 2023/12/01 04:57:26 by khbouych         ###   ########.fr       */
+/*   Updated: 2023/12/01 15:33:52 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,37 +61,40 @@ void	drow_map_pixel(void *mlxl)
 	mlx_image_to_window(mlx->mlx_p, mlx->img, 0, 0);
 }
 
+int checkload(t_txtr *list)
+{
+	t_txtr *tmp;
+
+	tmp = list;
+
+	while (tmp)
+	{
+		if (mlx_load_png(tmp->value) == NULL)
+			return(0);
+		tmp = tmp->next;
+	}
+	return (1);
+}
 void	load_texture(t_tex *tex ,t_txtr *l_ture)
 {
-	t_txtr	*tmp;
+	t_txtr		*tmp;
 
 	tmp = l_ture;
+	if (!checkload(l_ture))
+	{
+		freelist(&l_ture);
+		exit(0);
+	}
 	while (tmp)
 	{
 		if (!ft_strncmp(tmp->key, "NO", 2))
-		{
-			if (mlx_load_png(tmp->value) == NULL)
-				exit(0);
 			tex->no = mlx_load_png(tmp->value);
-		}
 		else if (!ft_strncmp(tmp->key, "SO", 2))
-		{
-			if (mlx_load_png(tmp->value) == NULL)
-				exit(0);
 			tex->so = mlx_load_png(tmp->value);
-		}
 		else if (!ft_strncmp(tmp->key, "WE", 2))
-		{
-			if (mlx_load_png(tmp->value) == NULL)
-				exit(0);
 			tex->we = mlx_load_png(tmp->value);
-		}
 		else if (!ft_strncmp(tmp->key, "EA", 2))
-		{
-			if (mlx_load_png(tmp->value) == NULL)
-				exit(0);
 			tex->ea = mlx_load_png(tmp->value);
-		}
 		tmp = tmp->next;
 	}
 }

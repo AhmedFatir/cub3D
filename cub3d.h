@@ -6,7 +6,7 @@
 /*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:32:06 by afatir            #+#    #+#             */
-/*   Updated: 2023/12/01 04:50:06 by khbouych         ###   ########.fr       */
+/*   Updated: 2023/12/01 15:24:52 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 # define S_W 1900
 # define S_H 900
-# define TILE_SIZE 64
+# define TILE_SIZE 32
 # define TILE_SIZE_MAP 30
 # define FOV 60
 # define ROTATION_SPEED 0.03
