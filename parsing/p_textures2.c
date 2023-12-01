@@ -6,7 +6,7 @@
 /*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 19:53:18 by khbouych          #+#    #+#             */
-/*   Updated: 2023/12/01 16:54:44 by khbouych         ###   ########.fr       */
+/*   Updated: 2023/12/01 19:01:22 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_txtr	*new_texture(char *line)
 	list->next = NULL;
 	return (list);
 }
+
 void	lst_back_ture(t_txtr **l_ture, t_txtr *new)
 {
 	t_txtr	*tmp;

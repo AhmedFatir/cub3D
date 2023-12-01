@@ -6,7 +6,7 @@
 /*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:23:08 by afatir            #+#    #+#             */
-/*   Updated: 2023/12/01 18:11:18 by khbouych         ###   ########.fr       */
+/*   Updated: 2023/12/01 18:23:32 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,14 +115,10 @@ void	my_mouse(void *param)
 
 void ft_free_texture(t_tex *tex)
 {
-	free(tex->no->pixels);
-	free(tex->so->pixels);
-	free(tex->we->pixels);
-	free(tex->ea->pixels);
-	free(tex->no);
-	free(tex->so);
-	free(tex->we);
-	free(tex->ea);
+	mlx_delete_texture(tex->no);
+	mlx_delete_texture(tex->so);
+	mlx_delete_texture(tex->we);
+	mlx_delete_texture(tex->ea);
 }
 int	execution(t_data *dt)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
+/*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:36:01 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/30 23:32:33 by afatir           ###   ########.fr       */
+/*   Updated: 2023/12/01 19:04:42 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	inter_check(float angle, float *inter, float *step, int is_horizon)
 	}
 	else
 	{
-		if (!(angle > M_PI / 2 && angle < 3 * M_PI / 2)) 
+		if (!(angle > M_PI / 2 && angle < 3 * M_PI / 2))
 		{
 			*inter += TILE_SIZE;
 			return (-1);
@@ -77,7 +77,7 @@ float	get_h_inter(t_mlx *mlx, float angl)
 	int		pixel;
 
 	y_step = TILE_SIZE;
-	x_step = TILE_SIZE / tan(angl); 
+	x_step = TILE_SIZE / tan(angl);
 	h_y = floor(mlx->ply->plyr_y / TILE_SIZE) * TILE_SIZE;
 	pixel = inter_check(angl, &h_y, &y_step, 1);
 	h_x = mlx->ply->plyr_x + (h_y - mlx->ply->plyr_y) / tan(angl);
@@ -121,7 +121,7 @@ float	get_v_inter(t_mlx *mlx, float angl)
 	return (sqrt(pow(v_x - mlx->ply->plyr_x, 2) + \
 	pow(v_y - mlx->ply->plyr_y, 2)));
 }
-//----------------------------------
+
 void	cast_rays(t_mlx *mlx)
 {
 	double	h_inter;

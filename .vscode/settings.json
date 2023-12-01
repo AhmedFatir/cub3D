@@ -1,10 +1,10 @@
 {
+  "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp_Runner.cCompilerPath": "clang",
   "C_Cpp_Runner.cppCompilerPath": "clang++",
   "C_Cpp_Runner.debuggerPath": "lldb",
   "C_Cpp_Runner.cStandard": "",
   "C_Cpp_Runner.cppStandard": "",
-  "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp_Runner.useMsvc": false,
   "C_Cpp_Runner.warnings": [
     "-Wall",
@@ -55,25 +55,5 @@
   "C_Cpp_Runner.useLeakSanitizer": false,
   "C_Cpp_Runner.showCompilationTime": false,
   "C_Cpp_Runner.useLinkTimeOptimization": false,
-  "C_Cpp_Runner.msvcSecureNoWarnings": false,
-  "files.associations": {
-    "__bit_reference": "c",
-    "__functional_base": "c",
-    "__node_handle": "c",
-    "algorithm": "c",
-    "bitset": "c",
-    "chrono": "c",
-    "__memory": "c",
-    "functional": "c",
-    "iterator": "c",
-    "limits": "c",
-    "memory": "c",
-    "optional": "c",
-    "ratio": "c",
-    "system_error": "c",
-    "tuple": "c",
-    "type_traits": "c",
-    "vector": "c",
-    "locale": "c"
-  }
+  "C_Cpp_Runner.msvcSecureNoWarnings": false
 }

@@ -16,13 +16,9 @@ int main()
   // {
   //   free(m->pixels[i++]);
   // }
-  // free(m->pixels);
-  // free(mm->pixels);
-  // free(mmm->pixels);
-  // free(mmmm->pixels);
-  free(m);
-  free(mm);
-  free(mmm);
-  free(mmmm);
+  // mlx_delete_texture(m);
+  mlx_delete_texture(mm);
+  mlx_delete_texture(mmm);
+  mlx_delete_texture(mmmm);
   (void)m;
 }

@@ -6,7 +6,7 @@
 /*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 00:41:00 by khbouych          #+#    #+#             */
-/*   Updated: 2023/12/01 17:01:56 by khbouych         ###   ########.fr       */
+/*   Updated: 2023/12/01 19:03:02 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	color_ture(t_data *m, t_txtr *l_ture)
 			if (!checkcolorvalues(ft_split(tmp->value, ',')))
 			{
 				write(1, "Error\ninvalid RGBA color\n", 26);
-				return(0);
+				return (0);
 			}
 			ft_process_rgb_color(tmp, m);
 		}
@@ -64,7 +64,8 @@ void	get_rows_cols(t_data *m)
 	}
 	m->rows = i;
 }
-void free_map(t_data *m)
+
+void	free_map(t_data *m)
 {
 	free_2d(m->sq_map);
 	free_2d(m->map2d);
@@ -74,6 +75,7 @@ void free_map(t_data *m)
 	if (m->cc)
 		free_2d(m->cc);
 }
+
 int	parsing(int ac, char **av, t_data *m, t_txtr *l_ture)
 {
 	int		count;
@@ -94,7 +96,6 @@ int	parsing(int ac, char **av, t_data *m, t_txtr *l_ture)
 	if (!color_ture(m, l_ture))
 		return (free_map(m), freelist(&l_ture), 0);
 	get_x_y_player(m);
-	// get_rows_cols(m);
 	m->t = l_ture;
 	return (1);
 }

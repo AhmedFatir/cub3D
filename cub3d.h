@@ -6,11 +6,9 @@
 /*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:32:06 by afatir            #+#    #+#             */
-/*   Updated: 2023/12/01 18:09:34 by khbouych         ###   ########.fr       */
+/*   Updated: 2023/12/01 19:16:18 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #ifndef CUB3D_H
 # define CUB3D_H
@@ -23,13 +21,13 @@
 # include "libft_gcl_ptf/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 
-# define S_W 1900
+# define S_W 1800
 # define S_H 900
-# define TILE_SIZE 32
+# define TILE_SIZE 64
 # define TILE_SIZE_MAP 30
 # define FOV 60
-# define ROTATION_SPEED 0.03
-# define PLAYER_SPEED 3
+# define ROTATION_SPEED 0.05
+# define PLAYER_SPEED 4
 
 # define BLK 0x000000FF
 # define GREY 0x808080FF
@@ -41,12 +39,11 @@
 
 typedef struct s_tex
 {
-	mlx_texture_t*	no;
-	mlx_texture_t*	so;
-	mlx_texture_t*	we;
-	mlx_texture_t*	ea;
-}	t_tex;
-
+	mlx_texture_t	*no;
+	mlx_texture_t	*so;
+	mlx_texture_t	*we;
+	mlx_texture_t	*ea;
+}t_tex;
 
 typedef struct s_txtr
 {
@@ -58,14 +55,14 @@ typedef struct s_txtr
 typedef struct s_data
 {
 	char	**map2d;
-	int rows;
-	int cols;
+	int		rows;
+	int		cols;
 	int		p_x;
 	int		p_y;
 	int		w_map;
 	int		h_map;
-	char 	**ff;
-	char 	**cc;
+	char	**ff;
+	char	**cc;
 	int		fd;
 	int		i;
 	char	*line;
@@ -76,7 +73,6 @@ typedef struct s_data
 	char	**rgb;
 	t_txtr	*t;
 }t_data;
-
 
 typedef struct s_player
 {
@@ -99,7 +95,7 @@ typedef struct s_ray
 	double	vert_x;
 	double	vert_y;
 	double	distance;
-	int flag;
+	int		flag;
 }t_ray;
 
 typedef struct s_mlx
@@ -111,97 +107,96 @@ typedef struct s_mlx
 	t_player	*ply;
 	t_tex		*tex;
 	t_txtr		*l_ture;
-	mouse_mode_t mouse_mode;
 }t_mlx;
 
 ///////////////////////////////EXECUTION////////////////////////////
 //mouvement.c
-void ft_free_texture(t_tex *tex);
-void printlist(t_txtr *l);
-float	nor_angle(float angle);
-void	cub_hook(t_mlx *mlx, double move_x, double move_y);
-void	key_press(mlx_key_data_t keydata, void *ml);
-void	move_player(t_mlx *mlx, double move_x, double move_y);
-void	rotate_player(t_mlx *mlx, int i);
+void		ft_free_texture(t_tex *tex);
+void		printlist(t_txtr *l);
+float		nor_angle(float angle);
+void		cub_hook(t_mlx *mlx, double move_x, double move_y);
+void		key_press(mlx_key_data_t keydata, void *ml);
+void		move_player(t_mlx *mlx, double move_x, double move_y);
+void		rotate_player(t_mlx *mlx, int i);
 //2dmap.c
-void	get_angle(t_mlx *mlx);
-void	draw_map_tile2d(t_mlx *mlx);
-void	draw_win(t_mlx *mlx, int x, int y, int color);
-void	draw_player(t_mlx *mlx, int x_p, int y_p, int color);
-void	draw_ray_2d(t_mlx *mlx, double angle, double distance, int color);
+void		get_angle(t_mlx *mlx);
+void		draw_map_tile2d(t_mlx *mlx);
+void		draw_win(t_mlx *mlx, int x, int y, int color);
+void		draw_player(t_mlx *mlx, int x_p, int y_p, int color);
+void		draw_ray_2d(t_mlx *mlx, double angle, double distance, int color);
 //execution.c
-void	ft_exit(t_mlx *mlx);
-int		execution(t_data *dt);
-void	drow_map_pixel(void *mlxl);
-void	get_tex(t_mlx *mlx);
-void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
+void		ft_exit(t_mlx *mlx);
+int			execution(t_data *dt);
+void		drow_map_pixel(void *mlxl);
+void		get_tex(t_mlx *mlx);
+void		my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
 // raycasting.c
-int	unit_circle(float angle, char c);
-void	cast_rays(t_mlx *mlx);
+int			unit_circle(float angle, char c);
+void		cast_rays(t_mlx *mlx);
 // render.c
-void	render_wall(t_mlx *mlx, int ray);
+void		render_wall(t_mlx *mlx, int ray);
 
 /////////////////////////////////////PARSING//////////////////////
 //o_list.c
-char	*removespaces(char *str);
-int	check_duplicat(t_data *m);
+char		*removespaces(char *str);
+int			check_duplicat(t_data *m);
 // static void	ft_skipp(int *i, const char *p_str, int *sign);
-int	ft_atoi(const char *str);
+int			ft_atoi(const char *str);
 // char	*ft_strrchr(char *str, int c);
 // o_map.c
-int	getsize_largline(char **map);
-int	getsizemap(char **map);
-char	*fixline(char *line, int maxlen);
-int	h_map(char **map);
-int	v_map(char **map);
+int			getsize_largline(char **map);
+int			getsizemap(char **map);
+char		*fixline(char *line, int maxlen);
+int			h_map(char **map);
+int			v_map(char **map);
 //outils_.c
 // void	*ft_memset(void *s, int c, unsigned int len);
 // void	*ft_calloc(unsigned int count, unsigned int size);
 // char	*ft_substr(char *s, unsigned int start, unsigned int len);
-char	*ft_strtrim(char *s1, char *set);
+char		*ft_strtrim(char *s1, char *set);
 // outils.c 
 // void	*ft_memcpy(void *dest, const void *src, unsigned int n);
 // char	*ft_strdup(char *s1);
-int	ft_isdigit(int c);
-int	checkcolorvalues(char **rgb);
-void	ft_process_rgb_color(t_txtr *tmp, t_data *m);
+int			ft_isdigit(int c);
+int			checkcolorvalues(char **rgb);
+void		ft_process_rgb_color(t_txtr *tmp, t_data *m);
 // p_map.c
-int	if_surrounded(char *line);
-int	if_validmap(char *line, int *flag);
-int	suroundedbyone(char **map);
-int	check_color_textures(char *line);
-int	check_l_surroundedbyone(char *line);
+int			if_surrounded(char *line);
+int			if_validmap(char *line, int *flag);
+int			suroundedbyone(char **map);
+int			check_color_textures(char *line);
+int			check_l_surroundedbyone(char *line);
 // p_map1.c
-char	*getmap(t_data *m);
-int	read_map_(t_data *m, int count);
-void	freeme(char *ture, char *line, int fd);
-int	read_map(char *av, t_data *m, int *count);
+char		*getmap(t_data *m);
+int			read_map_(t_data *m, int count);
+void		freeme(char *ture, char *line, int fd);
+int			read_map(char *av, t_data *m, int *count);
 //  p_map2.c
-char	*getlastline(char **map);
-int	check_first_last_line(char **map);
-int	check_countture(t_data *m, int count);
-void free_map(t_data *m);
+char		*getlastline(char **map);
+int			check_first_last_line(char **map);
+int			check_countture(t_data *m, int count);
+void		free_map(t_data *m);
 // p_textures1.c
-int	check_ifvalid(char *line);
-int	checktures_space_tab(char **ture2d, int count);
-int	check_pos_ofv(char *line);
-int	count_vergules(char *rgb);
-int	parse_rgb(char **ture2d);
+int			check_ifvalid(char *line);
+int			checktures_space_tab(char **ture2d, int count);
+int			check_pos_ofv(char *line);
+int			count_vergules(char *rgb);
+int			parse_rgb(char **ture2d);
 // p_textures2.c
-int	get_index(char *line, int i);
-t_txtr	*new_texture(char *line);
-void	lst_back_ture(t_txtr **l_ture, t_txtr *new);
-int	lst_ture(t_data *m, t_txtr **l_ture);
+int			get_index(char *line, int i);
+t_txtr		*new_texture(char *line);
+void		lst_back_ture(t_txtr **l_ture, t_txtr *new);
+int			lst_ture(t_data *m, t_txtr **l_ture);
 //  par1.c
-int	valid_map(t_data *m);
-void	get_x_y_player(t_data *m);
-void	free_2d(char **m);
-void	free1(t_data *m, t_txtr *l_ture);
-int	checkextension(char *fname);
+int			valid_map(t_data *m);
+void		get_x_y_player(t_data *m);
+void		free_2d(char **m);
+void		free1(t_data *m, t_txtr *l_ture);
+int			checkextension(char *fname);
 // parsing.c
-void	free_m(t_mlx *mlx);
-int	color_ture(t_data *m, t_txtr *l_ture);
-int	parsing(int ac, char **av, t_data *m, t_txtr *l_ture);
-void	freelist(t_txtr **head);
-uint32_t get_rgba(int r, int g, int b, int a);
+void		free_m(t_mlx *mlx);
+int			color_ture(t_data *m, t_txtr *l_ture);
+int			parsing(int ac, char **av, t_data *m, t_txtr *l_ture);
+void		freelist(t_txtr **head);
+uint32_t	get_rgba(int r, int g, int b, int a);
 #endif
