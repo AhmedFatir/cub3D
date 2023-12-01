@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
+/*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:23:08 by afatir            #+#    #+#             */
-/*   Updated: 2023/12/01 19:45:12 by afatir           ###   ########.fr       */
+/*   Updated: 2023/12/01 21:54:15 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,25 @@ float	nor_angle(float angle)
 	return (angle);
 }
 
+void	ft_delete_tex(t_tex *tex)
+{
+	if (tex->no)
+		mlx_delete_texture(tex->no);
+	if (tex->so)
+		mlx_delete_texture(tex->so);
+	if (tex->we)
+		mlx_delete_texture(tex->we);
+	if (tex->ea)
+		mlx_delete_texture(tex->ea);
+}
+
 void	ft_exit(t_mlx *mlx)
 {
 	mlx_close_window(mlx->mlx_p);
 	mlx_delete_image(mlx->mlx_p, mlx->img);
 	freelist(&mlx->dt->t);
 	free_map(mlx->dt);
-	mlx_delete_texture(mlx->tex->no);
-	mlx_delete_texture(mlx->tex->so);
-	mlx_delete_texture(mlx->tex->we);
-	mlx_delete_texture(mlx->tex->ea);
+	ft_delete_tex(mlx->tex);
 	free(mlx->tex);
 	free(mlx->ply);
 	free(mlx->ray);
@@ -131,10 +140,10 @@ int	execution(t_data *dt)
 	mlx.dt = dt;
 	if (S_H > 1440 || S_W > 2560 || FOV > 180 || FOV < 0)
 		return (ft_exit(&mlx), 0);
-	if (!load_texture(mlx.tex, dt->t))
-		return (ft_exit(&mlx), 0);
 	mlx.mlx_p = mlx_init(S_W, S_H, "cub3D", false);
 	if (!mlx.mlx_p)
+		return (ft_exit(&mlx), 0);
+	if (!load_texture(mlx.tex, dt->t))
 		return (ft_exit(&mlx), 0);
 	get_angle(&mlx);
 	mlx_key_hook(mlx.mlx_p, &key_press, &mlx);
