@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   o_list.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
+/*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 20:07:15 by khbouych          #+#    #+#             */
-/*   Updated: 2023/11/26 18:54:26 by afatir           ###   ########.fr       */
+/*   Updated: 2023/12/01 04:53:28 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,16 +95,28 @@ int	ft_atoi(const char *str)
 	return (sign * res);
 }
 
-// char	*ft_strrchr(char *str, int c)
-// {
-// 	int	i;
+int	valid_map(t_data *m)
+{
+	int	i;
+	int	maxlen;
 
-// 	i = ft_strlen(str);
-// 	while (i >= 0)
-// 	{
-// 		if (str[i] == (char)c)
-// 			return ((char *)&str[i]);
-// 		i--;
-// 	}
-// 	return (0);
-// }
+	maxlen = getsize_largline(m->map2d);
+	i = 0;
+	m->sq_map = malloc(sizeof(char *) * (getsizemap(m->map2d) + 1));
+	if (!m->sq_map)
+		return (0);
+	while (m->map2d[i])
+	{
+		if (maxlen == (int)ft_strlen(m->map2d[i]))
+			m->sq_map[i] = ft_strdup(m->map2d[i]);
+		else
+			m->sq_map[i] = fixline(m->map2d[i], maxlen);
+		i++;
+	}
+	m->sq_map[i] = NULL;
+	m->h_map = getsizemap(m->sq_map);
+	m->w_map = ft_strlen(m->sq_map[0]);
+	if (!h_map(m->sq_map) || !v_map(m->sq_map))
+		return (0);
+	return (1);
+}

@@ -6,7 +6,7 @@
 /*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:26:29 by afatir            #+#    #+#             */
-/*   Updated: 2023/12/01 04:49:13 by khbouych         ###   ########.fr       */
+/*   Updated: 2023/12/01 04:51:09 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	rotate_player(t_mlx *mlx, int i)
 	if (i == 1)
 	{
 		mlx->ply->angle += ROTATION_SPEED;
-		if (mlx->ply->angle > 2 * M_PI) 
+		if (mlx->ply->angle > 2 * M_PI)
 			mlx->ply->angle -= 2 * M_PI;
 	}
 	else

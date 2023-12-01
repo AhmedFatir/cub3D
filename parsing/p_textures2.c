@@ -6,7 +6,7 @@
 /*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 19:53:18 by khbouych          #+#    #+#             */
-/*   Updated: 2023/11/29 18:24:01 by khbouych         ###   ########.fr       */
+/*   Updated: 2023/12/01 04:51:35 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	lst_back_ture2(t_txtr **l_ture, t_txtr *new)
 
 int	lst_ture(t_data *m, t_txtr **l_ture)
 {
-	int			i;
+	int		i;
 	t_txtr	*tmp;
 
 	i = 0;

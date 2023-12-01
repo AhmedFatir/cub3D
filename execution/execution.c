@@ -6,7 +6,7 @@
 /*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:23:08 by afatir            #+#    #+#             */
-/*   Updated: 2023/12/01 04:49:50 by khbouych         ###   ########.fr       */
+/*   Updated: 2023/12/01 04:57:26 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ void	drow_map_pixel(void *mlxl)
 	// draw_ray_2d(mlx, mlx->ray->ray_ngl, mlx->ray->distance, RED);
 	mlx_image_to_window(mlx->mlx_p, mlx->img, 0, 0);
 }
+
 void	load_texture(t_tex *tex ,t_txtr *l_ture)
 {
+	t_txtr	*tmp;
 
-	t_txtr *tmp;
 	tmp = l_ture;
-
 	while (tmp)
 	{
 		if (!ft_strncmp(tmp->key, "NO", 2))
@@ -95,13 +95,13 @@ void	load_texture(t_tex *tex ,t_txtr *l_ture)
 		tmp = tmp->next;
 	}
 }
-void my_mouse(void *param)
-{
-	t_mlx *mlx;
-	mlx = param;
 
+void	my_mouse(void *param)
+{
+	t_mlx	*mlx;
 	static int fix;
 
+	mlx = param;
 	if (fix++ == 0)
 		mlx->ply->m_x = S_W/2;
 	usleep(1000);
@@ -109,6 +109,7 @@ void my_mouse(void *param)
 	mlx->ply->angle += (float)(mlx->ply->m_x - (S_W/2))/(S_H/ 2);
 	mlx_set_mouse_pos(mlx->mlx_p, (S_W/2), (S_H/ 2));
 }
+
 void	execution(t_data *dt, t_txtr *l_ture)
 {
 	t_mlx	mlx;

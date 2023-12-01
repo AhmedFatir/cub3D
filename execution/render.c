@@ -6,7 +6,7 @@
 /*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 15:05:46 by afatir            #+#    #+#             */
-/*   Updated: 2023/12/01 04:07:53 by khbouych         ###   ########.fr       */
+/*   Updated: 2023/12/01 04:59:08 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,15 @@ void	draw_floor_ceiling(t_mlx *mlx, int ray, int t_pix, int b_pix)
 	i = b_pix;
 	while (i < S_H)
 	{
-		my_mlx_pixel_put(mlx, ray, i, get_rgba(ft_atoi(mlx->dt->ff[0]), ft_atoi(mlx->dt->ff[1]), ft_atoi(mlx->dt->ff[2]), 255));
+		my_mlx_pixel_put(mlx, ray, i, get_rgba(ft_atoi(mlx->dt->ff[0]),
+				ft_atoi(mlx->dt->ff[1]), ft_atoi(mlx->dt->ff[2]), 255));
 		i++;
 	}
 	i = 0;
 	while (i < t_pix)
 	{
-		my_mlx_pixel_put(mlx, ray, i, get_rgba(ft_atoi(mlx->dt->cc[0]), ft_atoi(mlx->dt->cc[1]), ft_atoi(mlx->dt->cc[2]), 255));
+		my_mlx_pixel_put(mlx, ray, i, get_rgba(ft_atoi(mlx->dt->cc[0]),
+				ft_atoi(mlx->dt->cc[1]), ft_atoi(mlx->dt->cc[2]), 255));
 		i++;
 	}
 }
@@ -67,7 +69,7 @@ int	get_color(t_mlx *mlx, int flag)
 	}
 }
 
-unsigned int reverse_bytes(int c)
+unsigned int	reverse_bytes(int c)
 {
 	unsigned int	b;
 
@@ -121,6 +123,7 @@ uint32_t ft_get_color(int ofsetx, int ofsety, mlx_texture_t *text)
     uint32_t	g;
     uint32_t	b;
     uint32_t	a;
+
 	a = 255;
 	r = text->pixels[(ofsety * (text->width * 4)) + (ofsetx * 4)];
 	g = text->pixels[(ofsety * (text->width * 4)) + (ofsetx * 4) + 1];

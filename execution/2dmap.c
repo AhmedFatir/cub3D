@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   2dmap.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
+/*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:30:47 by afatir            #+#    #+#             */
-/*   Updated: 2023/11/30 23:29:21 by afatir           ###   ########.fr       */
+/*   Updated: 2023/12/01 04:55:40 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,10 @@ void	draw_win(t_mlx *mlx, int x, int y, int color)
 	y_m = y;
 	flag = 0;
 	x_m = x;
-	// while (x_m < (x + TILE_SIZE))
-	// 	my_mlx_pixel_put(mlx, x_m++, y_m, BLK);
 	while (y_m < (y + TILE_SIZE))
 	{
 		while (x_m < (x + TILE_SIZE))
 			my_mlx_pixel_put(mlx, x_m++, y_m, color);
-		// my_mlx_pixel_put(mlx, x_m - 1, y_m, BLK);
 		y_m++;
 		x_m = x;
 	}

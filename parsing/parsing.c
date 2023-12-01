@@ -6,7 +6,7 @@
 /*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 00:41:00 by khbouych          #+#    #+#             */
-/*   Updated: 2023/12/01 04:39:10 by khbouych         ###   ########.fr       */
+/*   Updated: 2023/12/01 04:55:14 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	free_m(t_mlx *mlx)
 int	color_ture(t_data *m, t_txtr *l_ture)
 {
 	t_txtr	*tmp;
+
 	(void)m;
 	tmp = l_ture;
 	while (tmp)
@@ -46,10 +47,10 @@ int	color_ture(t_data *m, t_txtr *l_ture)
 	return (1);
 }
 
-void get_rows_cols(t_data *m)
+void	get_rows_cols(t_data *m)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (m->map2d[i])
@@ -69,7 +70,7 @@ int	parsing(int ac, char **av, t_data *m, t_txtr *l_ture)
 	t_mlx	*smlx;
 	int		count;
 
-	smlx = ft_calloc(1 ,sizeof(t_mlx));
+	smlx = ft_calloc(1, sizeof(t_mlx));
 	l_ture = NULL;
 	if (ac != 2 || !checkextension(av[1]))
 	{
@@ -87,7 +88,7 @@ int	parsing(int ac, char **av, t_data *m, t_txtr *l_ture)
 	m->t = l_ture;
 	if (!color_ture(m, l_ture))
 		return (0);
-	get_x_y_player(smlx,m);
+	get_x_y_player(smlx, m);
 	get_rows_cols(m);
 	return (1);
 }
