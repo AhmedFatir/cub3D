@@ -6,7 +6,7 @@
 #    By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/01 07:32:35 by afatir            #+#    #+#              #
-#    Updated: 2023/12/01 04:35:37 by khbouych         ###   ########.fr        #
+#    Updated: 2023/12/01 04:59:39 by khbouych         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ fclean: clean
 git :
 	make fclean
 	git add .
-	git commit -m "khbouych-01/12/2023-04:10:12"
+	git commit -m "khbouych-01/12/2023 05:00"
 	git push
 
 re: fclean all
