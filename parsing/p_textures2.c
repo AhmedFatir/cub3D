@@ -6,7 +6,7 @@
 /*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 19:53:18 by khbouych          #+#    #+#             */
-/*   Updated: 2023/12/01 04:51:35 by khbouych         ###   ########.fr       */
+/*   Updated: 2023/12/01 16:54:44 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_txtr	*new_texture(char *line)
 {
 	t_txtr	*list;
 
-	list = (t_txtr *)malloc(sizeof(t_txtr));
+	list = (t_txtr *)ft_calloc(sizeof(t_txtr), 1);
 	if (!list)
 		return (NULL);
 	while (*line == ' ' || (*line >= 9 && *line <= 13))
@@ -42,21 +42,7 @@ t_txtr	*new_texture(char *line)
 	list->next = NULL;
 	return (list);
 }
-
-t_txtr	*lst_back_ture(t_txtr *l_ture, t_txtr *new)
-{
-	t_txtr	*tmp;
-
-	tmp = l_ture;
-	if (l_ture == NULL)
-		return (new);
-	while (tmp->next)
-		tmp = tmp->next;
-	tmp->next = new;
-	return (l_ture);
-}
-
-void	lst_back_ture2(t_txtr **l_ture, t_txtr *new)
+void	lst_back_ture(t_txtr **l_ture, t_txtr *new)
 {
 	t_txtr	*tmp;
 
@@ -82,7 +68,7 @@ int	lst_ture(t_data *m, t_txtr **l_ture)
 		tmp = new_texture(m->ture2d[i++]);
 		if (!tmp)
 			return (0);
-		lst_back_ture2(l_ture, tmp);
+		lst_back_ture(l_ture, tmp);
 	}
 	return (1);
 }

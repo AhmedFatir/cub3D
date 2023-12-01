@@ -6,7 +6,7 @@
 /*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 15:05:46 by afatir            #+#    #+#             */
-/*   Updated: 2023/12/01 04:59:08 by khbouych         ###   ########.fr       */
+/*   Updated: 2023/12/01 18:03:26 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ mlx_texture_t	*get_texture(t_mlx *mlx, int flag)
 
 int	get_color(t_mlx *mlx, int flag)
 {
+	mlx->ray->ray_ngl = nor_angle(mlx->ray->ray_ngl);
 	if (flag == 1)
 	{
 		if (mlx->ray->ray_ngl > 0 && mlx->ray->ray_ngl < M_PI)
@@ -68,7 +69,24 @@ int	get_color(t_mlx *mlx, int flag)
 			return (ORNG);
 	}
 }
+uint32_t get_rgba(int r, int g, int b, int a)
+{
+    return (r << 24 | g << 16 | b << 8 | a << 0);
+}
 
+uint32_t ft_get_color(int ofsetx, int ofsety, mlx_texture_t *text)
+{
+    uint32_t	r;
+    uint32_t	g;
+    uint32_t	b;
+    uint32_t	a;
+
+	a = 255;
+	r = text->pixels[(ofsety * (text->width * 4)) + (ofsetx * 4)];
+	g = text->pixels[(ofsety * (text->width * 4)) + (ofsetx * 4) + 1];
+	b = text->pixels[(ofsety * (text->width * 4)) + (ofsetx * 4) + 2];
+	return (get_rgba(r, g, b, a));
+}
 unsigned int	reverse_bytes(int c)
 {
 	unsigned int	b;
@@ -88,7 +106,6 @@ void	draw_wall(t_mlx *mlx, int ray, int t_pix, int b_pix, double wall_h)
 	double			x_o;
 	double			y_o;
 	mlx_texture_t	*texture;
-
 	y = t_pix;
 	texture = get_texture(mlx, mlx->ray->flag);
 	uint32_t *arr = (uint32_t *)texture->pixels;
@@ -112,24 +129,19 @@ void	draw_wall(t_mlx *mlx, int ray, int t_pix, int b_pix, double wall_h)
 	}
 }
 
-uint32_t get_rgba(int r, int g, int b, int a)
-{
-    return (r << 24 | g << 16 | b << 8 | a << 0);
-}
-
-uint32_t ft_get_color(int ofsetx, int ofsety, mlx_texture_t *text)
-{
-    uint32_t	r;
-    uint32_t	g;
-    uint32_t	b;
-    uint32_t	a;
-
-	a = 255;
-	r = text->pixels[(ofsety * (text->width * 4)) + (ofsetx * 4)];
-	g = text->pixels[(ofsety * (text->width * 4)) + (ofsetx * 4) + 1];
-	b = text->pixels[(ofsety * (text->width * 4)) + (ofsetx * 4) + 2];
-	return (get_rgba(r, g, b, a));
-}
+// void	draw_wall(t_mlx *mlx, int ray, int t_pix, int b_pix, double wall_h)
+// {
+// 	int				y;
+// 	int				c;
+// 	y = t_pix;
+// 	(void)wall_h;
+// 	while (y < b_pix)
+// 	{
+// 		c = get_color(mlx, mlx->ray->flag);
+// 		my_mlx_pixel_put(mlx, ray, y, c);
+// 		y++;
+// 	}
+// }
 
 void	render_wall(t_mlx *mlx, int ray)
 {

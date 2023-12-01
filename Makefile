@@ -6,7 +6,7 @@
 #    By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/01 07:32:35 by afatir            #+#    #+#              #
-#    Updated: 2023/12/01 04:59:39 by khbouych         ###   ########.fr        #
+#    Updated: 2023/12/01 17:54:17 by khbouych         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,8 @@ LIB = -L/Users/${USER}/.brew/Cellar/glfw/3.3.8/lib
 CC		= cc
 CFLAGS	= -Wall -Werror -Wextra -O3 -ffast-math #-fsanitize=address -g
 
+M = m.c
+ 
 MOBJS	= ${SRCS:%.c=%.o}
 SRCS	= main.c execution/execution.c execution/mouvement.c execution/2dmap.c execution/raycasting.c execution/render.c \
 			parsing/o_list.c parsing/o_map.c parsing/outils_.c parsing/outils.c parsing/p_map.c parsing/p_map1.c parsing/p_map2.c \
@@ -37,7 +39,9 @@ $(NAME): $(MOBJS)
 %.o: %.c cub3d.h
 	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
-
+m : $(M)
+	@make -s -C $(LIB_FT)
+	@$(CC) $(CFLAGS) $(FLAG_MLX) $(M) $(LIB_FT_A) $(MLX) $(LIB) -o $(NAME)
 clean:
 	@make clean -s -C $(LIB_FT)
 	@rm -f $(MOBJS)

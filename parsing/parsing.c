@@ -6,7 +6,7 @@
 /*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 00:41:00 by khbouych          #+#    #+#             */
-/*   Updated: 2023/12/01 04:55:14 by khbouych         ###   ########.fr       */
+/*   Updated: 2023/12/01 17:01:56 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,17 +30,17 @@ int	color_ture(t_data *m, t_txtr *l_ture)
 {
 	t_txtr	*tmp;
 
-	(void)m;
 	tmp = l_ture;
 	while (tmp)
 	{
 		if (!ft_strncmp(tmp->key, "F", 1) || !ft_strncmp(tmp->key, "C", 1))
 		{
-			if (!ft_process_rgb_color(tmp, m))
+			if (!checkcolorvalues(ft_split(tmp->value, ',')))
 			{
 				write(1, "Error\ninvalid RGBA color\n", 26);
-				exit(0);
+				return(0);
 			}
+			ft_process_rgb_color(tmp, m);
 		}
 		tmp = tmp->next;
 	}
@@ -64,13 +64,20 @@ void	get_rows_cols(t_data *m)
 	}
 	m->rows = i;
 }
-
+void free_map(t_data *m)
+{
+	free_2d(m->sq_map);
+	free_2d(m->map2d);
+	free_2d(m->ture2d);
+	if (m->ff)
+		free_2d(m->ff);
+	if (m->cc)
+		free_2d(m->cc);
+}
 int	parsing(int ac, char **av, t_data *m, t_txtr *l_ture)
 {
-	t_mlx	*smlx;
 	int		count;
 
-	smlx = ft_calloc(1, sizeof(t_mlx));
 	l_ture = NULL;
 	if (ac != 2 || !checkextension(av[1]))
 	{
@@ -79,16 +86,15 @@ int	parsing(int ac, char **av, t_data *m, t_txtr *l_ture)
 	}
 	count = 0;
 	if (!read_map(av[1], m, &count))
-		return (free(smlx), free(l_ture), 0);
-	if (!valid_map(m))
-		return (free_2d(m->sq_map), free_2d(m->map2d),
-			free_2d(m->ture2d), free(l_ture), free(smlx), 0);
-	if (!lst_ture(m, &l_ture))
-		return (free(l_ture), 0);
-	m->t = l_ture;
-	if (!color_ture(m, l_ture))
 		return (0);
-	get_x_y_player(smlx, m);
-	get_rows_cols(m);
+	if (!valid_map(m))
+		return (free_map(m), 0);
+	if (!lst_ture(m, &l_ture))
+		return (free_map(m), freelist(&l_ture), 0);
+	if (!color_ture(m, l_ture))
+		return (free_map(m), freelist(&l_ture), 0);
+	get_x_y_player(m);
+	// get_rows_cols(m);
+	m->t = l_ture;
 	return (1);
 }

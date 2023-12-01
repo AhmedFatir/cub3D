@@ -6,7 +6,7 @@
 /*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:32:06 by afatir            #+#    #+#             */
-/*   Updated: 2023/12/01 15:24:52 by khbouych         ###   ########.fr       */
+/*   Updated: 2023/12/01 18:09:34 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ typedef struct s_mlx
 
 ///////////////////////////////EXECUTION////////////////////////////
 //mouvement.c
+void ft_free_texture(t_tex *tex);
 void printlist(t_txtr *l);
 float	nor_angle(float angle);
 void	cub_hook(t_mlx *mlx, double move_x, double move_y);
@@ -130,7 +131,7 @@ void	draw_player(t_mlx *mlx, int x_p, int y_p, int color);
 void	draw_ray_2d(t_mlx *mlx, double angle, double distance, int color);
 //execution.c
 void	ft_exit(t_mlx *mlx);
-void	execution(t_data *dt, t_txtr *l_ture);
+int		execution(t_data *dt);
 void	drow_map_pixel(void *mlxl);
 void	get_tex(t_mlx *mlx);
 void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color);
@@ -163,7 +164,7 @@ char	*ft_strtrim(char *s1, char *set);
 // char	*ft_strdup(char *s1);
 int	ft_isdigit(int c);
 int	checkcolorvalues(char **rgb);
-int	ft_process_rgb_color(t_txtr *tmp, t_data *m);
+void	ft_process_rgb_color(t_txtr *tmp, t_data *m);
 // p_map.c
 int	if_surrounded(char *line);
 int	if_validmap(char *line, int *flag);
@@ -179,6 +180,7 @@ int	read_map(char *av, t_data *m, int *count);
 char	*getlastline(char **map);
 int	check_first_last_line(char **map);
 int	check_countture(t_data *m, int count);
+void free_map(t_data *m);
 // p_textures1.c
 int	check_ifvalid(char *line);
 int	checktures_space_tab(char **ture2d, int count);
@@ -188,12 +190,11 @@ int	parse_rgb(char **ture2d);
 // p_textures2.c
 int	get_index(char *line, int i);
 t_txtr	*new_texture(char *line);
-t_txtr	*lst_back_ture(t_txtr *l_ture, t_txtr *new);
-void	lst_back_ture2(t_txtr **l_ture, t_txtr *new);
+void	lst_back_ture(t_txtr **l_ture, t_txtr *new);
 int	lst_ture(t_data *m, t_txtr **l_ture);
 //  par1.c
 int	valid_map(t_data *m);
-void	get_x_y_player(t_mlx *smlx, t_data *m);
+void	get_x_y_player(t_data *m);
 void	free_2d(char **m);
 void	free1(t_data *m, t_txtr *l_ture);
 int	checkextension(char *fname);

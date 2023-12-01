@@ -6,7 +6,7 @@
 /*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:26:29 by afatir            #+#    #+#             */
-/*   Updated: 2023/12/01 04:51:09 by khbouych         ###   ########.fr       */
+/*   Updated: 2023/12/01 18:11:42 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,9 @@ void	key_press(mlx_key_data_t keydata, void *ml)
 	mlx = ml;
 	if (keydata.key == MLX_KEY_ESCAPE && (keydata.action == MLX_PRESS \
 	|| keydata.action == MLX_REPEAT))
+	{
 		ft_exit(mlx);
+	}
 	else if (keydata.key == MLX_KEY_A && (keydata.action == MLX_PRESS))
 		mlx->ply->l_r = -1;
 	else if (keydata.key == MLX_KEY_D && (keydata.action == MLX_PRESS))

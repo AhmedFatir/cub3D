@@ -6,7 +6,7 @@
 /*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:40:50 by afatir            #+#    #+#             */
-/*   Updated: 2023/12/01 15:32:43 by khbouych         ###   ########.fr       */
+/*   Updated: 2023/12/01 17:45:09 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,7 @@ int	main(int ac, char **av)
 	atexit(v);
 	if (!parsing(ac, av, &dt, dt.t))
 		return (0);
-	execution(&dt, dt.t);
+	// free_map(&dt);
 	// freelist(&dt.t);
-	// free_2d(dt.map2d);
-	// free_2d(dt.ture2d);
-	// free_2d(dt.sq_map);
-	// free_2d(dt.cc);
-	// free_2d(dt.ff);
-	return (0);
+	execution(&dt);
 }

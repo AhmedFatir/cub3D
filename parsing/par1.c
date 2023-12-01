@@ -6,18 +6,17 @@
 /*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 20:16:33 by khbouych          #+#    #+#             */
-/*   Updated: 2023/12/01 04:52:47 by khbouych         ###   ########.fr       */
+/*   Updated: 2023/12/01 16:30:35 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	get_x_y_player(t_mlx *smlx, t_data *m)
+void	get_x_y_player(t_data *m)
 {
 	int	i;
 	int	j;
 
-	(void)smlx;
 	i = 0;
 	while (m->sq_map[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 17:38:41 by khbouych          #+#    #+#             */
-/*   Updated: 2023/12/01 04:28:06 by khbouych         ###   ########.fr       */
+/*   Updated: 2023/12/01 16:53:20 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,30 +55,22 @@ int	checkcolorvalues(char **rgb)
 	while (rgb[i])
 	{
 		if (ft_atoi(rgb[i]) > 255 || ft_atoi(rgb[i]) < 0)
-			return (0);
+			return (free_2d(rgb),0);
 		i++;
 	}
-	return (1);
+	return (free_2d(rgb), 1);
 }
 
-int	ft_process_rgb_color(t_txtr *tmp, t_data *m)
+void	ft_process_rgb_color(t_txtr *tmp, t_data *m)
 {
-	char	**rgb;
-
-	rgb = ft_split(tmp->value, ',');
-	if (!checkcolorvalues(rgb))
-		return (free_2d(rgb), 0);
 	if (!ft_strncmp(tmp->key, "F", 2))
 	{
 		m->ff = ft_split(tmp->value, ',');
-		if (!m->ff)
-			return (free_2d(m->ff), 0);
+			return ;
 	}
 	else if (!ft_strncmp(tmp->key, "C", 2))
 	{
 		m->cc = ft_split(tmp->value, ',');
-		if (!m->cc)
-			return (free_2d(m->cc), 0);
+			return ;
 	}
-	return (free_2d(rgb), 1);
 }
