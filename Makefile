@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+         #
+#    By: afatir <afatir@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/01 07:32:35 by afatir            #+#    #+#              #
-#    Updated: 2023/12/01 19:18:47 by khbouych         ###   ########.fr        #
+#    Updated: 2023/12/01 18:45:53 by afatir           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,13 +24,12 @@ CC		= cc
 CFLAGS	= -Wall -Werror -Wextra -O3 -ffast-math #-fsanitize=address -g
 
 M = m.c
-
+ 
 MOBJS	= ${SRCS:%.c=%.o}
 SRCS	= main.c execution/execution.c execution/mouvement.c execution/2dmap.c execution/raycasting.c execution/render.c \
 			parsing/o_list.c parsing/o_map.c parsing/outils_.c parsing/outils.c parsing/p_map.c parsing/p_map1.c parsing/p_map2.c \
 			parsing/p_textures1.c parsing/p_textures2.c parsing/par1.c parsing/parsing.c
 
-MSG = "add rule run in makefile"
 all: $(NAME)
 
 $(NAME): $(MOBJS)
@@ -38,8 +37,11 @@ $(NAME): $(MOBJS)
 	@$(CC) $(CFLAGS) $(FLAG_MLX) $(MOBJS) $(LIB_FT_A) $(MLX) $(LIB) -o $(NAME)
 
 %.o: %.c cub3d.h
-	@$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
+m : $(M)
+	@make -s -C $(LIB_FT)
+	@$(CC) $(CFLAGS) $(FLAG_MLX) $(M) $(LIB_FT_A) $(MLX) $(LIB) -o $(NAME)
 clean:
 	@make clean -s -C $(LIB_FT)
 	@rm -f $(MOBJS)
@@ -51,14 +53,7 @@ fclean: clean
 git :
 	make fclean
 	git add .
-	git commit -m $(MSG)
+	git commit -m "khbouych-01/12/2023 05:00"
 	git push
-
-m : $(M)
-	@make -s -C $(LIB_FT)
-	@$(CC) $(CFLAGS) $(FLAG_MLX) $(M) $(LIB_FT_A) $(MLX) $(LIB) -o $(NAME)
-
-run :
-	@make re && ./cub3D maps/map.cub
 
 re: fclean all

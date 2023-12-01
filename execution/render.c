@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 15:05:46 by afatir            #+#    #+#             */
-/*   Updated: 2023/12/01 18:03:26 by khbouych         ###   ########.fr       */
+/*   Updated: 2023/12/01 20:31:42 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,17 +69,18 @@ int	get_color(t_mlx *mlx, int flag)
 			return (ORNG);
 	}
 }
-uint32_t get_rgba(int r, int g, int b, int a)
+
+int	get_rgba(int r, int g, int b, int a)
 {
-    return (r << 24 | g << 16 | b << 8 | a << 0);
+	return (r << 24 | g << 16 | b << 8 | a << 0);
 }
 
-uint32_t ft_get_color(int ofsetx, int ofsety, mlx_texture_t *text)
+uint32_t	ft_get_color(int ofsetx, int ofsety, mlx_texture_t *text)
 {
-    uint32_t	r;
-    uint32_t	g;
-    uint32_t	b;
-    uint32_t	a;
+	uint32_t	r;
+	uint32_t	g;
+	uint32_t	b;
+	uint32_t	a;
 
 	a = 255;
 	r = text->pixels[(ofsety * (text->width * 4)) + (ofsetx * 4)];
@@ -87,6 +88,7 @@ uint32_t ft_get_color(int ofsetx, int ofsety, mlx_texture_t *text)
 	b = text->pixels[(ofsety * (text->width * 4)) + (ofsetx * 4) + 2];
 	return (get_rgba(r, g, b, a));
 }
+
 unsigned int	reverse_bytes(int c)
 {
 	unsigned int	b;
@@ -99,49 +101,42 @@ unsigned int	reverse_bytes(int c)
 	return (b);
 }
 
-void	draw_wall(t_mlx *mlx, int ray, int t_pix, int b_pix, double wall_h)
+double	get_x_o(mlx_texture_t	*texture, t_mlx *mlx)
 {
-	int				y;
-	int				c;
+	double	x_o;
+
+	if (mlx->ray->flag == 1)
+		x_o = (int)fmodf((mlx->ray->horiz_x * \
+		(texture->width / TILE_SIZE_MAP)), texture->width);
+	else
+		x_o = (int)fmodf((mlx->ray->vert_y * \
+		(texture->width / TILE_SIZE_MAP)), texture->width);
+	return (x_o);
+}
+
+void	draw_wall(t_mlx *mlx, int t_pix, int b_pix, double wall_h)
+{
 	double			x_o;
 	double			y_o;
 	mlx_texture_t	*texture;
-	y = t_pix;
+	uint32_t		*arr;
+	double			y_step;
+
 	texture = get_texture(mlx, mlx->ray->flag);
-	uint32_t *arr = (uint32_t *)texture->pixels;
-	double y_step = (double)texture->height / wall_h;
-	if (mlx->ray->flag == 1)
-		x_o = (int)fmodf((mlx->ray->horiz_x  * (texture->width / TILE_SIZE_MAP)),texture->width);
-	else
-		x_o = (int)fmodf((mlx->ray->vert_y  * (texture->width / TILE_SIZE_MAP)),texture->width);
-	y_o = (y - (S_H / 2) + (wall_h / 2)) * y_step;
+	arr = (uint32_t *)texture->pixels;
+	y_step = (double)texture->height / wall_h;
+	x_o = get_x_o(texture, mlx);
+	y_o = (t_pix - (S_H / 2) + (wall_h / 2)) * y_step;
 	if (y_o < 0)
 		y_o = 0;
-	while (y < b_pix)
+	while (t_pix < b_pix)
 	{
-		if (y_o >= 0 && y_o < texture->height && x_o >= 0 && x_o < texture->width) {
-			c = arr[(int)y_o * texture->width + (int)x_o];
-			y_o += y_step;
-			my_mlx_pixel_put(mlx, ray, y, reverse_bytes(c));
-		} else
-			exit (0);
-		y++;
+		my_mlx_pixel_put(mlx, mlx->ray->index, t_pix, reverse_bytes \
+		(arr[(int)y_o * texture->width + (int)x_o]));
+		y_o += y_step;
+		t_pix++;
 	}
 }
-
-// void	draw_wall(t_mlx *mlx, int ray, int t_pix, int b_pix, double wall_h)
-// {
-// 	int				y;
-// 	int				c;
-// 	y = t_pix;
-// 	(void)wall_h;
-// 	while (y < b_pix)
-// 	{
-// 		c = get_color(mlx, mlx->ray->flag);
-// 		my_mlx_pixel_put(mlx, ray, y, c);
-// 		y++;
-// 	}
-// }
 
 void	render_wall(t_mlx *mlx, int ray)
 {
@@ -158,6 +153,7 @@ void	render_wall(t_mlx *mlx, int ray)
 		b_pix = S_H;
 	if (t_pix < 0)
 		t_pix = 0;
-	draw_wall(mlx, ray, t_pix, b_pix, wall_h);
+	mlx->ray->index = ray;
+	draw_wall(mlx, t_pix, b_pix, wall_h);
 	draw_floor_ceiling(mlx, ray, t_pix, b_pix);
 }

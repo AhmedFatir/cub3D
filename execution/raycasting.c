@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:36:01 by afatir            #+#    #+#             */
-/*   Updated: 2023/12/01 19:04:42 by khbouych         ###   ########.fr       */
+/*   Updated: 2023/12/01 19:45:53 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	inter_check(float angle, float *inter, float *step, int is_horizon)
 	}
 	else
 	{
-		if (!(angle > M_PI / 2 && angle < 3 * M_PI / 2))
+		if (!(angle > M_PI / 2 && angle < 3 * M_PI / 2)) 
 		{
 			*inter += TILE_SIZE;
 			return (-1);
@@ -77,7 +77,7 @@ float	get_h_inter(t_mlx *mlx, float angl)
 	int		pixel;
 
 	y_step = TILE_SIZE;
-	x_step = TILE_SIZE / tan(angl);
+	x_step = TILE_SIZE / tan(angl); 
 	h_y = floor(mlx->ply->plyr_y / TILE_SIZE) * TILE_SIZE;
 	pixel = inter_check(angl, &h_y, &y_step, 1);
 	h_x = mlx->ply->plyr_x + (h_y - mlx->ply->plyr_y) / tan(angl);
@@ -129,7 +129,6 @@ void	cast_rays(t_mlx *mlx)
 	int		ray;
 
 	ray = 0;
-	// draw_map_tile2d(mlx);
 	mlx->ray->ray_ngl = mlx->ply->angle - (mlx->ply->fov_rd / 2);
 	while (ray < S_W)
 	{
@@ -144,7 +143,6 @@ void	cast_rays(t_mlx *mlx)
 			mlx->ray->flag = 1;
 		}
 		render_wall(mlx, ray);
-		// draw_ray_2d(mlx, mlx->ray->ray_ngl, mlx->ray->distance, RED);
 		ray++;
 		mlx->ray->ray_ngl += (mlx->ply->fov_rd / S_W);
 	}

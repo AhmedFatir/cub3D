@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 00:41:00 by khbouych          #+#    #+#             */
-/*   Updated: 2023/12/01 19:03:02 by khbouych         ###   ########.fr       */
+/*   Updated: 2023/12/01 20:26:26 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int	parsing(int ac, char **av, t_data *m, t_txtr *l_ture)
 	if (!color_ture(m, l_ture))
 		return (free_map(m), freelist(&l_ture), 0);
 	get_x_y_player(m);
+	get_rows_cols(m);
 	m->t = l_ture;
 	return (1);
 }
