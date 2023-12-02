@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 15:05:46 by afatir            #+#    #+#             */
-/*   Updated: 2023/12/01 20:31:42 by afatir           ###   ########.fr       */
+/*   Updated: 2023/12/02 01:10:21 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,66 +51,16 @@ mlx_texture_t	*get_texture(t_mlx *mlx, int flag)
 	}
 }
 
-int	get_color(t_mlx *mlx, int flag)
-{
-	mlx->ray->ray_ngl = nor_angle(mlx->ray->ray_ngl);
-	if (flag == 1)
-	{
-		if (mlx->ray->ray_ngl > 0 && mlx->ray->ray_ngl < M_PI)
-			return (WHI);
-		else
-			return (RED);
-	}
-	else
-	{
-		if (mlx->ray->ray_ngl > M_PI / 2 && mlx->ray->ray_ngl < 3 * (M_PI / 2))
-			return (GREY);
-		else
-			return (ORNG);
-	}
-}
-
-int	get_rgba(int r, int g, int b, int a)
-{
-	return (r << 24 | g << 16 | b << 8 | a << 0);
-}
-
-uint32_t	ft_get_color(int ofsetx, int ofsety, mlx_texture_t *text)
-{
-	uint32_t	r;
-	uint32_t	g;
-	uint32_t	b;
-	uint32_t	a;
-
-	a = 255;
-	r = text->pixels[(ofsety * (text->width * 4)) + (ofsetx * 4)];
-	g = text->pixels[(ofsety * (text->width * 4)) + (ofsetx * 4) + 1];
-	b = text->pixels[(ofsety * (text->width * 4)) + (ofsetx * 4) + 2];
-	return (get_rgba(r, g, b, a));
-}
-
-unsigned int	reverse_bytes(int c)
-{
-	unsigned int	b;
-
-	b = 0;
-	b |= (c & 0xFF) << 24;
-	b |= (c & 0xFF00) << 8;
-	b |= (c & 0xFF0000) >> 8;
-	b |= (c & 0xFF000000) >> 24;
-	return (b);
-}
-
 double	get_x_o(mlx_texture_t	*texture, t_mlx *mlx)
 {
 	double	x_o;
 
 	if (mlx->ray->flag == 1)
 		x_o = (int)fmodf((mlx->ray->horiz_x * \
-		(texture->width / TILE_SIZE_MAP)), texture->width);
+		(texture->width / TILE_SIZE)), texture->width);
 	else
 		x_o = (int)fmodf((mlx->ray->vert_y * \
-		(texture->width / TILE_SIZE_MAP)), texture->width);
+		(texture->width / TILE_SIZE)), texture->width);
 	return (x_o);
 }
 

@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 22:14:02 by afatir            #+#    #+#             */
-/*   Updated: 2023/12/01 18:48:01 by afatir           ###   ########.fr       */
+/*   Updated: 2023/12/02 01:37:38 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,5 @@ int		ft_put_deci(int n);
 int		ft_put_unsigned(unsigned int n);
 int		ft_put_hexa(unsigned int n, char *s);
 int		ft_put_ad(unsigned long p, char *s);
-int		ft_printf(const char *s, ...);
+// int		ft_printf(const char *s, ...);
 #endif

@@ -3,63 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:23:08 by afatir            #+#    #+#             */
-/*   Updated: 2023/12/01 21:54:15 by khbouych         ###   ########.fr       */
+/*   Updated: 2023/12/01 23:49:21 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-float	nor_angle(float angle)
-{
-	if (angle < 0)
-		angle += (2 * M_PI);
-	if (angle > (2 * M_PI))
-		angle -= (2 * M_PI);
-	return (angle);
-}
-
-void	ft_delete_tex(t_tex *tex)
-{
-	if (tex->no)
-		mlx_delete_texture(tex->no);
-	if (tex->so)
-		mlx_delete_texture(tex->so);
-	if (tex->we)
-		mlx_delete_texture(tex->we);
-	if (tex->ea)
-		mlx_delete_texture(tex->ea);
-}
-
-void	ft_exit(t_mlx *mlx)
-{
-	mlx_close_window(mlx->mlx_p);
-	mlx_delete_image(mlx->mlx_p, mlx->img);
-	freelist(&mlx->dt->t);
-	free_map(mlx->dt);
-	ft_delete_tex(mlx->tex);
-	free(mlx->tex);
-	free(mlx->ply);
-	free(mlx->ray);
-	mlx_terminate(mlx->mlx_p);
-	ft_putstr_fd("Game closed\n", 1);
-	exit(0);
-}
-
-void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)
-{
-	if (x < 0)
-		return ;
-	else if (x >= S_W)
-		return ;
-	if (y < 0)
-		return ;
-	else if (y >= S_H)
-		return ;
-	mlx_put_pixel(mlx->img, x, y, color);
-}
 
 void	drow_map_pixel(void *mlxl)
 {
@@ -70,7 +21,6 @@ void	drow_map_pixel(void *mlxl)
 	mlx->img = mlx_new_image(mlx->mlx_p, S_W, S_H);
 	cub_hook(mlx, 0, 0);
 	cast_rays(mlx);
-	draw_map_tile2d(mlx);
 	mlx_image_to_window(mlx->mlx_p, mlx->img, 0, 0);
 }
 
@@ -148,8 +98,6 @@ int	execution(t_data *dt)
 	get_angle(&mlx);
 	mlx_key_hook(mlx.mlx_p, &key_press, &mlx);
 	mlx_loop_hook(mlx.mlx_p, &drow_map_pixel, &mlx);
-	mlx_set_cursor_mode(mlx.mlx_p, MLX_MOUSE_DISABLED);
-	mlx_cursor_hook(mlx.mlx_p, (void *)my_mouse, &mlx);
 	mlx_loop(mlx.mlx_p);
 	ft_exit(&mlx);
 	return (0);

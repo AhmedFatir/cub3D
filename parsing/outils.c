@@ -6,16 +6,11 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 17:38:41 by khbouych          #+#    #+#             */
-/*   Updated: 2023/12/01 20:25:02 by afatir           ###   ########.fr       */
+/*   Updated: 2023/12/01 22:55:23 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-int	ft_isdigit(int c)
-{
-	return (c >= '0' && c <= '9');
-}
 
 int	checkcolorvalues(char **rgb)
 {

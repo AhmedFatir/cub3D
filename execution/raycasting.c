@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:36:01 by afatir            #+#    #+#             */
-/*   Updated: 2023/12/01 19:45:53 by afatir           ###   ########.fr       */
+/*   Updated: 2023/12/01 23:17:00 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,21 +51,6 @@ int	wall_hit(float x, float y, t_mlx *mlx)
 		if (mlx->dt->map2d[y_m][x_m] == '1')
 			return (0);
 	return (1);
-}
-
-int	unit_circle(float angle, char c)
-{
-	if (c == 'x')
-	{
-		if (angle > 0 && angle < M_PI)
-			return (1);
-	}
-	else if (c == 'y')
-	{
-		if (angle > (M_PI / 2) && angle < (3 * M_PI) / 2)
-			return (1);
-	}
-	return (0);
 }
 
 float	get_h_inter(t_mlx *mlx, float angl)

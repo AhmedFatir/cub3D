@@ -6,7 +6,7 @@
 #    By: afatir <afatir@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/15 23:01:07 by afatir            #+#    #+#              #
-#    Updated: 2023/10/25 14:35:55 by afatir           ###   ########.fr        #
+#    Updated: 2023/12/02 01:37:44 by afatir           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRCS	= ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 			ft_strmapi.c ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
 			get_next_line_utils.c get_next_line.c \
 			ft_putchar.c ft_putstr.c ft_put_deci.c ft_put_unsigned.c \
-			ft_put_hexa.c ft_put_ad.c ft_free_all.c zft_printf.c
+			ft_put_hexa.c ft_put_ad.c ft_free_all.c
 
 
 all:		${NAME}

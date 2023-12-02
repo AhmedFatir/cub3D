@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   par1.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 20:16:33 by khbouych          #+#    #+#             */
-/*   Updated: 2023/12/01 16:30:35 by khbouych         ###   ########.fr       */
+/*   Updated: 2023/12/01 22:58:31 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,6 @@ void	free_2d(char **m)
 	while (m[i])
 		free(m[i++]);
 	free(m);
-}
-
-void	free1(t_data *m, t_txtr *l_ture)
-{
-	free_2d(m->sq_map);
-	free_2d(m->map2d);
-	free_2d(m->ture2d);
-	free(l_ture);
 }
 
 int	checkextension(char *fname)

@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 00:41:00 by khbouych          #+#    #+#             */
-/*   Updated: 2023/12/01 20:26:26 by afatir           ###   ########.fr       */
+/*   Updated: 2023/12/02 03:20:20 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,17 @@ int	color_ture(t_data *m, t_txtr *l_ture)
 	return (1);
 }
 
+void	free_map(t_data *m)
+{
+	free_2d(m->sq_map);
+	free_2d(m->map2d);
+	free_2d(m->ture2d);
+	if (m->ff)
+		free_2d(m->ff);
+	if (m->cc)
+		free_2d(m->cc);
+}
+
 void	get_rows_cols(t_data *m)
 {
 	int	i;
@@ -65,17 +76,6 @@ void	get_rows_cols(t_data *m)
 	m->rows = i;
 }
 
-void	free_map(t_data *m)
-{
-	free_2d(m->sq_map);
-	free_2d(m->map2d);
-	free_2d(m->ture2d);
-	if (m->ff)
-		free_2d(m->ff);
-	if (m->cc)
-		free_2d(m->cc);
-}
-
 int	parsing(int ac, char **av, t_data *m, t_txtr *l_ture)
 {
 	int		count;
@@ -90,7 +90,7 @@ int	parsing(int ac, char **av, t_data *m, t_txtr *l_ture)
 	if (!read_map(av[1], m, &count))
 		return (0);
 	if (!valid_map(m))
-		return (free_map(m), 0);
+		return (free_2d(m->map2d), 0);
 	if (!lst_ture(m, &l_ture))
 		return (free_map(m), freelist(&l_ture), 0);
 	if (!color_ture(m, l_ture))
