@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 20:16:33 by khbouych          #+#    #+#             */
-/*   Updated: 2023/12/01 22:58:31 by afatir           ###   ########.fr       */
+/*   Updated: 2023/12/05 14:16:56 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	checkextension(char *fname)
 	char	*dotp;
 
 	dotp = ft_strrchr(fname, '.');
-	if (dotp && !ft_strncmp(dotp, ".cub", 4))
+	if (dotp && !ft_strcmp(dotp, ".cub"))
 		return (1);
 	else if (!fname || !dotp)
 		return (0);

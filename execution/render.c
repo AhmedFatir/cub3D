@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 15:05:46 by afatir            #+#    #+#             */
-/*   Updated: 2023/12/05 09:10:08 by afatir           ###   ########.fr       */
+/*   Updated: 2023/12/05 18:26:20 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,20 +67,20 @@ void	draw_wall(t_mlx *mlx, int t_pix, int b_pix, double wall_h)
 	double			y_o;
 	mlx_texture_t	*texture;
 	uint32_t		*arr;
-	double			y_step;
+	double			factor;
 
 	texture = get_texture(mlx, mlx->ray->flag);
 	arr = (uint32_t *)texture->pixels;
-	y_step = (double)texture->height / wall_h;
+	factor = (double)texture->height / wall_h;
 	x_o = get_x_o(texture, mlx);
-	y_o = (t_pix - (S_H / 2) + (wall_h / 2)) * y_step;
+	y_o = (t_pix - (S_H / 2) + (wall_h / 2)) * factor;
 	if (y_o < 0)
 		y_o = 0;
 	while (t_pix < b_pix)
 	{
 		my_mlx_pixel_put(mlx, mlx->ray->index, t_pix, reverse_bytes \
 		(arr[(int)y_o * texture->width + (int)x_o]));
-		y_o += y_step;
+		y_o += factor;
 		t_pix++;
 	}
 }

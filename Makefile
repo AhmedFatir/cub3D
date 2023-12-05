@@ -3,18 +3,19 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+         #
+#    By: afatir <afatir@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/01 07:32:35 by afatir            #+#    #+#              #
-#    Updated: 2023/12/05 11:53:05 by khbouych         ###   ########.fr        #
+#    Updated: 2023/12/05 19:15:34 by afatir           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= cub3D
+NAME_B	= cub3D_bonus
 LIB_FT	= libft_gcl_ptf/
 LIB_FT_A= libft_gcl_ptf/libft_gcl_ptf.a
 
-MLX = MLX42/build/libmlx42.a
+MLX = MLX/libmlx42.a
 FLAG_MLX = -framework Cocoa -framework OpenGL -framework IOKit -lglfw
 INCLUDE = -I/Users/${USER}/.brew/Cellar/glfw/3.3.8/include/GLFW
 LIB = -L/Users/${USER}/.brew/Cellar/glfw/3.3.8/lib
@@ -43,7 +44,7 @@ $(NAME): $(MOBJS)
 
 bonus: $(MOBJS_B)
 	@make -s -C $(LIB_FT)
-	@$(CC) $(CFLAGS) $(FLAG_MLX) $(MOBJS_B) $(LIB_FT_A) $(MLX) $(LIB) -o $(NAME)
+	@$(CC) $(CFLAGS) $(FLAG_MLX) $(MOBJS_B) $(LIB_FT_A) $(MLX) $(LIB) -o $(NAME_B)
 
 clean:
 	@make clean -s -C $(LIB_FT)
@@ -53,5 +54,6 @@ clean:
 fclean: clean
 	@make fclean -s -C $(LIB_FT)
 	@rm -f $(NAME)
+	@rm -f $(NAME_B)
 
 re: fclean all

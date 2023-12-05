@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 00:41:00 by khbouych          #+#    #+#             */
-/*   Updated: 2023/12/05 11:52:14 by khbouych         ###   ########.fr       */
+/*   Updated: 2023/12/05 17:21:47 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	color_ture(t_data *m, t_txtr *l_ture)
 {
 	t_txtr	*tmp;
 
+	m->cc = NULL;
+	m->ff = NULL;
 	tmp = l_ture;
 	while (tmp)
 	{
@@ -49,10 +51,9 @@ int	color_ture(t_data *m, t_txtr *l_ture)
 
 void	free_map(t_data *m)
 {
+	free_2d(m->sq_map);
 	free_2d(m->map2d);
 	free_2d(m->ture2d);
-	if (m->sq_map)
-		free_2d(m->sq_map);
 	if (m->ff)
 		free_2d(m->ff);
 	if (m->cc)

@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:36:01 by afatir            #+#    #+#             */
-/*   Updated: 2023/12/05 09:37:22 by afatir           ###   ########.fr       */
+/*   Updated: 2023/12/05 18:20:19 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ int	wall_hit(float x, float y, t_mlx *mlx)
 		return (0);
 	x_m = floor (x / TILE_SIZE);
 	y_m = floor (y / TILE_SIZE);
-	if ((y >= S_H || x >= S_W || (y_m >= mlx->dt->h_map || \
-	x_m >= mlx->dt->w_map)))
+	if ((y_m >= mlx->dt->h_map || x_m >= mlx->dt->w_map))
 		return (0);
 	if (mlx->dt->map2d[y_m] && x_m <= (int)ft_strlen(mlx->dt->map2d[y_m]))
 		if (mlx->dt->map2d[y_m][x_m] == '1')
@@ -94,7 +93,7 @@ float	get_v_inter(t_mlx *mlx, float angl)
 	pixel = inter_check(angl, &v_x, &x_step, 0);
 	v_y = mlx->ply->plyr_y + (v_x - mlx->ply->plyr_x) * tan(angl);
 	if ((unit_circle(angl, 'x') && y_step < 0) || \
-		(!unit_circle(angl, 'x') && y_step > 0))
+	(!unit_circle(angl, 'x') && y_step > 0))
 		y_step *= -1;
 	while (wall_hit(v_x - pixel, v_y, mlx))
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:36:01 by afatir            #+#    #+#             */
-/*   Updated: 2023/12/05 12:11:23 by khbouych         ###   ########.fr       */
+/*   Updated: 2023/12/05 11:56:15 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ int	wall_hit_bonus(float x, float y, t_mlx *mlx)
 		return (0);
 	x_m = floor (x / TILE_SIZE_R);
 	y_m = floor (y / TILE_SIZE_R);
-	if ((y >= S_H || x >= S_W || (y_m >= mlx->dt->h_map || \
-	x_m >= mlx->dt->w_map)))
+	if ((y_m >= mlx->dt->h_map || x_m >= mlx->dt->w_map))
 		return (0);
 	if (mlx->dt->map2d[y_m] && x_m <= (int)ft_strlen(mlx->dt->map2d[y_m]))
 		if (mlx->dt->map2d[y_m][x_m] == '1')

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
+/*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:32:06 by afatir            #+#    #+#             */
-/*   Updated: 2023/12/05 12:13:04 by khbouych         ###   ########.fr       */
+/*   Updated: 2023/12/05 19:15:19 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@
 # include <fcntl.h>
 # include <math.h>
 # include "libft_gcl_ptf/libft.h"
-# include "MLX42/include/MLX42/MLX42.h"
+# include "MLX/MLX42.h"
 
 # define S_W 1900
 # define S_H 1000
 # define TILE_SIZE 32
 # define FOV 60
 # define ROTATION_SPEED 0.045
-# define PLAYER_SPEED 1
+# define PLAYER_SPEED 4
 
 # define BLK 0x000000FF
 # define GREY 0x808080FF

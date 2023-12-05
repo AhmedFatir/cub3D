@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 20:43:09 by khbouych          #+#    #+#             */
-/*   Updated: 2023/12/05 09:52:18 by afatir           ###   ########.fr       */
+/*   Updated: 2023/12/05 14:14:29 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ int	read_map(char *av, t_data *m, int *count)
 {
 	m->fd = open(av, O_RDONLY);
 	if (m->fd == -1)
-		return (0);
+		return (write(1, "Error\ninvalid file\n", 20), 0);
 	m->line = get_next_line(m->fd);
 	if (m->line == NULL)
-		return (0);
+		return (write(1, "Error\nempty file\n", 18), 0);
 	m->ture = ft_strdup("");
 	while (m->line && m->line[0] != '1' && m->line[0] != 32)
 	{
