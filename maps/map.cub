@@ -4,9 +4,9 @@ SO textures/Sunflowers.png
 WE textures/the_starry_night.png
 EA textures/girl_with_a_pearl_earring.png
 
-C 0,0,60
-F 60,179,110
 
+C 0,20,60
+F 60,129,11
 
         1111111111111111111111111
         10000000001110000000000001

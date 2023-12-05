@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
+/*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 23:53:10 by afatir            #+#    #+#             */
-/*   Updated: 2023/12/05 10:58:02 by afatir           ###   ########.fr       */
+/*   Updated: 2023/12/05 12:10:07 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@
 # include <fcntl.h>
 # include <math.h>
 # include "libft_gcl_ptf/libft.h"
-# include "../MLX42/include/MLX42/MLX42.h"
+# include "MLX42/include/MLX42/MLX42.h"
 
 # define S_W 1900
 # define S_H 1000
 # define TILE_SIZE_R 16
 # define FOV 60
 # define ROTATION_SPEED 0.045
-# define PLAYER_SPEED 2
+# define PLAYER_SPEED 1
 
 # define BLK 0x000000FF
 # define GREY 0x808080
@@ -122,7 +122,7 @@ int		getsizemap(char **map);
 char	*fixline(char *line, int maxlen);
 int		h_map(char **map);
 int		v_map(char **map);
-// outils.c 
+// outils.c
 int		checkcolorvalues(char **rgb);
 void	ft_process_rgb_color(t_txtr *tmp, t_data *m);
 // p_map.c

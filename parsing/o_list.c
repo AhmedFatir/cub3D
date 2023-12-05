@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   o_list.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
+/*   By: khbouych <khbouych@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 20:07:15 by khbouych          #+#    #+#             */
-/*   Updated: 2023/12/05 09:36:33 by afatir           ###   ########.fr       */
+/*   Updated: 2023/12/05 11:54:29 by khbouych         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,6 @@ int	valid_map(t_data *m)
 	m->h_map = getsizemap(m->sq_map);
 	m->w_map = ft_strlen(m->sq_map[0]);
 	if (!h_map(m->sq_map) || !v_map(m->sq_map))
-		return (0);
+		return (free_2d(m->sq_map), free_2d(m->map2d), free_2d(m->ture2d), 0);
 	return (1);
 }
