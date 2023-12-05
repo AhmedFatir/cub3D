@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 15:48:23 by khbouych          #+#    #+#             */
-/*   Updated: 2023/11/26 18:38:48 by afatir           ###   ########.fr       */
+/*   Updated: 2023/12/05 09:24:17 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	checktures_space_tab(char **ture2d, int count)
 	{
 		if (!check_ifvalid(ture2d[i]))
 		{
-			write(1, "Error\ninvalid map element [texture/color]\n", 41);
+			write(1, "Error\ninvalid map element [texture/color]\n", 42);
 			return (0);
 		}
 	}
@@ -101,7 +101,7 @@ int	parse_rgb(char **ture2d)
 		{
 			if (count_vergules(ptr) != 2 || !check_pos_ofv(ptr))
 			{
-				write(1, "Error\ninvalid map element [texture/color]\n", 41);
+				write(1, "Error\ninvalid map element [texture/color]\n", 42);
 				return (0);
 			}
 		}

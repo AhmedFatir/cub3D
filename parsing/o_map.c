@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 11:02:09 by khbouych          #+#    #+#             */
-/*   Updated: 2023/11/26 18:54:41 by afatir           ###   ########.fr       */
+/*   Updated: 2023/12/05 09:36:28 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*fixline(char *line, int maxlen)
 	int		i;
 
 	i = 0;
-	new = malloc(sizeof(char) * (maxlen + 1));
+	new = ft_calloc(sizeof(char), (maxlen + 1));
 	if (!new)
 		return (NULL);
 	while (line[i])

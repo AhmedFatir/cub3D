@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:23:08 by afatir            #+#    #+#             */
-/*   Updated: 2023/12/02 00:58:31 by afatir           ###   ########.fr       */
+/*   Updated: 2023/12/05 09:19:57 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,12 @@ int	execution_bonus(t_data *dt)
 {
 	t_mlx	mlx;
 
+	if (S_H > 1440 || S_W > 2560 || FOV >= 180 || FOV <= 0)
+		return (freelist(&dt->t), free_map(dt), 0);
 	mlx.ply = (t_player *)ft_calloc(sizeof(t_player), 1);
 	mlx.ray = (t_ray *)ft_calloc(sizeof(t_ray), 1);
 	mlx.tex = (t_tex *)ft_calloc(sizeof(t_tex), 1);
 	mlx.dt = dt;
-	if (S_H > 1440 || S_W > 2560 || FOV > 180 || FOV < 0)
-		return (ft_exit_bonus(&mlx), 0);
 	mlx.mlx_p = mlx_init(S_W, S_H, "cub3D", false);
 	if (!mlx.mlx_p)
 		return (ft_exit_bonus(&mlx), 0);

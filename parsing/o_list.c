@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 20:07:15 by khbouych          #+#    #+#             */
-/*   Updated: 2023/12/01 22:54:45 by afatir           ###   ########.fr       */
+/*   Updated: 2023/12/05 09:36:33 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	valid_map(t_data *m)
 
 	maxlen = getsize_largline(m->map2d);
 	i = 0;
-	m->sq_map = malloc(sizeof(char *) * (getsizemap(m->map2d) + 1));
+	m->sq_map = ft_calloc(sizeof(char *), (getsizemap(m->map2d) + 1));
 	if (!m->sq_map)
 		return (0);
 	while (m->map2d[i])

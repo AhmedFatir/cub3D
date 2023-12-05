@@ -6,7 +6,7 @@
 #    By: afatir <afatir@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/01 07:32:35 by afatir            #+#    #+#              #
-#    Updated: 2023/12/02 02:02:13 by afatir           ###   ########.fr        #
+#    Updated: 2023/12/05 10:14:28 by afatir           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,11 +20,11 @@ INCLUDE = -I/Users/${USER}/.brew/Cellar/glfw/3.3.8/include/GLFW
 LIB = -L/Users/${USER}/.brew/Cellar/glfw/3.3.8/lib
 
 CC		= cc
-CFLAGS	= -Wall -Werror -Wextra -O3 -ffast-math
+CFLAGS	= -Wall -Werror -Wextra -O3 -ffast-math #-fsanitize=address -g
 
 MOBJS	= ${SRCS:%.c=%.o}
 MOBJS_B	= ${SRCS_B:%.c=%.o}
-SRCS	= main.c execution/execution.c execution/mouvement.c execution/2dmap.c execution/raycasting.c execution/render.c execution/render2.c execution/execfree.c \
+SRCS	= main.c execution/execution.c execution/mouvement.c execution/raycasting.c execution/render.c execution/render2.c execution/execfree.c \
 			parsing/o_list.c parsing/o_map.c parsing/outils.c parsing/p_map.c parsing/p_map1.c parsing/p_map2.c \
 			parsing/p_textures1.c parsing/p_textures2.c parsing/par1.c parsing/parsing.c
 

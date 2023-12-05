@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 09:11:50 by afatir            #+#    #+#             */
-/*   Updated: 2023/10/24 18:59:17 by afatir           ###   ########.fr       */
+/*   Updated: 2023/12/05 09:37:04 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	**ft_free_all(char **p)
 	size_t	j;
 
 	if (!p)
-		return (0); 
+		return (0);
 	j = 0;
 	while (p[j])
 		free(p[j++]);

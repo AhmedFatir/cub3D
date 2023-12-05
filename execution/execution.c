@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 10:23:08 by afatir            #+#    #+#             */
-/*   Updated: 2023/12/01 23:49:21 by afatir           ###   ########.fr       */
+/*   Updated: 2023/12/05 09:18:31 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,29 +67,34 @@ int	load_texture(t_tex *tex, t_txtr *l_ture)
 	return (1);
 }
 
-void	my_mouse(void *param)
+void	get_angle(t_mlx *mlx)
 {
-	t_mlx		*mlx;
-	static int	fix;
+	char	c;
 
-	mlx = param;
-	if (fix++ == 0)
-		mlx->ply->m_x = S_W / 2;
-	mlx_get_mouse_pos(mlx->mlx_p, &mlx->ply->m_x, &mlx->ply->m_y);
-	mlx->ply->angle += (float)(mlx->ply->m_x - (S_W / 2)) / (S_H / 2);
-	mlx_set_mouse_pos(mlx->mlx_p, (S_W / 2), (S_H / 2));
+	c = mlx->dt->map2d[mlx->dt->p_y][mlx->dt->p_x];
+	if (c == 'N')
+		mlx->ply->angle = 3 * M_PI / 2;
+	if (c == 'S')
+		mlx->ply->angle = M_PI / 2;
+	if (c == 'E')
+		mlx->ply->angle = 0;
+	if (c == 'W')
+		mlx->ply->angle = M_PI;
+	mlx->ply->plyr_x = (mlx->dt->p_x * TILE_SIZE) + TILE_SIZE / 2;
+	mlx->ply->plyr_y = (mlx->dt->p_y * TILE_SIZE) + TILE_SIZE / 2;
+	mlx->ply->fov_rd = (FOV * M_PI / 180);
 }
 
 int	execution(t_data *dt)
 {
 	t_mlx	mlx;
 
+	if (S_H > 1440 || S_W > 2560 || FOV >= 180 || FOV <= 0)
+		return (freelist(&dt->t), free_map(dt), 0);
 	mlx.ply = (t_player *)ft_calloc(sizeof(t_player), 1);
 	mlx.ray = (t_ray *)ft_calloc(sizeof(t_ray), 1);
 	mlx.tex = (t_tex *)ft_calloc(sizeof(t_tex), 1);
 	mlx.dt = dt;
-	if (S_H > 1440 || S_W > 2560 || FOV > 180 || FOV < 0)
-		return (ft_exit(&mlx), 0);
 	mlx.mlx_p = mlx_init(S_W, S_H, "cub3D", false);
 	if (!mlx.mlx_p)
 		return (ft_exit(&mlx), 0);

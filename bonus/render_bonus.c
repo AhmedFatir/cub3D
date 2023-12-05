@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 15:05:46 by afatir            #+#    #+#             */
-/*   Updated: 2023/12/02 01:35:11 by afatir           ###   ########.fr       */
+/*   Updated: 2023/12/05 09:08:36 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,18 @@
 void	draw_floor_ceiling_bonus(t_mlx *mlx, int ray, int t_pix, int b_pix)
 {
 	int		i;
+	int		c;
 
 	i = b_pix;
+	c = get_rgba_bonus(ft_atoi(mlx->dt->ff[0]), ft_atoi(mlx->dt->ff[1]), \
+		ft_atoi(mlx->dt->ff[2]), 255);
 	while (i < S_H)
-	{
-		my_mlx_pixel_put_bonus(mlx, ray, i, \
-				get_rgba_bonus(ft_atoi(mlx->dt->ff[0]),
-				ft_atoi(mlx->dt->ff[1]), ft_atoi(mlx->dt->ff[2]), 255));
-		i++;
-	}
+		my_mlx_pixel_put_bonus(mlx, ray, i++, c);
 	i = 0;
+	c = get_rgba_bonus(ft_atoi(mlx->dt->cc[0]), ft_atoi(mlx->dt->cc[1]), \
+		ft_atoi(mlx->dt->cc[2]), 255);
 	while (i < t_pix)
-	{
-		my_mlx_pixel_put_bonus(mlx, ray, i, \
-				get_rgba_bonus(ft_atoi(mlx->dt->cc[0]),
-				ft_atoi(mlx->dt->cc[1]), ft_atoi(mlx->dt->cc[2]), 255));
-		i++;
-	}
+		my_mlx_pixel_put_bonus(mlx, ray, i++, c);
 }
 
 mlx_texture_t	*get_texture_bonus(t_mlx *mlx, int flag)

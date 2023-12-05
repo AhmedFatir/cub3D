@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:30:47 by afatir            #+#    #+#             */
-/*   Updated: 2023/12/02 01:28:21 by afatir           ###   ########.fr       */
+/*   Updated: 2023/12/05 09:06:54 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,23 +92,5 @@ void	draw_player_bonus(t_mlx *mlx, int x_p, int y_p, int color)
 			x++;
 		}
 		y++;
-	}
-}
-
-void	draw_ray_2d_bonus(t_mlx *mlx, double angle, double distance, int color)
-{
-	double	x;
-	double	y;
-	int		t;
-
-	t = 0;
-	y = mlx->ply->plyr_y;
-	x = mlx->ply->plyr_x;
-	while (t < distance)
-	{
-		my_mlx_pixel_put_bonus(mlx, (int)x, (int)y, color);
-		x += 1 * cos(angle);
-		y += 1 * sin(angle);
-		t++;
 	}
 }

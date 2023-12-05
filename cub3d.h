@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 10:32:06 by afatir            #+#    #+#             */
-/*   Updated: 2023/12/02 01:32:31 by afatir           ###   ########.fr       */
+/*   Updated: 2023/12/05 09:39:06 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@
 # include "../MLX42/include/MLX42/MLX42.h"
 
 # define S_W 1900
-# define S_H 900
+# define S_H 1000
 # define TILE_SIZE 32
 # define FOV 60
-# define ROTATION_SPEED 0.05
-# define PLAYER_SPEED 5
+# define ROTATION_SPEED 0.045
+# define PLAYER_SPEED 4
 
 # define BLK 0x000000FF
 # define GREY 0x808080FF
@@ -42,14 +42,14 @@ typedef struct s_tex
 	mlx_texture_t	*so;
 	mlx_texture_t	*we;
 	mlx_texture_t	*ea;
-}t_tex;
+}	t_tex;
 
 typedef struct s_txtr
 {
 	char			*key;
 	char			*value;
 	struct s_txtr	*next;
-}t_txtr;
+}	t_txtr;
 
 typedef struct s_data
 {
@@ -71,7 +71,7 @@ typedef struct s_data
 	char	**sq_map;
 	char	**rgb;
 	t_txtr	*t;
-}t_data;
+}	t_data;
 
 typedef struct s_player
 {
@@ -84,7 +84,7 @@ typedef struct s_player
 	int		u_d;
 	int		m_x;
 	int		m_y;
-}t_player;
+}	t_player;
 
 typedef struct s_ray
 {
@@ -96,7 +96,7 @@ typedef struct s_ray
 	double	vert_y;
 	double	distance;
 	int		flag;
-}t_ray;
+}	t_ray;
 
 typedef struct s_mlx
 {
@@ -108,7 +108,7 @@ typedef struct s_mlx
 	t_tex			*tex;
 	t_txtr			*l_ture;
 	mouse_mode_t	mouse_mode;
-}t_mlx;
+}	t_mlx;
 
 //////////////PARSING//////////////
 //o_list.c
@@ -171,13 +171,8 @@ void	move_player(t_mlx *mlx, double move_x, double move_y);
 void	cub_hook(t_mlx *mlx, double move_x, double move_y);
 void	ft_reles(mlx_key_data_t keydata, t_mlx *mlx);
 void	key_press(mlx_key_data_t keydata, void *ml);
-//2dmap.c
-void	get_angle(t_mlx *mlx);
-void	draw_map_tile2d(t_mlx *mlx);
-void	draw_win(t_mlx *mlx, int x, int y, int color);
-void	draw_player(t_mlx *mlx, int x_p, int y_p, int color);
-void	draw_ray_2d(t_mlx *mlx, double angle, double distance, int color);
 //execution.c
+void	get_angle(t_mlx *mlx);
 void	drow_map_pixel(void *mlxl);
 int		checkload(t_txtr *list);
 int		load_texture(t_tex *tex, t_txtr *l_ture);

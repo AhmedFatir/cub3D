@@ -6,7 +6,7 @@
 /*   By: afatir <afatir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 00:41:00 by khbouych          #+#    #+#             */
-/*   Updated: 2023/12/02 03:20:20 by afatir           ###   ########.fr       */
+/*   Updated: 2023/12/05 10:11:02 by afatir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,14 @@ int	parsing(int ac, char **av, t_data *m, t_txtr *l_ture)
 	l_ture = NULL;
 	if (ac != 2 || !checkextension(av[1]))
 	{
-		write(1, "Error\ninvalid compilation\n", 27);
+		write(1, "Error\ninvalid compilation\n", 26);
 		exit(0);
 	}
 	count = 0;
 	if (!read_map(av[1], m, &count))
 		return (0);
 	if (!valid_map(m))
-		return (free_2d(m->map2d), 0);
+		return (free_map(m), 0);
 	if (!lst_ture(m, &l_ture))
 		return (free_map(m), freelist(&l_ture), 0);
 	if (!color_ture(m, l_ture))
