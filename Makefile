@@ -6,7 +6,7 @@
 #    By: afatir <afatir@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/01 07:32:35 by afatir            #+#    #+#              #
-#    Updated: 2023/12/05 19:15:34 by afatir           ###   ########.fr        #
+#    Updated: 2023/12/07 02:59:56 by afatir           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,9 +51,13 @@ clean:
 	@rm -f $(MOBJS)
 	@rm -f $(MOBJS_B)
 
+mini:
+	cc -O3 -ffast-math -framework Cocoa -framework OpenGL -framework IOKit -lglfw $(MLX) $(LIB) mini_cub3D.c -o mini_cub3D
+
 fclean: clean
 	@make fclean -s -C $(LIB_FT)
 	@rm -f $(NAME)
 	@rm -f $(NAME_B)
+	@rm -f mini_cub3D
 
 re: fclean all
