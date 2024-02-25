@@ -17,8 +17,8 @@ LIB_FT_A= libft_gcl_ptf/libft_gcl_ptf.a
 
 MLX = MLX/libmlx42.a
 FLAG_MLX = -framework Cocoa -framework OpenGL -framework IOKit -lglfw
-INCLUDE = -I/Users/${USER}/.brew/Cellar/glfw/3.3.8/include/GLFW
-LIB = -L/Users/${USER}/.brew/Cellar/glfw/3.3.8/lib
+INCLUDE = -I/Users/${USER}/.brew/Cellar/glfw/3.4/include/GLFW
+LIB = -L/Users/${USER}/.brew/Cellar/glfw/3.4/lib
 
 CC		= cc
 CFLAGS	= -Wall -Werror -Wextra -O3 -ffast-math #-fsanitize=address -g
