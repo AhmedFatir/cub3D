@@ -19,7 +19,7 @@
 # include <fcntl.h>
 # include <math.h>
 # include "libft_gcl_ptf/libft.h"
-# include "../MLX42/include/MLX42/MLX42.h"
+# include "MLX/MLX42.h"
 
 # define S_W 1900
 # define S_H 1000
