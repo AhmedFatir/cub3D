@@ -15,7 +15,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <math.h>
-# include "MLX/MLX42.h" // include the mlx library
+# include "MLXGLFW/MacOS/mlx/MLX42.h" // include the mlx library
 
 # define S_W 1900 // screen width
 # define S_H 1000 // screen height
@@ -216,7 +216,6 @@ float	nor_angle(float angle)	// normalize the angle
 void	draw_floor_ceiling(t_mlx *mlx, int ray, int t_pix, int b_pix)	// draw the floor and the ceiling
 {
 	int		i;
-	int		c;
 
 	i = b_pix;
 	while (i < S_H)
